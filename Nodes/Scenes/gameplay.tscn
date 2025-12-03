@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://c6hrxahg2vy6o"]
+
+[node name="Gameplay" type="Node3D"]
+process_mode = 1
