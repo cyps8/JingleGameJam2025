@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkna205klwqky"]
+
+[ext_resource type="Script" uid="uid://ds54j3mnngqou" path="res://Scripts/SceneManager.gd" id="1_uewl6"]
+[ext_resource type="PackedScene" uid="uid://drj0jssxxceyu" path="res://Nodes/Scenes/main_menu.tscn" id="2_62qmo"]
+[ext_resource type="PackedScene" uid="uid://cg38013tvrhgd" path="res://Nodes/Scenes/game.tscn" id="2_hheyw"]
+[ext_resource type="Script" uid="uid://dpg0ifkb6hmsd" path="res://Scripts/SFXPlayer.gd" id="2_s5jww"]
+[ext_resource type="Script" uid="uid://bf5lc31pqguc1" path="res://Scripts/Options.gd" id="3_1t681"]
+
+[node name="Root" type="Node"]
+process_mode = 3
+script = ExtResource("1_uewl6")
+gameScene = ExtResource("2_hheyw")
+menuScene = ExtResource("2_62qmo")
+
+[node name="SFXPlayer" type="Node" parent="."]
+script = ExtResource("2_s5jww")
+metadata/_custom_type_script = "uid://dpg0ifkb6hmsd"
+
+[node name="OptionsMenu" type="CanvasLayer" parent="."]
+layer = 90
+script = ExtResource("3_1t681")
+metadata/_custom_type_script = "uid://bf5lc31pqguc1"
+
+[node name="c" type="Control" parent="OptionsMenu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="OptionsMenu/c"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -167.5
+offset_top = -213.5
+offset_right = 167.5
+offset_bottom = 213.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="OptionsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 97.5
+offset_top = 334.5
+offset_right = 257.0
+offset_bottom = 401.0
+text = "Return
+"
+
+[node name="LoadingScreen" type="CanvasLayer" parent="."]
+layer = 100
+visible = false
+
+[node name="c" type="Control" parent="LoadingScreen"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="LoadingScreen/c"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0885599, 0.0885599, 0.0885599, 1)
+
+[connection signal="pressed" from="OptionsMenu/c/Panel/Button" to="OptionsMenu" method="BackPressed"]
