@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cg38013tvrhgd"]
+[gd_scene load_steps=4 format=3 uid="uid://cg38013tvrhgd"]
 
 [ext_resource type="Script" uid="uid://c02g64mdqmclg" path="res://Scripts/GameManager.gd" id="1_ia1on"]
 [ext_resource type="Script" uid="uid://dn2vqg4n5t2g4" path="res://Scripts/Pause.gd" id="2_05cs3"]
+[ext_resource type="PackedScene" uid="uid://c6hrxahg2vy6o" path="res://Nodes/Scenes/gameplay.tscn" id="3_05cs3"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_ia1on")
@@ -56,8 +57,7 @@ offset_right = 272.0
 offset_bottom = 411.0
 text = "MAIN MENU"
 
-[node name="Gameplay" type="Node3D" parent="."]
-process_mode = 1
+[node name="Gameplay" parent="." instance=ExtResource("3_05cs3")]
 
 [connection signal="pressed" from="PauseMenu/c/Panel/Resume" to="PauseMenu" method="ResumePressed"]
 [connection signal="pressed" from="PauseMenu/c/Panel/Options" to="PauseMenu" method="OptionsPressed"]
