@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh5kdx2ryyrin"]
+
+[ext_resource type="Script" uid="uid://c5ghc6qhii1bx" path="res://Nodes/Scenes/AbilitySelect.gd" id="1_cdxm4"]
+
+[node name="AbilitySelect" type="CanvasLayer"]
+script = ExtResource("1_cdxm4")
+
+[node name="Ability1" type="Button" parent="."]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 145.0
+offset_right = 89.0
+offset_bottom = 147.0
+grow_vertical = 2
+scale = Vector2(3.25, 0.775)
+text = "Ability1"
+
+[node name="Ability2" type="Button" parent="."]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -141.0
+offset_top = 145.0
+offset_right = -51.0
+offset_bottom = 147.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.25, 0.775)
+text = "Ability2"
+
+[node name="Ability3" type="Button" parent="."]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -292.0
+offset_top = 145.0
+offset_right = -202.0
+offset_bottom = 147.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(3.25, 0.775)
+text = "Ability3"
