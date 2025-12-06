@@ -1,16 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkna205klwqky"]
+[gd_scene load_steps=7 format=3 uid="uid://bkna205klwqky"]
 
 [ext_resource type="Script" uid="uid://ds54j3mnngqou" path="res://Scripts/SceneManager.gd" id="1_uewl6"]
 [ext_resource type="PackedScene" uid="uid://drj0jssxxceyu" path="res://Nodes/Scenes/main_menu.tscn" id="2_62qmo"]
 [ext_resource type="PackedScene" uid="uid://cg38013tvrhgd" path="res://Nodes/Scenes/game.tscn" id="2_hheyw"]
 [ext_resource type="Script" uid="uid://dpg0ifkb6hmsd" path="res://Scripts/SFXPlayer.gd" id="2_s5jww"]
 [ext_resource type="Script" uid="uid://bf5lc31pqguc1" path="res://Scripts/Options.gd" id="3_1t681"]
+[ext_resource type="PackedScene" uid="uid://dh5kdx2ryyrin" path="res://Nodes/Scenes/ability_select.tscn" id="4_b4ixw"]
 
 [node name="Root" type="Node"]
 process_mode = 3
 script = ExtResource("1_uewl6")
 gameScene = ExtResource("2_hheyw")
 menuScene = ExtResource("2_62qmo")
+abilitySelectScene = ExtResource("4_b4ixw")
 
 [node name="SFXPlayer" type="Node" parent="."]
 script = ExtResource("2_s5jww")
