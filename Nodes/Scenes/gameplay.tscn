@@ -1,8 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6hrxahg2vy6o"]
+[gd_scene load_steps=24 format=3 uid="uid://c6hrxahg2vy6o"]
 
 [ext_resource type="Script" uid="uid://d2iv34ayqfa3i" path="res://Scripts/Player.gd" id="1_84d6f"]
 [ext_resource type="Texture2D" uid="uid://che1v77ujxggu" path="res://Assets/Art/Other/icon.svg" id="1_sw52n"]
 [ext_resource type="Script" uid="uid://b3qoryrjch6mg" path="res://Scripts/Enemy.gd" id="3_wnkb1"]
+[ext_resource type="Texture2D" uid="uid://bwcibwoa1ym6p" path="res://Assets/Art/Sprites/Sloth/IMG_5455.PNG" id="4_dmect"]
+[ext_resource type="Texture2D" uid="uid://bfo3nhl5yj255" path="res://Assets/Art/Sprites/Sloth/IMG_5451.PNG" id="5_2kk6b"]
+[ext_resource type="Texture2D" uid="uid://dvf6mdhljja31" path="res://Assets/Art/Sprites/Sloth/IMG_5450.PNG" id="6_uk5xd"]
+[ext_resource type="Texture2D" uid="uid://tkawe1iu413a" path="res://Assets/Art/Sprites/UI/heart.png" id="7_eno18"]
+[ext_resource type="Texture2D" uid="uid://3pdhtkbnclge" path="res://Assets/Art/Sprites/UI/stam.png" id="8_oo8pr"]
 
 [sub_resource type="Gradient" id="Gradient_6irbu"]
 colors = PackedColorArray(0.28560975, 0.27472824, 0.27455476, 1, 0.112083234, 0.12456738, 0.13221022, 1)
@@ -40,18 +45,35 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnkb1"]
-bg_color = Color(1, 0.8117647, 0, 1)
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmect"]
+bg_color = Color(0.75686276, 0.19607843, 0, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="Gradient" id="Gradient_wnkb1"]
-offsets = PackedFloat32Array(0.50666666, 0.7, 0.86, 1)
-colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 0.20270275, 1, 0, 0, 0.53933936, 1, 0, 0, 0.76862746)
+offsets = PackedFloat32Array(0.6066667, 0.76, 0.84, 0.99333334, 1)
+colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 0.14893617, 1, 0, 0, 0.22340423, 1, 0, 0, 0.49283546, 1, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dmect"]
 gradient = SubResource("Gradient_wnkb1")
+width = 240
+height = 180
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_uk5xd"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eno18"]
+gradient = SubResource("Gradient_uk5xd")
 width = 240
 height = 180
 fill = 1
@@ -111,6 +133,18 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_wnkb1")
 value = 100.0
 show_percentage = false
 
+[node name="HealthBar" type="ProgressBar" parent="Player/HUD/c"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 407.0
+offset_top = 857.0
+offset_right = 807.0
+offset_bottom = 872.0
+theme_override_styles/background = SubResource("StyleBoxFlat_84d6f")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dmect")
+value = 100.0
+show_percentage = false
+
 [node name="DMGBorder" type="TextureRect" parent="Player/HUD/c"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
@@ -122,20 +156,46 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_dmect")
 
+[node name="KnockoutBorder" type="TextureRect" parent="Player/HUD/c"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_eno18")
+
 [node name="Enemy" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2580582, -1.0362949)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2580582, -0.8971336)
 script = ExtResource("3_wnkb1")
+enemyTexture = ExtResource("4_dmect")
+armTexture = ExtResource("5_2kk6b")
+punchTexture = ExtResource("6_uk5xd")
+
+[node name="Health" type="Sprite3D" parent="Enemy"]
+unique_name_in_owner = true
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.19273318, 1.0298122, 0)
+modulate = Color(0.87614596, 0, 0.2658959, 1)
+texture = ExtResource("7_eno18")
+
+[node name="Stamina" type="Sprite3D" parent="Enemy"]
+unique_name_in_owner = true
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.16677137, 1.0298122, 0)
+modulate = Color(0.9843137, 0.76862746, 0, 1)
+texture = ExtResource("8_oo8pr")
 
 [node name="Sprite" type="Sprite3D" parent="Enemy"]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, -0.18522167, 0)
 modulate = Color(1.0039216, 0.9999855, 0.9999855, 1)
-texture = ExtResource("1_sw52n")
+texture = ExtResource("4_dmect")
 
 [node name="ArmR" type="Sprite3D" parent="Enemy"]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0.439443, -0.36226118, 0.28319818)
-modulate = Color(0.6745098, 0.08235294, 0.40392157, 1)
-texture = ExtResource("1_sw52n")
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0.6089966, -0.06779206, 0.14576149)
+texture = ExtResource("5_2kk6b")
 
 [node name="ArmL" type="Sprite3D" parent="Enemy"]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.439, -0.362, 0.28305113)
-modulate = Color(0.6745098, 0.08235294, 0.40392157, 1)
-texture = ExtResource("1_sw52n")
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, -0.609, -0.068, 0.146)
+flip_h = true
+texture = ExtResource("5_2kk6b")
