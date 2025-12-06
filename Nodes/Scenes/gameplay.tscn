@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://c6hrxahg2vy6o"]
+[gd_scene load_steps=16 format=3 uid="uid://c6hrxahg2vy6o"]
 
 [ext_resource type="Script" uid="uid://d2iv34ayqfa3i" path="res://Scripts/Player.gd" id="1_84d6f"]
 [ext_resource type="Texture2D" uid="uid://che1v77ujxggu" path="res://Assets/Art/Other/icon.svg" id="1_sw52n"]
+[ext_resource type="Script" uid="uid://b3qoryrjch6mg" path="res://Scripts/Enemy.gd" id="3_wnkb1"]
 
 [sub_resource type="Gradient" id="Gradient_6irbu"]
 colors = PackedColorArray(0.28560975, 0.27472824, 0.27455476, 1, 0.112083234, 0.12456738, 0.13221022, 1)
@@ -45,6 +46,17 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="Gradient" id="Gradient_wnkb1"]
+offsets = PackedFloat32Array(0.50666666, 0.7, 0.86, 1)
+colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 0.20270275, 1, 0, 0, 0.53933936, 1, 0, 0, 0.76862746)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dmect"]
+gradient = SubResource("Gradient_wnkb1")
+width = 240
+height = 180
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Gameplay" type="Node3D"]
 process_mode = 1
 
@@ -64,7 +76,7 @@ transform = Transform3D(1, 0, 0, 0, 0.0028798105, 0.9999959, 0, -0.9999959, 0.00
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.2428935)
 script = ExtResource("1_84d6f")
 
-[node name="Camera3D" type="Camera3D" parent="Player"]
+[node name="Cam" type="Camera3D" parent="Player"]
 fov = 85.0
 
 [node name="ArmR" type="Sprite3D" parent="Player"]
@@ -99,9 +111,31 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_wnkb1")
 value = 100.0
 show_percentage = false
 
+[node name="DMGBorder" type="TextureRect" parent="Player/HUD/c"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_dmect")
+
 [node name="Enemy" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2580582, -1.0362949)
+script = ExtResource("3_wnkb1")
 
 [node name="Sprite" type="Sprite3D" parent="Enemy"]
-modulate = Color(1, 0, 0, 1)
+modulate = Color(1.0039216, 0.9999855, 0.9999855, 1)
+texture = ExtResource("1_sw52n")
+
+[node name="ArmR" type="Sprite3D" parent="Enemy"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0.439443, -0.36226118, 0.28319818)
+modulate = Color(0.6745098, 0.08235294, 0.40392157, 1)
+texture = ExtResource("1_sw52n")
+
+[node name="ArmL" type="Sprite3D" parent="Enemy"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.439, -0.362, 0.28305113)
+modulate = Color(0.6745098, 0.08235294, 0.40392157, 1)
 texture = ExtResource("1_sw52n")
