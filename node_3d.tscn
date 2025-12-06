@@ -1,40 +1,116 @@
-[gd_scene load_steps=6 format=3 uid="uid://7cuuqdrdbpn6"]
+[gd_scene load_steps=16 format=3 uid="uid://7cuuqdrdbpn6"]
 
 [ext_resource type="PackedScene" uid="uid://81ir7xdhj0dr" path="res://Assets/Art/Blender/MonkeyScene.blend" id="1_a202f"]
-[ext_resource type="Shader" uid="uid://bm4mry85vcml3" path="res://CuteSkyMoment.gdshader" id="1_noarx"]
+[ext_resource type="Shader" uid="uid://dhkf2ntd2irym" path="res://celshader.gdshader" id="1_jka67"]
+[ext_resource type="PackedScene" uid="uid://ba3n03ad8k0j7" path="res://Assets/Art/Objects/Pillar.fbx" id="2_r3fl7"]
+[ext_resource type="Script" uid="uid://mody5urqln4n" path="res://Assets/Art/Objects/pillar.gd" id="3_jka67"]
+[ext_resource type="Shader" uid="uid://dvxe22pi73h1e" path="res://celshade.gdshader" id="4_i5arm"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_a0tk4"]
-shader = ExtResource("1_noarx")
-shader_parameter/clouds_samples = 16
-shader_parameter/shadow_sample = 4
-shader_parameter/clouds_density = 0.5
-shader_parameter/clouds_scale = 1.0
-shader_parameter/clouds_smoothness = 0.035
-shader_parameter/clouds_light_color = Color(0, 0, 0, 1)
-shader_parameter/clouds_shadow_intensity = 1.0
-shader_parameter/high_clouds_density = 0.0
-shader_parameter/top_color = Color(0.2039831, 0.39439845, 0.4358718, 1)
-shader_parameter/bottom_color = Color(0.50486857, 0.38923615, 0.41890082, 1)
-shader_parameter/sun_scatter = Color(0.46050525, 0.2638932, 0.2550854, 1)
-shader_parameter/astro_tint = Color(0, 0, 0, 1)
-shader_parameter/astro_scale = 1.0
-shader_parameter/astro_intensity = 1.0
-shader_parameter/stars_intensity = 0.0
-shader_parameter/shooting_stars_intensity = 0.0
-shader_parameter/shooting_star_tint = Color(0, 0, 0, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i5arm"]
+render_priority = 0
+shader = ExtResource("1_jka67")
+shader_parameter/albedo = Color(0, 0.7607843, 0.6901961, 1)
 
-[sub_resource type="Sky" id="Sky_r3fl7"]
-sky_material = SubResource("ShaderMaterial_a0tk4")
+[sub_resource type="BoxMesh" id="BoxMesh_cdqbm"]
+material = SubResource("ShaderMaterial_i5arm")
 
-[sub_resource type="Environment" id="Environment_jka67"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wc5p8"]
+sky_top_color = Color(0.20266753, 0.49899077, 0.52576894, 1)
+sky_horizon_color = Color(0.79070103, 0.6421549, 0.42421177, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_jsk3o"]
+sky_material = SubResource("ProceduralSkyMaterial_wc5p8")
+
+[sub_resource type="Environment" id="Environment_4arys"]
 background_mode = 2
-sky = SubResource("Sky_r3fl7")
+background_color = Color(0.39527985, 0.4920619, 0.3925756, 1)
+sky = SubResource("Sky_jsk3o")
+ambient_light_color = Color(0.3152152, 0.6325925, 0.6545473, 1)
 tonemap_mode = 2
+
+[sub_resource type="Shader" id="Shader_wc5p8"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.5.1.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform ivec2 albedo_texture_size;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jsk3o"]
+render_priority = 0
+shader = SubResource("Shader_wc5p8")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture_size = Vector2i(0, 0)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4arys"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6iypd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tereu"]
+render_priority = 0
+shader = ExtResource("4_i5arm")
+shader_parameter/albedo = Color(0, 0, 0, 1)
 
 [node name="Node3D" type="Node3D"]
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5509504, 0, 0, 0, 1.5509504, 0, 0, 0, 1.5509504, 88.50046, -12.394726, -47.527218)
+mesh = SubResource("BoxMesh_cdqbm")
+skeleton = NodePath("../../..")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_jka67")
+environment = SubResource("Environment_4arys")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_color = Color(0.98437387, 0.27679953, 5.7756904e-07, 1)
+shadow_enabled = true
 
 [node name="MonkeyScene" parent="." instance=ExtResource("1_a202f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.438717, 1.9014907, 22.096863)
@@ -74,6 +150,7 @@ transform = Transform3D(0.4504256, 0, 0, 0, 0.4504256, 0, 0, 0, 0.4504256, 1.922
 
 [node name="Arch Asset" parent="MonkeyScene" index="19"]
 transform = Transform3D(0.4504256, 0, 0, 0, 0.4504256, 0, 0, 0, 0.4504256, 0.5865898, 1.1618333, -45.15744)
+surface_material_override/0 = SubResource("ShaderMaterial_jsk3o")
 
 [node name="Spike" parent="MonkeyScene" index="20"]
 transform = Transform3D(0.57502764, 0, 0, 0, 0.57502764, 0, 0, 0, 0.57502764, 0.7066307, 1.0181422, -47.4178)
@@ -83,6 +160,7 @@ transform = Transform3D(0.5990619, 0, 0, 0, 0.5990619, 0, 0, 0, 0.5990619, 0.602
 
 [node name="Small Arch" parent="MonkeyScene" index="22"]
 transform = Transform3D(0.31648403, 0, 0, 0, 0.31648403, 0, 0, 0, 0.31648403, 0.56251144, -0.8413563, -35.018883)
+surface_material_override/0 = SubResource("ShaderMaterial_4arys")
 
 [node name="Seperated square column" parent="MonkeyScene" index="23"]
 transform = Transform3D(0.5990619, 0, 0, 0, 0.5990619, 0, 0, 0, 0.5990619, 0.7073822, 2.3636956, -50.61537)
@@ -96,70 +174,82 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8413563, -36.02562)
 [node name="Pillar w_stands" parent="MonkeyScene" index="26"]
 transform = Transform3D(0.5486027, 0, 0, 0, 0.5486027, 0, 0, 0, 0.5486027, 0, 5.6487346, -54.077152)
 
-[node name="Pillar w_stands_001" parent="MonkeyScene" index="27"]
-transform = Transform3D(0.6447661, 0, 0, 0, 0.6447661, 0, 0, 0, 0.6447661, 7.1650505, 5.24885, 8.547071)
-
-[node name="Small Arch_001" parent="MonkeyScene" index="28"]
+[node name="Small Arch_001" parent="MonkeyScene" index="27"]
 transform = Transform3D(0.7204249, 0, 0, 0, 0.7204249, 0, 0, 0, 0.7204249, -15.558041, -5.0044656, -0.32839775)
 
-[node name="Circle_003" parent="MonkeyScene" index="29"]
+[node name="Circle_003" parent="MonkeyScene" index="28"]
 transform = Transform3D(1.466432, 0, 0, 0, 1.466432, 0, 0, 0, 1.466432, 1.7241211, -4.159009, 16.147224)
 
-[node name="Circle_004" parent="MonkeyScene" index="30"]
+[node name="Circle_004" parent="MonkeyScene" index="29"]
 transform = Transform3D(1.466432, 0, 0, 0, 1.466432, 0, 0, 0, 1.466432, 1.7241211, -4.159009, 30.614433)
 
-[node name="Spike_001" parent="MonkeyScene" index="31"]
+[node name="Spike_001" parent="MonkeyScene" index="30"]
 transform = Transform3D(0.964668, 0.015034619, 0.040188346, -0.0066520413, 0.9458725, -0.19418122, -0.042389777, 0.19371256, 0.94504184, 5.9978676, -2.7703133, 7.6371574)
 
-[node name="Spike_002" parent="MonkeyScene" index="32"]
+[node name="Spike_002" parent="MonkeyScene" index="31"]
 transform = Transform3D(0.78161186, -0.0054989797, -0.03662002, 0.01320392, 0.76433575, 0.1670472, 0.034596555, -0.16747798, 0.76357216, 3.76783, -0.9835135, 8.571949)
 
-[node name="Spike_003" parent="MonkeyScene" index="33"]
+[node name="Spike_003" parent="MonkeyScene" index="32"]
 transform = Transform3D(0.9651723, -0.017802099, -0.023469051, 0.022257406, 0.9446801, 0.19877024, 0.019295562, -0.19921868, 0.94465077, 5.6524506, -2.5891643, -9.425482)
 
-[node name="Spike_004" parent="MonkeyScene" index="34"]
+[node name="Spike_004" parent="MonkeyScene" index="33"]
 transform = Transform3D(0.78246754, 0.001995633, 0.005362133, -0.0012206753, 0.7746901, -0.11019083, -0.005589721, 0.11017954, 0.7746724, 4.9156075, -0.80236435, -8.49069)
 
-[node name="Spike_005" parent="MonkeyScene" index="35"]
-transform = Transform3D(0.7810793, 0.04249, 0.019949103, -0.033904757, 0.7406736, -0.25008252, -0.032462817, 0.24876778, 0.74118084, 5.866913, -2.0610795, -8.49069)
+[node name="Spike_005" parent="MonkeyScene" index="34"]
+transform = Transform3D(0.7810793, 0.04249, 0.019949103, -0.033904757, 0.7406736, -0.25008252, -0.032462817, 0.24876778, 0.74118084, 5.866913, 17.568476, -8.49069)
 
-[node name="Pillar w_stands_002" parent="MonkeyScene" index="36"]
+[node name="Pillar w_stands_002" parent="MonkeyScene" index="35"]
 transform = Transform3D(0.7319245, 0, 0, 0, 0.7319245, 0, 0, 0, 0.7319245, 1.0981674, 13.8413925, -7.9980364)
+material_override = SubResource("StandardMaterial3D_6iypd")
 
-[node name="Arch Asset_001" parent="MonkeyScene" index="37"]
+[node name="Pillar" parent="MonkeyScene/Pillar w_stands_002" index="0" instance=ExtResource("2_r3fl7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.9073486e-06, -45.8768)
+
+[node name="Arch Asset_001" parent="MonkeyScene" index="36"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8413563, 0)
 
-[node name="Seperated square column_001" parent="MonkeyScene" index="38"]
+[node name="Seperated square column_001" parent="MonkeyScene" index="37"]
 transform = Transform3D(0.8851391, -2.497242e-07, -0.885139, 2.4972425e-07, -1.2517756, 6.028876e-07, -0.885139, -6.028876e-07, -0.8851391, -6.088375, 8.9957905, 8.533028)
 
-[node name="Seperated square column_002" parent="MonkeyScene" index="39"]
+[node name="Seperated square column_002" parent="MonkeyScene" index="38"]
 transform = Transform3D(0.8851391, -2.497242e-07, -0.885139, 2.4972425e-07, -1.2517756, 6.028876e-07, -0.885139, -6.028876e-07, -0.8851391, -6.088375, 8.9957905, 22.952465)
 
-[node name="Cube_006" parent="MonkeyScene" index="40"]
+[node name="Cube_006" parent="MonkeyScene" index="39"]
 transform = Transform3D(0.8210894, 0, 1.3713374, 0, 1.59836, 0, -1.3713374, 0, 0.8210894, 18.812199, -0.19973493, 22.885109)
+
+[node name="Cube_007" parent="MonkeyScene" index="40"]
+transform = Transform3D(1.4021574, 0, 0.7672738, 0, 1.59836, 0, -0.76727384, 0, 1.4021574, 16.653515, -0.19973493, -21.089447)
+
+[node name="Pillar" parent="MonkeyScene" index="41"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.80189276, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MonkeyScene/Pillar" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6685066)
+material_override = SubResource("ShaderMaterial_tereu")
+
+[node name="@Node3D@69113" parent="MonkeyScene" instance=ExtResource("2_r3fl7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.147045, 20.777065, -28.512386)
+script = ExtResource("3_jka67")
+
+[node name="Cube_002" parent="MonkeyScene" index="44"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5242805, 6.369715, 0)
+
+[node name="Cube_004" parent="MonkeyScene" index="45"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0958138, -0.24823666, 3.64221)
+
+[node name="Plane_002" parent="MonkeyScene" index="46"]
+transform = Transform3D(0, 1.7003449, 0, -1.7003449, 0, 0, 0, 0, 1.7003449, 1.2670021, 1.3627453, 0.05573082)
+
+[node name="Plane_003" parent="MonkeyScene" index="47"]
+transform = Transform3D(21.69998, 0, 0, 0, 1, 0, 0, 0, 29.87756, 11.630447, -2.4685185, 0)
+
+[node name="Camera_001" parent="MonkeyScene" index="48"]
+transform = Transform3D(-0.032509446, -0.041306354, 0.99861753, 0.000111812726, 0.99914545, 0.041331835, -0.9994714, 0.0014553331, -0.032477047, 25.4473, 3.5912766, -1.0095711)
+
+[node name="Cube_005" parent="MonkeyScene" index="49"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20421982, -18.40043, 8.231564)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="MonkeyScene"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.695, 0.9136982, 8.350353)
-
-[node name="Cube_007" parent="MonkeyScene" index="42"]
-transform = Transform3D(1.4021574, 0, 0.7672738, 0, 1.59836, 0, -0.76727384, 0, 1.4021574, 16.653515, -0.19973493, -21.089447)
-
-[node name="Cube_002" parent="MonkeyScene" index="46"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5242805, 6.369715, 0)
-
-[node name="Cube_004" parent="MonkeyScene" index="47"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0958138, -0.24823666, 3.64221)
-
-[node name="Plane_002" parent="MonkeyScene" index="48"]
-transform = Transform3D(0, 1.7003449, 0, -1.7003449, 0, 0, 0, 0, 1.7003449, 1.2670021, 1.3627453, 0.05573082)
-
-[node name="Plane_003" parent="MonkeyScene" index="49"]
-transform = Transform3D(21.69998, 0, 0, 0, 1, 0, 0, 0, 29.87756, 11.630447, -2.4685185, 0)
-
-[node name="Camera_001" parent="MonkeyScene" index="50"]
-transform = Transform3D(-0.032509446, -0.041306354, 0.99861753, 0.000111812726, 0.99914545, 0.041331835, -0.9994714, 0.0014553331, -0.032477047, 25.4473, 3.5912766, -1.0095711)
-
-[node name="Cube_005" parent="MonkeyScene" index="51"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20421982, -18.40043, 8.231564)
 
 [editable path="MonkeyScene"]
