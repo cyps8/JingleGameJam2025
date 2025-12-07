@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cg38013tvrhgd"]
+[gd_scene load_steps=5 format=3 uid="uid://cg38013tvrhgd"]
 
 [ext_resource type="Script" uid="uid://c02g64mdqmclg" path="res://Scripts/GameManager.gd" id="1_ia1on"]
 [ext_resource type="Script" uid="uid://dn2vqg4n5t2g4" path="res://Scripts/Pause.gd" id="2_05cs3"]
 [ext_resource type="PackedScene" uid="uid://c6hrxahg2vy6o" path="res://Nodes/Scenes/gameplay.tscn" id="3_05cs3"]
+[ext_resource type="Script" uid="uid://d88qniwqmnoc" path="res://Nodes/Scenes/Buttons.gd" id="3_do2eo"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_ia1on")
@@ -40,6 +41,7 @@ offset_top = 56.0
 offset_right = 272.0
 offset_bottom = 148.0
 text = "RESUME"
+script = ExtResource("3_do2eo")
 
 [node name="Options" type="Button" parent="PauseMenu/c/Panel"]
 layout_mode = 0
@@ -48,6 +50,7 @@ offset_top = 188.0
 offset_right = 270.0
 offset_bottom = 280.0
 text = "OPTIONS"
+script = ExtResource("3_do2eo")
 
 [node name="MainMenu" type="Button" parent="PauseMenu/c/Panel"]
 layout_mode = 0
@@ -56,6 +59,7 @@ offset_top = 319.0
 offset_right = 272.0
 offset_bottom = 411.0
 text = "MAIN MENU"
+script = ExtResource("3_do2eo")
 
 [node name="Gameplay" parent="." instance=ExtResource("3_05cs3")]
 
