@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 func StartPressed():
-	Root.ins.ChangeScene(Root.Scene.GAME)
+	Root.ins.ChangeScene(Root.Scene.INTRO)
 
 func OptionsPressed():
 	Root.ins.OpenOptionsMenu()

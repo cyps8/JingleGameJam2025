@@ -6,10 +6,12 @@ static var ins: Root
 
 @export var gameScene: PackedScene
 @export var menuScene: PackedScene
+@export var introScene: PackedScene
 @export var abilitySelectScene: PackedScene
 
 enum Scene{
 	MAINMENU,
+	INTRO,
 	GAME,
 	ABILITY_SELECT
 }
@@ -50,6 +52,8 @@ func ChangeScene(newScene: Scene):
 
 	if newScene == Scene.MAINMENU:
 		currentPackedScene = menuScene
+	elif newScene == Scene.INTRO:
+		currentPackedScene = introScene
 	elif newScene == Scene.GAME:
 		currentPackedScene = gameScene
 	elif newScene == Scene.ABILITY_SELECT:
