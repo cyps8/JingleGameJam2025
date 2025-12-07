@@ -33,11 +33,25 @@ var camBobTween: Tween
 
 var hitRecoil: float
 
+var biteCd: float = 0
+var biteDamage: float = 20
+var biteHeal: float = 15
+var biteCost: float = 30
+
+var biteUnlocked: bool = true
+var screechUnlocked: bool = false
+var beatUnlocked: bool = false
+var furUnlocked: bool = false
+var muscleUnlocked: bool = false
+
 @onready var stamBar: ProgressBar = %StamBar
 @onready var healthBar: ProgressBar = %HealthBar
 @onready var dmgBorder: TextureRect = %DMGBorder
 @onready var blockBorder: TextureRect = %BlockBorder
 @onready var knockoutBorder: TextureRect = %KnockoutBorder
+
+@onready var lowerTeeth: Sprite3D = %LowerTeeth
+@onready var upperTeeth: Sprite3D = %UpperTeeth
 
 @export var gloves: Array[Texture]
 
@@ -103,6 +117,10 @@ func _process(_dt):
 		if Input.is_action_just_pressed("punch") && !outOfStam:
 			var punchTween: Tween = create_tween()
 			punchTween.tween_property($ArmL, "position:z", $ArmL.position.z - 1, 1/punchSpeed).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+			punchTween.parallel()
+			punchTween.tween_property($ArmL, "position:x", $ArmL.position.x + 0.5, 1/punchSpeed).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+			punchTween.parallel()
+			punchTween.tween_property($ArmL, "position:y", $ArmL.position.y + 0.2, 1/punchSpeed)
 			punchTween.tween_callback(Callable(self, "ResetArmL"))
 			stamCur -= punchCost
 			recoverycd = 0.35
@@ -121,6 +139,10 @@ func _process(_dt):
 		if Input.is_action_just_pressed("punch") && !outOfStam:
 			var punchTween: Tween = create_tween()
 			punchTween.tween_property($ArmR, "position:z", $ArmR.position.z - 1, 1/punchSpeed).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+			punchTween.parallel()
+			punchTween.tween_property($ArmR, "position:x", $ArmR.position.x - 0.5, 1/punchSpeed).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+			punchTween.parallel()
+			punchTween.tween_property($ArmR, "position:y", $ArmR.position.y + 0.2, 1/punchSpeed)
 			punchTween.tween_callback(Callable(self, "ResetArmR"))
 			stamCur -= punchCost
 			recoverycd = 0.35
@@ -144,6 +166,19 @@ func _process(_dt):
 	stamBar.value = stamCur
 
 	CamStuff(_dt, mousePos)
+
+func Bite():
+	var biteTween: Tween = create_tween()
+	lowerTeeth.position.y = 0.8
+	upperTeeth.position.y = 0.8
+	biteTween.tween_property(lowerTeeth, "position:y", -0.2, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	biteTween.parallel()
+	biteTween.tween_property(upperTeeth, "position:y", 0.2, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	biteTween.parallel()
+	biteTween.tween_property(lowerTeeth, "modulate:a", 1.0, 0.5)
+	biteTween.parallel()
+	biteTween.tween_property(upperTeeth, "modulate:a", 1.0, 0.5)
+	biteTween.tween_callback(func(): Enemy.ins.TakeDamage(biteDamage))
 
 func ResetArmL():
 	if !blockingL:
@@ -179,6 +214,10 @@ func TakeDamage(val: float):
 
 	SFXPlayer.ins.PlaySound(3, SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.4) + 0.8)
 	SFXPlayer.ins.PlaySound(6, SFXPlayer.SoundType.SFX, 0.8, (randf() * 0.2) + 0.9)
+
+func HealDamage(val):
+	healthCur += val
+	healthBar.value = healthCur
 
 func Block():
 	blockBorder.modulate.a = 1.0
