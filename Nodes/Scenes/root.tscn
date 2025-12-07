@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkna205klwqky"]
+[gd_scene load_steps=16 format=3 uid="uid://bkna205klwqky"]
 
 [ext_resource type="Script" uid="uid://ds54j3mnngqou" path="res://Scripts/SceneManager.gd" id="1_uewl6"]
 [ext_resource type="PackedScene" uid="uid://drj0jssxxceyu" path="res://Nodes/Scenes/main_menu.tscn" id="2_62qmo"]
@@ -6,6 +6,15 @@
 [ext_resource type="Script" uid="uid://dpg0ifkb6hmsd" path="res://Scripts/SFXPlayer.gd" id="2_s5jww"]
 [ext_resource type="Script" uid="uid://bf5lc31pqguc1" path="res://Scripts/Options.gd" id="3_1t681"]
 [ext_resource type="PackedScene" uid="uid://dh5kdx2ryyrin" path="res://Nodes/Scenes/ability_select.tscn" id="4_b4ixw"]
+[ext_resource type="AudioStream" uid="uid://c8o7qn3sae4d2" path="res://Assets/Audio/SFX/Damage/Enemy/Sloth/SFX_Sloth_Damage_1.wav" id="6_g65lr"]
+[ext_resource type="AudioStream" uid="uid://dqwg3wn54rq4k" path="res://Assets/Audio/SFX/Damage/Enemy/Sloth/SFX_Sloth_Damage_2.wav" id="7_qncjq"]
+[ext_resource type="AudioStream" uid="uid://bf3rkt2yqt68g" path="res://Assets/Audio/SFX/Damage/Enemy/Sloth/SFX_Sloth_Damage_3.wav" id="8_ig2k1"]
+[ext_resource type="AudioStream" uid="uid://dhreuj30st41g" path="res://Assets/Audio/SFX/Player/SFX_Player_Hurt.wav" id="9_0gkdr"]
+[ext_resource type="AudioStream" uid="uid://wtmrs1b3ywd0" path="res://Assets/Audio/SFX/Player/SFX_Player_Block_1.wav" id="10_83jsg"]
+[ext_resource type="AudioStream" uid="uid://d1punu7abah7t" path="res://Assets/Audio/SFX/Player/SFX_Player_Block_2.wav" id="11_3mi07"]
+[ext_resource type="AudioStream" uid="uid://tmorfrqn6b3b" path="res://Assets/Audio/SFX/SFX_Punch_2.wav" id="12_83jsg"]
+[ext_resource type="Script" path="res://Nodes/Scenes/Buttons.gd" id="14_3mi07"]
+[ext_resource type="Script" uid="uid://coy43r45ubitg" path="res://Scripts/AudioSlider.gd" id="15_2bkfp"]
 
 [node name="Root" type="Node"]
 process_mode = 3
@@ -16,6 +25,7 @@ abilitySelectScene = ExtResource("4_b4ixw")
 
 [node name="SFXPlayer" type="Node" parent="."]
 script = ExtResource("2_s5jww")
+sounds = Array[AudioStream]([ExtResource("6_g65lr"), ExtResource("7_qncjq"), ExtResource("8_ig2k1"), ExtResource("9_0gkdr"), ExtResource("10_83jsg"), ExtResource("11_3mi07"), ExtResource("12_83jsg")])
 metadata/_custom_type_script = "uid://dpg0ifkb6hmsd"
 
 [node name="OptionsMenu" type="CanvasLayer" parent="."]
@@ -53,6 +63,39 @@ offset_right = 257.0
 offset_bottom = 401.0
 text = "Return
 "
+script = ExtResource("14_3mi07")
+
+[node name="MasterSlider" type="HSlider" parent="OptionsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 41.5
+offset_top = 63.5
+offset_right = 287.0
+offset_bottom = 105.0
+max_value = 1.0
+step = 0.01
+script = ExtResource("15_2bkfp")
+
+[node name="MusicSlider" type="HSlider" parent="OptionsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 45.5
+offset_top = 141.5
+offset_right = 291.0
+offset_bottom = 183.0
+max_value = 1.0
+step = 0.01
+script = ExtResource("15_2bkfp")
+busName = "Music"
+
+[node name="SFXSlider" type="HSlider" parent="OptionsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 44.5
+offset_top = 215.5
+offset_right = 290.0
+offset_bottom = 257.0
+max_value = 1.0
+step = 0.01
+script = ExtResource("15_2bkfp")
+busName = "SFX"
 
 [node name="LoadingScreen" type="CanvasLayer" parent="."]
 layer = 100
