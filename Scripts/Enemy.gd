@@ -27,6 +27,8 @@ var stamRecovery: float = 40
 
 var outOfStam: bool = false
 
+var lastBlock: int = 0
+
 static var ins: Enemy
 
 @onready var healthIcon: Sprite3D = %Health
@@ -97,6 +99,13 @@ func TryDamage():
 		Player.ins.TakeDamage(punchDamage)
 	elif !left && !Player.ins.blockingR:
 		Player.ins.TakeDamage(punchDamage)
+	else:
+		if lastBlock == 0:
+			lastBlock = 1
+		else: 
+			lastBlock = 0
+		SFXPlayer.ins.PlaySound(4 + lastBlock, SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
+		Player.ins.Block()
 
 	staminaCur -= punchCost
 	if staminaCur <= 0:
@@ -115,16 +124,17 @@ func TakeDamage(val: float):
 	$Sprite.modulate = Color.RED
 	$ArmL.modulate = Color.RED
 	$ArmR.modulate = Color.RED
-	dmgFlash.tween_property($Sprite, "modulate", Color.WHITE, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	dmgFlash.tween_property($Sprite, "modulate", Color.WHITE, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	dmgFlash.parallel()
-	dmgFlash.tween_property($ArmL, "modulate", Color.WHITE, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	dmgFlash.tween_property($ArmL, "modulate", Color.WHITE, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	dmgFlash.parallel()
-	dmgFlash.tween_property($ArmR, "modulate", Color.WHITE, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	dmgFlash.tween_property($ArmR, "modulate", Color.WHITE, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 	var healthScale: float = healthCur / healthMax
 	healthIcon.scale = Vector3(healthScale * defaultHealthIconScale, healthScale * defaultHealthIconScale, healthScale * defaultHealthIconScale)
 
 	SFXPlayer.ins.PlaySound(randi_range(0, 2), SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
+	SFXPlayer.ins.PlaySound(6, SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
 
 
 func Die():

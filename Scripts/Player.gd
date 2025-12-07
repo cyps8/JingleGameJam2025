@@ -36,6 +36,7 @@ var hitRecoil: float
 @onready var stamBar: ProgressBar = %StamBar
 @onready var healthBar: ProgressBar = %HealthBar
 @onready var dmgBorder: TextureRect = %DMGBorder
+@onready var blockBorder: TextureRect = %BlockBorder
 @onready var knockoutBorder: TextureRect = %KnockoutBorder
 
 @export var gloves: Array[Texture]
@@ -175,6 +176,18 @@ func TakeDamage(val: float):
 	hitRecoilTween.tween_property(self, "hitRecoil", 0.0, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 
 	healthBar.value = healthCur
+
+	SFXPlayer.ins.PlaySound(3, SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.4) + 0.8)
+	SFXPlayer.ins.PlaySound(6, SFXPlayer.SoundType.SFX, 0.8, (randf() * 0.2) + 0.9)
+
+func Block():
+	blockBorder.modulate.a = 1.0
+	var blockFlash: Tween = create_tween()
+	blockFlash.tween_property(blockBorder, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	hitRecoil = 0.02
+	var hitRecoilTween: Tween = create_tween()
+	hitRecoilTween.tween_property(self, "hitRecoil", 0.0, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 
 func Die():
 	pass
