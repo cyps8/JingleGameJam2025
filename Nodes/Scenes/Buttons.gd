@@ -7,6 +7,7 @@ extends Button
 func _ready() -> void:
 	mouse_entered.connect(_buttonEnter)
 	mouse_exited.connect(_buttonExit)
+	focus_exited.connect(_buttonExit)
 	pressed.connect(_buttonPressed)
 	call_deferred("_init_pivot")
 	
@@ -14,7 +15,6 @@ func _init_pivot() -> void:
 	pivot_offset = size/2.0
 	
 func _buttonEnter() -> void:
-	print("getgseg")
 	create_tween().tween_property(self,"scale",hoverScale,0.1).set_trans(Tween.TRANS_SINE) 
  
 func _buttonExit() -> void:

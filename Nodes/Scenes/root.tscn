@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkna205klwqky"]
+[gd_scene load_steps=15 format=3 uid="uid://bkna205klwqky"]
 
 [ext_resource type="Script" uid="uid://ds54j3mnngqou" path="res://Scripts/SceneManager.gd" id="1_uewl6"]
 [ext_resource type="PackedScene" uid="uid://drj0jssxxceyu" path="res://Nodes/Scenes/main_menu.tscn" id="2_62qmo"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://wtmrs1b3ywd0" path="res://Assets/Audio/SFX/Player/SFX_Player_Block_1.wav" id="10_83jsg"]
 [ext_resource type="AudioStream" uid="uid://d1punu7abah7t" path="res://Assets/Audio/SFX/Player/SFX_Player_Block_2.wav" id="11_3mi07"]
 [ext_resource type="AudioStream" uid="uid://tmorfrqn6b3b" path="res://Assets/Audio/SFX/SFX_Punch_2.wav" id="12_83jsg"]
+[ext_resource type="Script" uid="uid://d88qniwqmnoc" path="res://Nodes/Scenes/Buttons.gd" id="14_3mi07"]
 
 [node name="Root" type="Node"]
 process_mode = 3
@@ -61,6 +62,7 @@ offset_right = 257.0
 offset_bottom = 401.0
 text = "Return
 "
+script = ExtResource("14_3mi07")
 
 [node name="LoadingScreen" type="CanvasLayer" parent="."]
 layer = 100
