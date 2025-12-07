@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkna205klwqky"]
+[gd_scene load_steps=14 format=3 uid="uid://bkna205klwqky"]
 
 [ext_resource type="Script" uid="uid://ds54j3mnngqou" path="res://Scripts/SceneManager.gd" id="1_uewl6"]
 [ext_resource type="PackedScene" uid="uid://drj0jssxxceyu" path="res://Nodes/Scenes/main_menu.tscn" id="2_62qmo"]
@@ -9,6 +9,10 @@
 [ext_resource type="AudioStream" uid="uid://c8o7qn3sae4d2" path="res://Assets/Audio/SFX/Damage/Enemy/Sloth/SFX_Sloth_Damage_1.wav" id="6_g65lr"]
 [ext_resource type="AudioStream" uid="uid://dqwg3wn54rq4k" path="res://Assets/Audio/SFX/Damage/Enemy/Sloth/SFX_Sloth_Damage_2.wav" id="7_qncjq"]
 [ext_resource type="AudioStream" uid="uid://bf3rkt2yqt68g" path="res://Assets/Audio/SFX/Damage/Enemy/Sloth/SFX_Sloth_Damage_3.wav" id="8_ig2k1"]
+[ext_resource type="AudioStream" uid="uid://dhreuj30st41g" path="res://Assets/Audio/SFX/Player/SFX_Player_Hurt.wav" id="9_0gkdr"]
+[ext_resource type="AudioStream" uid="uid://wtmrs1b3ywd0" path="res://Assets/Audio/SFX/Player/SFX_Player_Block_1.wav" id="10_83jsg"]
+[ext_resource type="AudioStream" uid="uid://d1punu7abah7t" path="res://Assets/Audio/SFX/Player/SFX_Player_Block_2.wav" id="11_3mi07"]
+[ext_resource type="AudioStream" uid="uid://tmorfrqn6b3b" path="res://Assets/Audio/SFX/SFX_Punch_2.wav" id="12_83jsg"]
 
 [node name="Root" type="Node"]
 process_mode = 3
@@ -19,7 +23,7 @@ abilitySelectScene = ExtResource("4_b4ixw")
 
 [node name="SFXPlayer" type="Node" parent="."]
 script = ExtResource("2_s5jww")
-sounds = Array[AudioStream]([ExtResource("6_g65lr"), ExtResource("7_qncjq"), ExtResource("8_ig2k1")])
+sounds = Array[AudioStream]([ExtResource("6_g65lr"), ExtResource("7_qncjq"), ExtResource("8_ig2k1"), ExtResource("9_0gkdr"), ExtResource("10_83jsg"), ExtResource("11_3mi07"), ExtResource("12_83jsg")])
 metadata/_custom_type_script = "uid://dpg0ifkb6hmsd"
 
 [node name="OptionsMenu" type="CanvasLayer" parent="."]
