@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bjq3igcieuorv" path="res://Scripts/MainMenu.gd" id="1_48opo"]
 [ext_resource type="AudioStream" uid="uid://hf2yqyo0m2k3" path="res://Assets/Audio/Music/Funky music 2.ogg" id="2_ncjvi"]
-[ext_resource type="Script" uid="uid://d88qniwqmnoc" path="res://Nodes/Scenes/Buttons.gd" id="2_p3l52"]
+[ext_resource type="Script" path="res://Nodes/Scenes/Buttons.gd" id="2_p3l52"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_48opo")
@@ -45,6 +45,7 @@ script = ExtResource("2_p3l52")
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ncjvi")
 autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="c/StartGame" to="." method="StartPressed"]
 [connection signal="pressed" from="c/Options" to="." method="OptionsPressed"]
