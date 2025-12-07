@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://drj0jssxxceyu"]
+[gd_scene load_steps=4 format=3 uid="uid://drj0jssxxceyu"]
 
 [ext_resource type="Script" uid="uid://bjq3igcieuorv" path="res://Scripts/MainMenu.gd" id="1_48opo"]
 [ext_resource type="AudioStream" uid="uid://hf2yqyo0m2k3" path="res://Assets/Audio/Music/Funky music 2.ogg" id="2_ncjvi"]
+[ext_resource type="Script" uid="uid://d88qniwqmnoc" path="res://Nodes/Scenes/Buttons.gd" id="2_p3l52"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_48opo")
@@ -21,6 +22,7 @@ offset_top = 268.0
 offset_right = 286.0
 offset_bottom = 345.0
 text = "START"
+script = ExtResource("2_p3l52")
 
 [node name="Options" type="Button" parent="c"]
 layout_mode = 0
@@ -29,6 +31,7 @@ offset_top = 368.0
 offset_right = 292.0
 offset_bottom = 446.0
 text = "OPTIONS"
+script = ExtResource("2_p3l52")
 
 [node name="Quit" type="Button" parent="c"]
 layout_mode = 0
@@ -37,6 +40,7 @@ offset_top = 464.0
 offset_right = 293.0
 offset_bottom = 542.0
 text = "EXIT"
+script = ExtResource("2_p3l52")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ncjvi")
