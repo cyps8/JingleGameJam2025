@@ -38,6 +38,8 @@ var hitRecoil: float
 @onready var dmgBorder: TextureRect = %DMGBorder
 @onready var knockoutBorder: TextureRect = %KnockoutBorder
 
+@export var gloves: Array[Texture]
+
 static var ins: Player
 
 func _init():
@@ -104,6 +106,7 @@ func _process(_dt):
 			stamCur -= punchCost
 			recoverycd = 0.35
 			usingL = true
+			$ArmL.texture = gloves[1]
 		elif Input.is_action_just_pressed("block") && !outOfStam:
 			blockingL = true
 			$ArmL.position += Vector3(0.3, 0.5, 0)
@@ -121,6 +124,7 @@ func _process(_dt):
 			stamCur -= punchCost
 			recoverycd = 0.35
 			usingR = true
+			$ArmR.texture = gloves[1]
 		elif Input.is_action_just_pressed("block") && !outOfStam:
 			blockingR = true
 			$ArmR.position += Vector3(-0.3, 0.5, 0)
@@ -147,6 +151,7 @@ func ResetArmL():
 	resetTween.tween_property($ArmL, "position", armLDefPos, 0.1)
 	resetTween.tween_callback(func(): usingL = false)
 	resetTween.tween_callback(func(): blockingL = false)
+	$ArmL.texture = gloves[0]
 
 func ResetArmR():
 	if !blockingR:
@@ -155,6 +160,7 @@ func ResetArmR():
 	resetTween.tween_property($ArmR, "position", armRDefPos, 0.1)
 	resetTween.tween_callback(func(): usingR = false)
 	resetTween.tween_callback(func(): blockingR = false)
+	$ArmR.texture = gloves[0]
 
 func TakeDamage(val: float):
 	healthCur -= val

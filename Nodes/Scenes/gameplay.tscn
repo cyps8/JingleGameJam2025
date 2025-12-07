@@ -1,41 +1,15 @@
-[gd_scene load_steps=24 format=3 uid="uid://c6hrxahg2vy6o"]
+[gd_scene load_steps=20 format=3 uid="uid://c6hrxahg2vy6o"]
 
+[ext_resource type="PackedScene" uid="uid://7cuuqdrdbpn6" path="res://node_3d.tscn" id="1_5aubf"]
 [ext_resource type="Script" uid="uid://d2iv34ayqfa3i" path="res://Scripts/Player.gd" id="1_84d6f"]
-[ext_resource type="Texture2D" uid="uid://che1v77ujxggu" path="res://Assets/Art/Other/icon.svg" id="1_sw52n"]
+[ext_resource type="Texture2D" uid="uid://imy4rgupu6uo" path="res://Assets/Art/Sprites/Player/glove1.png" id="3_5aubf"]
 [ext_resource type="Script" uid="uid://b3qoryrjch6mg" path="res://Scripts/Enemy.gd" id="3_wnkb1"]
 [ext_resource type="Texture2D" uid="uid://bwcibwoa1ym6p" path="res://Assets/Art/Sprites/Sloth/IMG_5455.PNG" id="4_dmect"]
+[ext_resource type="Texture2D" uid="uid://cogxtjb1a3dc1" path="res://Assets/Art/Sprites/Player/glove2.png" id="4_sv8sg"]
 [ext_resource type="Texture2D" uid="uid://bfo3nhl5yj255" path="res://Assets/Art/Sprites/Sloth/IMG_5451.PNG" id="5_2kk6b"]
 [ext_resource type="Texture2D" uid="uid://dvf6mdhljja31" path="res://Assets/Art/Sprites/Sloth/IMG_5450.PNG" id="6_uk5xd"]
 [ext_resource type="Texture2D" uid="uid://tkawe1iu413a" path="res://Assets/Art/Sprites/UI/heart.png" id="7_eno18"]
 [ext_resource type="Texture2D" uid="uid://3pdhtkbnclge" path="res://Assets/Art/Sprites/UI/stam.png" id="8_oo8pr"]
-
-[sub_resource type="Gradient" id="Gradient_6irbu"]
-colors = PackedColorArray(0.28560975, 0.27472824, 0.27455476, 1, 0.112083234, 0.12456738, 0.13221022, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_sw52n"]
-noise_type = 2
-frequency = 0.0583
-cellular_return_type = 6
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_84d6f"]
-noise = SubResource("FastNoiseLite_sw52n")
-color_ramp = SubResource("Gradient_6irbu")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wnkb1"]
-albedo_texture = SubResource("NoiseTexture2D_84d6f")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_dmect"]
-material = SubResource("StandardMaterial3D_wnkb1")
-size = Vector2(10, 10)
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2kk6b"]
-
-[sub_resource type="Sky" id="Sky_uk5xd"]
-sky_material = SubResource("ProceduralSkyMaterial_2kk6b")
-
-[sub_resource type="Environment" id="Environment_eno18"]
-background_mode = 2
-sky = SubResource("Sky_uk5xd")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84d6f"]
 bg_color = Color(0.09620472, 0.09620475, 0.09620469, 1)
@@ -79,37 +53,41 @@ height = 180
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5aubf"]
+radius = 5.664
+height = 16.818
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sv8sg"]
+radius = 2.331
+height = 8.582
+
 [node name="Gameplay" type="Node3D"]
 process_mode = 1
 
 [node name="World" type="Node3D" parent="."]
 
-[node name="TempFloor" type="MeshInstance3D" parent="World"]
-mesh = SubResource("PlaneMesh_dmect")
-skeleton = NodePath("../..")
-
-[node name="Env" type="WorldEnvironment" parent="World"]
-environment = SubResource("Environment_eno18")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 0.0028798105, 0.9999959, 0, -0.9999959, 0.0028798105, 0, 3.9116445, 0)
+[node name="Node3D" parent="World" instance=ExtResource("1_5aubf")]
+transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-08, 10.815596, -0.5600095, 21.711939)
 
 [node name="Player" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.2428935)
 script = ExtResource("1_84d6f")
+gloves = Array[Texture]([ExtResource("3_5aubf"), ExtResource("4_sv8sg")])
 
 [node name="Cam" type="Camera3D" parent="Player"]
+current = true
 fov = 85.0
 
 [node name="ArmR" type="Sprite3D" parent="Player"]
-transform = Transform3D(0.36394054, -0.24595535, -0.33418047, 0.14370222, 0.86993814, 0.33785108, 0.083048016, -0.42745036, 0.87987506, 0.82144547, -0.71799016, -0.92223907)
-modulate = Color(1, 0.6666667, 0.24313726, 1)
-texture = ExtResource("1_sw52n")
+transform = Transform3D(0.045492567, -0.012297771, -0.016709022, 0.017962778, 0.043496903, 0.016892549, 0.010381001, -0.021372516, 0.043993752, 0.82144547, -0.71799016, -0.92223907)
+billboard = 1
+texture = ExtResource("3_5aubf")
 
 [node name="ArmL" type="Sprite3D" parent="Player"]
-transform = Transform3D(0.36396214, 0.24556169, 0.33432278, -0.14350663, 0.8704329, 0.33709526, -0.083291136, -0.42666858, 0.88011086, -0.821, -0.718, -0.922)
-modulate = Color(1, 0.6666667, 0.24313726, 1)
-texture = ExtResource("1_sw52n")
+transform = Transform3D(0.045492567, -0.012297771, -0.016709022, 0.017962778, 0.043496903, 0.016892549, 0.010381001, -0.021372516, 0.043993752, -0.821, -0.718, -0.922)
+flip_h = true
+billboard = 1
+texture = ExtResource("3_5aubf")
 
 [node name="HUD" type="CanvasLayer" parent="Player"]
 
@@ -187,15 +165,32 @@ modulate = Color(0.9843137, 0.76862746, 0, 1)
 texture = ExtResource("8_oo8pr")
 
 [node name="Sprite" type="Sprite3D" parent="Enemy"]
-transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, -0.18522167, 0)
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, -0.18522167, -0.015573919)
 modulate = Color(1.0039216, 0.9999855, 0.9999855, 1)
 texture = ExtResource("4_dmect")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy/Sprite"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.841537, 0)
+cast_shadow = 3
+mesh = SubResource("CapsuleMesh_5aubf")
 
 [node name="ArmR" type="Sprite3D" parent="Enemy"]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0.6089966, -0.06779206, 0.14576149)
 texture = ExtResource("5_2kk6b")
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Enemy/ArmR"]
+transform = Transform3D(2, 0, 0, 0, 1.7699916, -0.9311982, 0, 0.9311982, 1.7699916, 2.6033964, 0.0007266998, 0.0010347366)
+cast_shadow = 3
+mesh = SubResource("CapsuleMesh_sv8sg")
+skeleton = NodePath("../../Sprite")
+
 [node name="ArmL" type="Sprite3D" parent="Enemy"]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, -0.609, -0.068, 0.146)
 flip_h = true
 texture = ExtResource("5_2kk6b")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Enemy/ArmL"]
+transform = Transform3D(2, 0, 0, 0, 1.7699916, -0.9311982, 0, 0.9311982, 1.7699916, -2.080533, -0.0007266998, -0.0010356903)
+cast_shadow = 3
+mesh = SubResource("CapsuleMesh_sv8sg")
+skeleton = NodePath("../../Sprite")

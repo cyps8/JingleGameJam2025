@@ -87,7 +87,7 @@ func Punch():
 	arm.position += Vector3(0, 0.2, 0)
 	
 	var punchTween: Tween = create_tween()
-	punchTween.tween_property(arm, "position", arm.position + Vector3(punchOffset,0.1,0.8), 0.8).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	punchTween.tween_property(arm, "position", arm.position + Vector3(punchOffset,0.1,1.0), 0.8).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	punchTween.tween_callback(TryDamage)
 	punchTween.tween_property(arm, "position", armDefPos, 0.15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	punchTween.tween_callback(func(): arm.texture = armTexture)
@@ -109,6 +109,7 @@ func TryDamage():
 func TakeDamage(val: float):
 	healthCur -= val
 	if healthCur < 0:
+		healthCur = 0
 		Die()
 	var dmgFlash: Tween = create_tween()
 	$Sprite.modulate = Color.RED
@@ -122,6 +123,9 @@ func TakeDamage(val: float):
 
 	var healthScale: float = healthCur / healthMax
 	healthIcon.scale = Vector3(healthScale * defaultHealthIconScale, healthScale * defaultHealthIconScale, healthScale * defaultHealthIconScale)
+
+	SFXPlayer.ins.PlaySound(randi_range(0, 2), SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
+
 
 func Die():
 	pass
