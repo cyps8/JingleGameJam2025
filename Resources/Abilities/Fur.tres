@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://ce6yhd7fgv2r0"]
+
+[ext_resource type="Script" uid="uid://cu7rke6bemqoj" path="res://Scripts/Ability.gd" id="1_733ii"]
+[ext_resource type="Texture2D" uid="uid://che1v77ujxggu" path="res://Assets/Art/Other/icon.svg" id="1_wnh10"]
+
+[resource]
+script = ExtResource("1_733ii")
+name = "Fur"
+description = "a thick layer of fur that reduces the damage you take and helps you survive longer."
+icon = ExtResource("1_wnh10")
+metadata/_custom_type_script = "uid://cu7rke6bemqoj"

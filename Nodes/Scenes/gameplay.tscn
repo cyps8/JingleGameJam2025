@@ -8,11 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://bwcibwoa1ym6p" path="res://Assets/Art/Sprites/Sloth/IMG_5455.PNG" id="4_dmect"]
 [ext_resource type="Texture2D" uid="uid://cogxtjb1a3dc1" path="res://Assets/Art/Sprites/Player/glove2.png" id="4_sv8sg"]
 [ext_resource type="Texture2D" uid="uid://bfo3nhl5yj255" path="res://Assets/Art/Sprites/Sloth/IMG_5451.PNG" id="5_2kk6b"]
+[ext_resource type="Texture2D" uid="uid://cytdmxy3pu58d" path="res://Assets/Art/Sprites/Player/Teeth.png" id="6_csnm0"]
 [ext_resource type="Texture2D" uid="uid://dvf6mdhljja31" path="res://Assets/Art/Sprites/Sloth/IMG_5450.PNG" id="6_uk5xd"]
 [ext_resource type="Texture2D" uid="uid://tkawe1iu413a" path="res://Assets/Art/Sprites/UI/heart.png" id="7_eno18"]
 [ext_resource type="Texture2D" uid="uid://3pdhtkbnclge" path="res://Assets/Art/Sprites/UI/stam.png" id="8_oo8pr"]
 [ext_resource type="AudioStream" uid="uid://dk5tnp3ftb8tv" path="res://Assets/Audio/SFX/Ambience/SFX_Ambience_Arena.ogg" id="12_csnm0"]
-[ext_resource type="AudioStream" uid="uid://dno0g44vsmw2t" path="res://Assets/Audio/Music/Battle Music.ogg" id="13_csnm0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84d6f"]
 bg_color = Color(0.09620472, 0.09620475, 0.09620469, 1)
@@ -171,6 +171,20 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_eno18")
 
+[node name="Teeth" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.825525)
+
+[node name="UpperTeeth" type="Sprite3D" parent="Player/Teeth"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.1, 0)
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("6_csnm0")
+
+[node name="LowerTeeth" type="Sprite3D" parent="Player/Teeth"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.1, 0)
+flip_v = true
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("6_csnm0")
+
 [node name="Enemy" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2580582, -0.8971336)
 script = ExtResource("3_wnkb1")
@@ -225,8 +239,3 @@ skeleton = NodePath("../../Sprite")
 stream = ExtResource("12_csnm0")
 autoplay = true
 bus = &"SFX"
-
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_csnm0")
-volume_db = -1.737
-autoplay = true

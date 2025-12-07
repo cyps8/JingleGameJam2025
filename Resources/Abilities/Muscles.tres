@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://cvjkx67yp8p3i"]
+
+[ext_resource type="Texture2D" uid="uid://che1v77ujxggu" path="res://Assets/Art/Other/icon.svg" id="1_gm6kr"]
+[ext_resource type="Script" uid="uid://cu7rke6bemqoj" path="res://Scripts/Ability.gd" id="1_u3ew0"]
+
+[resource]
+script = ExtResource("1_u3ew0")
+name = "Muscles"
+description = "strong muscles help you deal more damage to your opponents with improved efficiency."
+icon = ExtResource("1_gm6kr")
+metadata/_custom_type_script = "uid://cu7rke6bemqoj"

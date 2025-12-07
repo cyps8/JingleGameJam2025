@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+@export var abilities: Array[Ability]
+
 func _ready():
 	$Ability1.pressed.connect(_on_ability1_pressed)
 	$Ability2.pressed.connect(_on_ability2_pressed)

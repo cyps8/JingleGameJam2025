@@ -1,9 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://dh5kdx2ryyrin"]
+[gd_scene load_steps=9 format=3 uid="uid://dh5kdx2ryyrin"]
 
 [ext_resource type="Script" uid="uid://c5ghc6qhii1bx" path="res://Nodes/Scenes/AbilitySelect.gd" id="1_cdxm4"]
+[ext_resource type="Script" uid="uid://cu7rke6bemqoj" path="res://Scripts/Ability.gd" id="2_k5os8"]
+[ext_resource type="Resource" uid="uid://ce6yhd7fgv2r0" path="res://Resources/Abilities/Fur.tres" id="3_towo8"]
+[ext_resource type="Resource" uid="uid://bf5yiiu35417v" path="res://Resources/Abilities/Bite.tres" id="4_ywres"]
+[ext_resource type="Resource" uid="uid://dral5c80jc0le" path="res://Resources/Abilities/Tail.tres" id="5_7j3vw"]
+[ext_resource type="Resource" uid="uid://cvjkx67yp8p3i" path="res://Resources/Abilities/Muscles.tres" id="6_8og1i"]
+[ext_resource type="Resource" uid="uid://1s3n3clrnwix" path="res://Resources/Abilities/Screech.tres" id="7_7ncdt"]
+[ext_resource type="Resource" uid="uid://c64jyerof713g" path="res://Resources/Abilities/BeatChest.tres" id="8_upyjv"]
 
 [node name="AbilitySelect" type="CanvasLayer"]
 script = ExtResource("1_cdxm4")
+abilities = Array[ExtResource("2_k5os8")]([ExtResource("3_towo8"), ExtResource("4_ywres"), ExtResource("5_7j3vw"), ExtResource("6_8og1i"), ExtResource("7_7ncdt"), ExtResource("8_upyjv")])
 
 [node name="Ability1" type="Button" parent="."]
 anchors_preset = 9
