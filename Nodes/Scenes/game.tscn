@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cg38013tvrhgd"]
+[gd_scene load_steps=6 format=3 uid="uid://cg38013tvrhgd"]
 
 [ext_resource type="Script" uid="uid://c02g64mdqmclg" path="res://Scripts/GameManager.gd" id="1_ia1on"]
 [ext_resource type="Script" uid="uid://dn2vqg4n5t2g4" path="res://Scripts/Pause.gd" id="2_05cs3"]
 [ext_resource type="PackedScene" uid="uid://c6hrxahg2vy6o" path="res://Nodes/Scenes/gameplay.tscn" id="3_05cs3"]
+[ext_resource type="Script" path="res://Nodes/Scenes/Buttons.gd" id="3_do2eo"]
 [ext_resource type="AudioStream" uid="uid://dno0g44vsmw2t" path="res://Assets/Audio/Music/Battle Music.ogg" id="4_do2eo"]
-[ext_resource type="Script" uid="uid://d88qniwqmnoc" path="res://Nodes/Scenes/Buttons.gd" id="3_do2eo"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_ia1on")
@@ -68,6 +68,7 @@ script = ExtResource("3_do2eo")
 stream = ExtResource("4_do2eo")
 volume_db = -7.46
 autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="PauseMenu/c/Panel/Resume" to="PauseMenu" method="ResumePressed"]
 [connection signal="pressed" from="PauseMenu/c/Panel/Options" to="PauseMenu" method="OptionsPressed"]
