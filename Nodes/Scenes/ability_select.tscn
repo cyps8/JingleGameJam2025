@@ -13,41 +13,132 @@
 script = ExtResource("1_cdxm4")
 abilities = Array[ExtResource("2_k5os8")]([ExtResource("3_towo8"), ExtResource("4_ywres"), ExtResource("5_7j3vw"), ExtResource("6_8og1i"), ExtResource("7_7ncdt"), ExtResource("8_upyjv")])
 
+[node name="SelectText" type="RichTextLabel" parent="."]
+offset_top = 30.0
+offset_right = 1200.0
+offset_bottom = 130.0
+theme_override_font_sizes/normal_font_size = 64
+text = "Select Your CHIMP Ability"
+horizontal_alignment = 1
+
 [node name="Ability1" type="Button" parent="."]
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = 145.0
-offset_right = 89.0
-offset_bottom = 147.0
+offset_left = 100.0
+offset_top = 200.0
+offset_right = 350.0
+offset_bottom = -200.0
 grow_vertical = 2
-scale = Vector2(3.25, 0.775)
-text = "Ability1"
+
+[node name="TextureRect" type="TextureRect" parent="Ability1"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 25.0
+offset_right = 104.0
+offset_bottom = 65.0
+
+[node name="AbilityName1" type="RichTextLabel" parent="Ability1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.407
+anchor_top = 0.147
+anchor_right = 0.577
+anchor_bottom = 0.179
+offset_left = -101.75
+offset_top = 86.5
+offset_right = 105.75
+offset_bottom = 170.5
+mouse_filter = 1
+text = "Ability Name"
+horizontal_alignment = 1
+
+[node name="Description1" type="RichTextLabel" parent="Ability1"]
+layout_mode = 0
+offset_top = 300.0
+offset_right = 250.0
+offset_bottom = 500.0
+mouse_filter = 1
+text = "Description"
+horizontal_alignment = 1
 
 [node name="Ability2" type="Button" parent="."]
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -141.0
-offset_top = 145.0
-offset_right = -51.0
-offset_bottom = 147.0
+offset_left = -150.0
+offset_top = 200.0
+offset_right = 100.0
+offset_bottom = -200.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(3.25, 0.775)
-text = "Ability2"
+
+[node name="TextureRect" type="TextureRect" parent="Ability2"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 25.0
+offset_right = 104.0
+offset_bottom = 65.0
+
+[node name="AbilityName2" type="RichTextLabel" parent="Ability2"]
+layout_mode = 0
+offset_top = 160.0
+offset_right = 250.00002
+offset_bottom = 260.0
+mouse_filter = 1
+text = "Ability Name"
+horizontal_alignment = 1
+
+[node name="Description2" type="RichTextLabel" parent="Ability2"]
+layout_mode = 0
+offset_top = 300.0
+offset_right = 250.00002
+offset_bottom = 500.0
+mouse_filter = 1
+text = "Description"
+horizontal_alignment = 1
 
 [node name="Ability3" type="Button" parent="."]
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -292.0
-offset_top = 145.0
-offset_right = -202.0
-offset_bottom = 147.0
+offset_left = -400.0
+offset_top = 200.0
+offset_right = -150.0
+offset_bottom = -200.0
 grow_horizontal = 0
 grow_vertical = 2
-scale = Vector2(3.25, 0.775)
-text = "Ability3"
+
+[node name="TextureRect" type="TextureRect" parent="Ability3"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 25.0
+offset_right = 104.0
+offset_bottom = 65.0
+
+[node name="AbilityName3" type="RichTextLabel" parent="Ability3"]
+layout_mode = 0
+offset_left = 6.154
+offset_top = 160.0
+offset_right = 256.154
+offset_bottom = 260.0
+mouse_filter = 1
+text = "Ability Name"
+horizontal_alignment = 1
+
+[node name="Description3" type="RichTextLabel" parent="Ability3"]
+layout_mode = 0
+offset_top = 300.0
+offset_right = 250.0
+offset_bottom = 500.00006
+mouse_filter = 1
+text = "Description"
+horizontal_alignment = 1
+
+[node name="LossCountBar" type="ProgressBar" parent="."]
+offset_left = 727.0
+offset_top = 815.0
+offset_right = 1156.0
+offset_bottom = 842.0
+max_value = 3.0
