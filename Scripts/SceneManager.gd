@@ -8,12 +8,14 @@ static var ins: Root
 @export var menuScene: PackedScene
 @export var introScene: PackedScene
 @export var abilitySelectScene: PackedScene
+@export var loseScene: PackedScene
 
 enum Scene{
 	MAINMENU,
 	INTRO,
 	GAME,
-	ABILITY_SELECT
+	ABILITY_SELECT,
+	LOSE
 }
 
 var optionsRef: Options
@@ -58,6 +60,8 @@ func ChangeScene(newScene: Scene):
 		currentPackedScene = gameScene
 	elif newScene == Scene.ABILITY_SELECT:
 		currentPackedScene = abilitySelectScene
+	elif newScene == Scene.LOSE:
+		currentPackedScene = loseScene
 
 	add_child(loadingScreenRef)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bkna205klwqky"]
+[gd_scene load_steps=20 format=3 uid="uid://bkna205klwqky"]
 
 [ext_resource type="Script" uid="uid://ds54j3mnngqou" path="res://Scripts/SceneManager.gd" id="1_uewl6"]
 [ext_resource type="PackedScene" uid="uid://drj0jssxxceyu" path="res://Nodes/Scenes/main_menu.tscn" id="2_62qmo"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bf5lc31pqguc1" path="res://Scripts/Options.gd" id="3_1t681"]
 [ext_resource type="PackedScene" uid="uid://bumwks6a8fxgk" path="res://Nodes/Scenes/intro.tscn" id="4_1yy5m"]
 [ext_resource type="PackedScene" uid="uid://dh5kdx2ryyrin" path="res://Nodes/Scenes/ability_select.tscn" id="4_b4ixw"]
+[ext_resource type="PackedScene" uid="uid://dmg43dqj06qxs" path="res://Nodes/Scenes/youlose.tscn" id="6_1s7rx"]
 [ext_resource type="AudioStream" uid="uid://c8o7qn3sae4d2" path="res://Assets/Audio/SFX/Damage/Enemy/Sloth/SFX_Sloth_Damage_1.wav" id="6_g65lr"]
 [ext_resource type="AudioStream" uid="uid://dqwg3wn54rq4k" path="res://Assets/Audio/SFX/Damage/Enemy/Sloth/SFX_Sloth_Damage_2.wav" id="7_qncjq"]
 [ext_resource type="AudioStream" uid="uid://bf3rkt2yqt68g" path="res://Assets/Audio/SFX/Damage/Enemy/Sloth/SFX_Sloth_Damage_3.wav" id="8_ig2k1"]
@@ -26,6 +27,7 @@ gameScene = ExtResource("2_hheyw")
 menuScene = ExtResource("2_62qmo")
 introScene = ExtResource("4_1yy5m")
 abilitySelectScene = ExtResource("4_b4ixw")
+loseScene = ExtResource("6_1s7rx")
 
 [node name="SFXPlayer" type="Node" parent="."]
 script = ExtResource("2_s5jww")

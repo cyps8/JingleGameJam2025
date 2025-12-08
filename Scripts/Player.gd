@@ -334,4 +334,7 @@ func Block():
 	hitRecoilTween.tween_property(self, "hitRecoil", 0.0, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 
 func Die():
-	Root.ins.ChangeScene(Root.Scene.ABILITY_SELECT)
+	if Globals.lossCount < 4:
+		Root.ins.ChangeScene(Root.Scene.ABILITY_SELECT)
+	else:
+		Root.ins.ChangeScene(Root.Scene.LOSE)
