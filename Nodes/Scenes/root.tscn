@@ -24,6 +24,7 @@
 [node name="Root" type="Node"]
 process_mode = 3
 script = ExtResource("1_uewl6")
+skipMenu = true
 gameScene = ExtResource("2_hheyw")
 menuScene = ExtResource("2_62qmo")
 introScene = ExtResource("4_1yy5m")

@@ -60,14 +60,26 @@ var enhancedStamina: float = 0
 
 @export var gloves: Array[Texture]
 
+var talk: Label3D
+
 static var ins: Player
 
 var dead: bool = false
+
+var intro: bool = true
+
+var stuffToSay: Array[String]
+
+var emperorYapping: bool = false
+
+var won: bool = false
 
 func _init():
 	ins = self
 
 func _ready():
+	talk = get_tree().get_first_node_in_group("talk")
+
 	if Globals.biteUnlocked:
 		biteAbility.visible = true
 	
@@ -106,6 +118,39 @@ func _ready():
 	var mousePos: Vector2 = get_viewport().get_mouse_position()
 	lastSide = mousePos.x < get_viewport().size.x / 2
 
+	Intro()
+
+func LookAtEmperor():
+	var lookTween: Tween = create_tween()
+	lookTween.tween_property(self, "camForward:x", deg_to_rad(22.5), 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	lookTween.parallel()
+	lookTween.tween_property(cam, "fov", 40, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+func EmperorTalk():
+	emperorYapping = true
+	talk.visible = true
+	if stuffToSay.size() > 0:
+		talk.text = stuffToSay[0]
+		stuffToSay.remove_at(0)
+	else:
+		EmperorShutUp()
+
+
+func EmperorShutUp():
+	emperorYapping = false
+	talk.visible = false
+	LookAwayEmperor()
+
+func LookAwayEmperor():
+	var lookTween: Tween = create_tween()
+	lookTween.tween_property(self, "camForward:x", 0.0, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	lookTween.parallel()
+	lookTween.tween_property(cam, "fov", 85, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	if intro:
+		FinishIntro()
+	elif won:
+		Root.ins.ChangeScene(Root.Scene.MAINMENU)
+
 func CamStuff(_dt: float, mousePos: Vector2):
 	var lookOffset = Vector2(mousePos.x / get_viewport().size.x, mousePos.y / get_viewport().size.y)
 	lookOffset -= Vector2(.5, .5)
@@ -121,7 +166,63 @@ func KnockoutAnim():
 
 var lastSide: bool = false
 
+func Intro():
+	position = Vector3(0, 0.871, 7.629)
+	knockoutBorder.modulate.a = 1.0
+	knockoutBorder.texture.gradient.set_offset(1, 0.01)
+	var introTween: Tween = create_tween()
+	introTween.tween_method(KOBorder, 0.01, 1.0, 1.1)
+	introTween.tween_property(knockoutBorder, "modulate:a", 0.0, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	introTween.tween_interval(0.5)
+	introTween.tween_property(self, "position", Vector3(0, 1.5, 5.243), Vector3(0, 0.871, 7.629).distance_to(Vector3(0, 1.5, 1.243)) * 0.3)
+	introTween.tween_callback(func(): LookAtEmperor())
+	introTween.tween_interval(0.5)
+	if Globals.justUpgraded:
+		var randIntro = randi_range(0, 5)
+		match randIntro:
+			0:
+				stuffToSay = ["Dear heavens you look awful, \n what did you do to yourself", "Oh well, time to battle!"]
+			1:
+				stuffToSay = ["You know, you look more …primitive", "Never mind, \n on with the fight!"]
+			2:
+				stuffToSay = ["Did you do something different? \n Is that a tail? ", "Never mind, time to battle!"]
+			3:
+				stuffToSay = ["Never in my 16 years of ape supreme \n have I witnessed someone so downright ugly", "Anyway, FIGHT!"]
+			4:
+				stuffToSay = ["Oh god, look at you. \n You’re absolutely covered in fur", "No matter, FIGHT!"]
+			5:
+				stuffToSay = ["What is this, \n some kind of planet of da apes?", "Whatever, \n let the battle COMMENCE!"]
+		Globals.justUpgraded = false
+	elif Globals.currentOpponent == Enemy.EnemyType.SLOTH:
+		stuffToSay = ["You failed to appease \n both myself and the banana republic", "thus you stand here today to fight \n my 3 strongest and mightiest warriors", "If you fail to do so, you shall become \n ONE OF US and join me as one of my Chimpions.."]
+	elif Globals.currentOpponent == Enemy.EnemyType.ELEPHANT:
+		stuffToSay = ["What?! How could you? \n He was one of my finest Chimpions!", "He called in sick to be here \n and you just knocked him out!", "Nevermind, I’ll send someone out here \n who aught to knock your socks off…", "literally, \n he has been known to do that"]
+	elif Globals.currentOpponent == Enemy.EnemyType.CHEETAH:
+		stuffToSay = ["OOGH AGH! You’ve done it again! \n Again? Grrr… ", "I didn’t expect you to be so strong", "That’s it", "Time to send out a real Chimpion, \n one of my strongest Warriors.."]
+	introTween.tween_callback(func(): EmperorTalk())
+
+func Win():
+	won = true
+	talk.position.z -= 10
+	var winTween: Tween = create_tween()
+	winTween.tween_callback(func(): LookAtEmperor())
+	winTween.tween_interval(0.5)
+	stuffToSay = ["Mmm, hmph, well I guess what they say is true \n I suppose Cheetahs never DO prosper", "Fine, take your freedom", "but don’t think for a second \n that this means you’re off the hook", "We’ll meet again… \n Now get out of my sight \n before I change my mind", "OOG AGH!"]
+	winTween.tween_callback(func(): EmperorTalk())
+
+func FinishIntro():
+	var introTween: Tween = create_tween()
+	introTween.tween_property(self, "position", Vector3(0, 1.5, 1.243), 1.6)
+	introTween.tween_callback(func(): EndIntro())
+
+func EndIntro():
+	intro = false
+	Enemy.ins.intro = false
+
 func _process(_dt):
+
+	if (intro || won) && emperorYapping && Input.is_action_just_pressed("punch"):
+		EmperorTalk()
 
 	if Input.is_action_just_pressed("SecretDeath"):
 		TakeDamage(9999)
@@ -149,17 +250,17 @@ func _process(_dt):
 
 	biteCd -= _dt
 	biteAbility.value = (biteCdMax - biteCd) / biteCdMax
-	if Input.is_action_just_pressed("bite") && !outOfStam && biteCd < 0 && Globals.biteUnlocked:
+	if Input.is_action_just_pressed("bite") && !outOfStam && biteCd < 0 && Globals.biteUnlocked && !intro && !won:
 		Bite()
 
 	screechCd -= _dt
 	screechAbility.value = (screechCdMax - screechCd) / screechCdMax
-	if Input.is_action_just_pressed("screech") && !outOfStam && screechCd < 0 && Globals.screechUnlocked:
+	if Input.is_action_just_pressed("screech") && !outOfStam && screechCd < 0 && Globals.screechUnlocked && !intro && !won:
 		Screech()
 
 	beatCd -= _dt
 	beatAbility.value = (beatCdMax - beatCd) / beatCdMax
-	if Input.is_action_just_pressed("beat") && !outOfStam && beatCd < 0 && Globals.beatUnlocked && !usingL && !usingR:
+	if Input.is_action_just_pressed("beat") && !outOfStam && beatCd < 0 && Globals.beatUnlocked && !usingL && !usingR && !intro && !won:
 		Beat()
 
 	var mousePos: Vector2 = get_viewport().get_mouse_position()
@@ -181,7 +282,7 @@ func _process(_dt):
 			$ArmL.position = armLDefPos
 		
 	if left && !usingL:
-		if Input.is_action_just_pressed("punch") && !outOfStam:
+		if Input.is_action_just_pressed("punch") && !outOfStam && !dead && !intro && !won:
 			var punchTween: Tween = create_tween()
 			punchTween.tween_property($ArmL, "position:z", $ArmL.position.z - 1, 1/punchSpeed).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 			punchTween.parallel()
@@ -193,7 +294,7 @@ func _process(_dt):
 			recoverycd = 0.35
 			usingL = true
 			$ArmL.texture = gloves[1]
-		elif Input.is_action_just_pressed("block") && !outOfStam:
+		elif Input.is_action_just_pressed("block") && !outOfStam && !dead && !intro && !won:
 			blockingL = true
 			$ArmL.position += Vector3(0.3, 0.5, 0)
 			var blockTween: Tween = create_tween()
@@ -203,7 +304,7 @@ func _process(_dt):
 			recoverycd = 0.35
 			usingL = true
 	elif !left && !usingR:
-		if Input.is_action_just_pressed("punch") && !outOfStam:
+		if Input.is_action_just_pressed("punch") && !outOfStam && !dead && !intro && !won:
 			var punchTween: Tween = create_tween()
 			punchTween.tween_property($ArmR, "position:z", $ArmR.position.z - 1, 1/punchSpeed).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 			punchTween.parallel()
@@ -215,7 +316,7 @@ func _process(_dt):
 			recoverycd = 0.35
 			usingR = true
 			$ArmR.texture = gloves[1]
-		elif Input.is_action_just_pressed("block") && !outOfStam:
+		elif Input.is_action_just_pressed("block") && !outOfStam && !dead && !intro && !won:
 			blockingR = true
 			$ArmR.position += Vector3(-0.3, 0.5, 0)
 			var blockTween: Tween = create_tween()
@@ -235,6 +336,8 @@ func _process(_dt):
 	CamStuff(_dt, mousePos)
 
 func Bite():
+	if dead:
+		return
 	stamCur -= biteCost
 	recoverycd = 0.35
 	biteCd = biteCdMax
@@ -260,6 +363,8 @@ func Screech():
 	Enemy.ins.Stunned()
 
 func Beat():
+	if dead:
+		return
 	usingL = true
 	usingR = true
 	beatCd = beatCdMax
@@ -304,7 +409,7 @@ func ResetArmR():
 	$ArmR.texture = gloves[0]
 
 func TakeDamage(val: float):
-	if Enemy.ins.dead:
+	if Enemy.ins.dead || dead:
 		return
 	if Globals.furUnlocked:
 		healthCur -= val * 0.75
@@ -313,7 +418,7 @@ func TakeDamage(val: float):
 	dmgBorder.modulate.a = 1.0
 	var dmgFlash: Tween = create_tween()
 	dmgFlash.tween_property(dmgBorder, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	if healthCur < 0:
+	if healthCur <= 0:
 		Die()
 
 	hitRecoil = 0.05
@@ -345,6 +450,19 @@ func Block():
 
 func Die():
 	dead = true
+	SFXPlayer.ins.PlaySound(8, SFXPlayer.SoundType.SFX)
+	knockoutBorder.texture.gradient.set_offset(1, 1.0)
+	var dyingTween: Tween = create_tween()
+	dyingTween.tween_property(knockoutBorder, "modulate:a", 1.0, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	dyingTween.tween_method(KOBorder, 1.0, 0.3, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	dyingTween.tween_method(KOBorder, 0.3, 0.6, 0.8)
+	dyingTween.tween_method(KOBorder, 0.6, 0.01, 0.8)
+	dyingTween.tween_callback(func(): DeathOver())
+
+func KOBorder(val: float):
+	knockoutBorder.texture.gradient.set_offset(1, val)
+
+func DeathOver():
 	if Globals.lossCount < 4:
 		Root.ins.ChangeScene(Root.Scene.ABILITY_SELECT)
 	else:

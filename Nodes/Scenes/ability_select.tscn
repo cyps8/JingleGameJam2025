@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dh5kdx2ryyrin"]
+[gd_scene load_steps=15 format=3 uid="uid://dh5kdx2ryyrin"]
 
 [ext_resource type="Script" uid="uid://c5ghc6qhii1bx" path="res://Nodes/Scenes/AbilitySelect.gd" id="1_cdxm4"]
 [ext_resource type="Script" uid="uid://cu7rke6bemqoj" path="res://Scripts/Ability.gd" id="2_k5os8"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://1s3n3clrnwix" path="res://Resources/Abilities/Screech.tres" id="7_7ncdt"]
 [ext_resource type="Resource" uid="uid://c64jyerof713g" path="res://Resources/Abilities/BeatChest.tres" id="8_upyjv"]
 [ext_resource type="Theme" uid="uid://wajogwsuqirr" path="res://Resources/Buttons.tres" id="9_towo8"]
+[ext_resource type="FontFile" uid="uid://c3r3mjkx1w3lf" path="res://Assets/Fonts/Gambado Sans Forte.ttf" id="10_ywres"]
 
 [sub_resource type="Gradient" id="Gradient_yeh5w"]
 colors = PackedColorArray(0.11018626, 0.17129964, 0.20814848, 1, 0, 0, 0, 1)
@@ -20,6 +21,26 @@ height = 90
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ywres"]
+bg_color = Color(0, 0, 0, 0.7529412)
+border_width_bottom = 10
+border_color = Color(0.15127608, 0.15127608, 0.15127608, 1)
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7j3vw"]
+bg_color = Color(0.94509804, 0.75686276, 0.25882354, 1)
+border_width_bottom = 20
+border_color = Color(0.94509804, 0.5529412, 0.25882354, 1)
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [node name="AbilitySelect" type="CanvasLayer"]
 script = ExtResource("1_cdxm4")
@@ -44,10 +65,10 @@ vertical_alignment = 1
 [node name="Ability1" type="Button" parent="."]
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_left = 100.0
-offset_top = 200.0
-offset_right = 350.0
-offset_bottom = -200.0
+offset_left = 102.0
+offset_top = 156.0
+offset_right = 352.0
+offset_bottom = -244.0
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="Ability1"]
@@ -57,7 +78,7 @@ offset_top = 25.0
 offset_right = 104.0
 offset_bottom = 65.0
 
-[node name="AbilityName1" type="RichTextLabel" parent="Ability1"]
+[node name="AbilityName1" type="Label" parent="Ability1"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.407
@@ -69,8 +90,12 @@ offset_top = 86.5
 offset_right = 105.75
 offset_bottom = 170.5
 mouse_filter = 1
+theme = ExtResource("9_towo8")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
 text = "Ability Name"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Description1" type="RichTextLabel" parent="Ability1"]
 layout_mode = 0
@@ -86,10 +111,10 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -150.0
-offset_top = 200.0
-offset_right = 100.0
-offset_bottom = -200.0
+offset_left = -148.0
+offset_top = 156.0
+offset_right = 102.0
+offset_bottom = -244.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -100,14 +125,18 @@ offset_top = 25.0
 offset_right = 104.0
 offset_bottom = 65.0
 
-[node name="AbilityName2" type="RichTextLabel" parent="Ability2"]
+[node name="AbilityName2" type="Label" parent="Ability2"]
 layout_mode = 0
 offset_top = 160.0
 offset_right = 250.00002
 offset_bottom = 260.0
 mouse_filter = 1
+theme = ExtResource("9_towo8")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
 text = "Ability Name"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Description2" type="RichTextLabel" parent="Ability2"]
 layout_mode = 0
@@ -123,10 +152,10 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -400.0
-offset_top = 200.0
-offset_right = -150.0
-offset_bottom = -200.0
+offset_left = -398.0
+offset_top = 156.0
+offset_right = -148.0
+offset_bottom = -244.0
 grow_horizontal = 0
 grow_vertical = 2
 
@@ -137,15 +166,19 @@ offset_top = 25.0
 offset_right = 104.0
 offset_bottom = 65.0
 
-[node name="AbilityName3" type="RichTextLabel" parent="Ability3"]
+[node name="AbilityName3" type="Label" parent="Ability3"]
 layout_mode = 0
 offset_left = 6.154
 offset_top = 160.0
 offset_right = 256.154
 offset_bottom = 260.0
 mouse_filter = 1
+theme = ExtResource("9_towo8")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
 text = "Ability Name"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Description3" type="RichTextLabel" parent="Ability3"]
 layout_mode = 0
@@ -157,8 +190,40 @@ text = "Description"
 horizontal_alignment = 1
 
 [node name="LossCountBar" type="ProgressBar" parent="."]
-offset_left = 727.0
-offset_top = 815.0
-offset_right = 1156.0
+offset_left = 163.0
+offset_top = 782.0
+offset_right = 973.0
 offset_bottom = 842.0
-max_value = 3.0
+theme_override_colors/font_color = Color(0.94509804, 0.5019608, 0.25882354, 1)
+theme_override_colors/font_outline_color = Color(0.9137255, 0.9137255, 0.9137255, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("10_ywres")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/background = SubResource("StyleBoxFlat_ywres")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7j3vw")
+max_value = 1.0
+value = 0.5
+
+[node name="Moneometer" type="Label" parent="."]
+offset_left = 173.0
+offset_top = 696.0
+offset_right = 959.0
+offset_bottom = 771.0
+theme = ExtResource("9_towo8")
+theme_override_font_sizes/font_size = 70
+text = "Monke-O-Meter"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Moneometer2" type="Label" parent="."]
+self_modulate = Color(0.38170326, 0.38170323, 0.38170323, 1)
+offset_left = 178.0
+offset_top = 826.0
+offset_right = 964.0
+offset_bottom = 901.0
+theme = ExtResource("9_towo8")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "(I don't want to become monkey)"
+horizontal_alignment = 1
+vertical_alignment = 1
