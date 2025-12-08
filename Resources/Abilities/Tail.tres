@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://dral5c80jc0le"]
 
 [ext_resource type="Script" uid="uid://cu7rke6bemqoj" path="res://Scripts/Ability.gd" id="1_fb00i"]
-[ext_resource type="Texture2D" uid="uid://che1v77ujxggu" path="res://Assets/Art/Other/icon.svg" id="1_urmqo"]
+[ext_resource type="Texture2D" uid="uid://c5xr7pyucx014" path="res://Assets/Art/Sprites/Abilities/Tail.png" id="1_urmqo"]
 
 [resource]
 script = ExtResource("1_fb00i")
 name = "Tail"
-description = "a tail improves your balance and agility which helps you punch faster and increases max stamina."
+description = "[PASSIVE] a tail improves your balance and agility which helps you punch faster and increases max stamina."
 icon = ExtResource("1_urmqo")
 metadata/_custom_type_script = "uid://cu7rke6bemqoj"
