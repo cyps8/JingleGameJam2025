@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bkna205klwqky"]
+[gd_scene load_steps=23 format=3 uid="uid://bkna205klwqky"]
 
 [ext_resource type="Script" uid="uid://ds54j3mnngqou" path="res://Scripts/SceneManager.gd" id="1_uewl6"]
 [ext_resource type="PackedScene" uid="uid://drj0jssxxceyu" path="res://Nodes/Scenes/main_menu.tscn" id="2_62qmo"]
@@ -19,14 +19,13 @@
 [ext_resource type="Script" uid="uid://d88qniwqmnoc" path="res://Nodes/Scenes/Buttons.gd" id="14_3mi07"]
 [ext_resource type="Script" uid="uid://coy43r45ubitg" path="res://Scripts/AudioSlider.gd" id="15_2bkfp"]
 [ext_resource type="Theme" uid="uid://wajogwsuqirr" path="res://Resources/Buttons.tres" id="16_04r4e"]
-[ext_resource type="Script" uid="uid://sini0j2yfh2w" path="res://Nodes/Scenes/Credits.gd" id="20_jy3bs"]
-[ext_resource type="FontFile" uid="uid://c3r3mjkx1w3lf" path="res://Assets/Fonts/Gambado Sans Forte.ttf" id="21_4d1fn"]
 [ext_resource type="AudioStream" uid="uid://b0adus1a8ud44" path="res://Assets/Audio/SFX/SFX_Fighting_KO.wav" id="16_jy3bs"]
+[ext_resource type="Script" path="res://Nodes/Scenes/Credits.gd" id="20_jy3bs"]
+[ext_resource type="FontFile" uid="uid://c3r3mjkx1w3lf" path="res://Assets/Fonts/Gambado Sans Forte.ttf" id="21_4d1fn"]
 
 [node name="Root" type="Node"]
 process_mode = 3
 script = ExtResource("1_uewl6")
-skipMenu = true
 gameScene = ExtResource("2_hheyw")
 menuScene = ExtResource("2_62qmo")
 introScene = ExtResource("4_1yy5m")
