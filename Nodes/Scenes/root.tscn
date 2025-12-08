@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bkna205klwqky"]
+[gd_scene load_steps=22 format=3 uid="uid://bkna205klwqky"]
 
 [ext_resource type="Script" uid="uid://ds54j3mnngqou" path="res://Scripts/SceneManager.gd" id="1_uewl6"]
 [ext_resource type="PackedScene" uid="uid://drj0jssxxceyu" path="res://Nodes/Scenes/main_menu.tscn" id="2_62qmo"]
@@ -19,6 +19,8 @@
 [ext_resource type="Script" uid="uid://d88qniwqmnoc" path="res://Nodes/Scenes/Buttons.gd" id="14_3mi07"]
 [ext_resource type="Script" uid="uid://coy43r45ubitg" path="res://Scripts/AudioSlider.gd" id="15_2bkfp"]
 [ext_resource type="Theme" uid="uid://wajogwsuqirr" path="res://Resources/Buttons.tres" id="16_04r4e"]
+[ext_resource type="Script" uid="uid://sini0j2yfh2w" path="res://Nodes/Scenes/Credits.gd" id="20_jy3bs"]
+[ext_resource type="FontFile" uid="uid://c3r3mjkx1w3lf" path="res://Assets/Fonts/Gambado Sans Forte.ttf" id="21_4d1fn"]
 [ext_resource type="AudioStream" uid="uid://b0adus1a8ud44" path="res://Assets/Audio/SFX/SFX_Fighting_KO.wav" id="16_jy3bs"]
 
 [node name="Root" type="Node"]
@@ -152,6 +154,206 @@ theme_override_constants/outline_size = 15
 theme_override_font_sizes/font_size = 30
 text = "SFX Volume"
 
+[node name="CreditsMenu" type="CanvasLayer" parent="."]
+layer = 90
+script = ExtResource("20_jy3bs")
+metadata/_custom_type_script = "uid://bf5lc31pqguc1"
+
+[node name="c" type="Control" parent="CreditsMenu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CreditsMenu/c"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -572.0
+offset_top = -381.73132
+offset_right = 572.0
+offset_bottom = 381.73132
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("16_04r4e")
+
+[node name="Button" type="Button" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 444.0
+offset_top = 651.7313
+offset_right = 655.0
+offset_bottom = 734.7313
+theme = ExtResource("16_04r4e")
+text = "Return
+"
+script = ExtResource("14_3mi07")
+
+[node name="Header" type="RichTextLabel" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 444.0
+offset_top = 27.731323
+offset_right = 676.0
+offset_bottom = 78.73132
+theme = ExtResource("16_04r4e")
+theme_override_colors/default_color = Color(0.94509804, 0.5019608, 0.25882354, 1)
+theme_override_colors/font_outline_color = Color(0.9137255, 0.9137255, 0.9137255, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("21_4d1fn")
+theme_override_font_sizes/normal_font_size = 50
+text = "CREDITS"
+
+[node name="Code" type="RichTextLabel" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 99.73132
+offset_right = 674.0
+offset_bottom = 150.73132
+theme = ExtResource("16_04r4e")
+theme_override_colors/default_color = Color(0.94509804, 0.5019608, 0.25882354, 1)
+theme_override_colors/font_outline_color = Color(0.9137255, 0.9137255, 0.9137255, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("21_4d1fn")
+theme_override_font_sizes/normal_font_size = 40
+text = "Programmers"
+
+[node name="Cypri" type="RichTextLabel" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 155.73132
+offset_right = 849.0
+offset_bottom = 206.73132
+theme = ExtResource("16_04r4e")
+theme_override_colors/default_color = Color(0.94509804, 0.5019608, 0.25882354, 1)
+theme_override_colors/font_outline_color = Color(0.9137255, 0.9137255, 0.9137255, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("21_4d1fn")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[url=https://cyps.itch.io/]Lead Programmer - Cypri[/url]"
+
+[node name="Chloe" type="RichTextLabel" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 435.73132
+offset_right = 904.0
+offset_bottom = 486.73132
+theme = ExtResource("16_04r4e")
+theme_override_colors/default_color = Color(0.94509804, 0.5019608, 0.25882354, 1)
+theme_override_colors/font_outline_color = Color(0.9137255, 0.9137255, 0.9137255, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("21_4d1fn")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[url=https://www.instagram.com/cloe.illustration?igsh=MXhiamkwMXk1aW1hNQ==]2D Artist - Chloe Gardiner[/url]"
+
+[node name="Jesse" type="RichTextLabel" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 611.7313
+offset_right = 944.0
+offset_bottom = 662.7313
+theme = ExtResource("16_04r4e")
+theme_override_colors/default_color = Color(0.94509804, 0.5019608, 0.25882354, 1)
+theme_override_colors/font_outline_color = Color(0.9137255, 0.9137255, 0.9137255, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("21_4d1fn")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[url=https://www.instagram.com/jessechan99?igsh=M3VwaGQ4aHZ2bTJ6]Music - Jesse Chan[/url]"
+
+[node name="James" type="RichTextLabel" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 558.7313
+offset_right = 906.0
+offset_bottom = 609.7313
+theme = ExtResource("16_04r4e")
+theme_override_colors/default_color = Color(0.94509804, 0.5019608, 0.25882354, 1)
+theme_override_colors/font_outline_color = Color(0.9137255, 0.9137255, 0.9137255, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("21_4d1fn")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[url=https://www.instagram.com/soundsbyjc?igsh=emZ3dnEzYzBzc3k0]SFX Designer - James Conroy[/url]"
+
+[node name="Hannah" type="RichTextLabel" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 206.73132
+offset_right = 911.0
+offset_bottom = 257.73132
+theme = ExtResource("16_04r4e")
+theme_override_colors/default_color = Color(0.94509804, 0.5019608, 0.25882354, 1)
+theme_override_colors/font_outline_color = Color(0.9137255, 0.9137255, 0.9137255, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("21_4d1fn")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[url=https://www.linkedin.com/in/hannah-banks-00669719b/]Programmer - Hannah Banks[/url]"
+
+[node name="Jesse2" type="RichTextLabel" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 375.0
+offset_top = 257.73132
+offset_right = 899.0
+offset_bottom = 308.73132
+theme = ExtResource("16_04r4e")
+theme_override_colors/default_color = Color(0.94509804, 0.5019608, 0.25882354, 1)
+theme_override_colors/font_outline_color = Color(0.9137255, 0.9137255, 0.9137255, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("21_4d1fn")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[url=https://www.instagram.com/jessechan99?igsh=M3VwaGQ4aHZ2bTJ6]Programmer - Jesse Chan[/url]"
+
+[node name="Jack" type="RichTextLabel" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 390.73132
+offset_right = 1008.0
+offset_bottom = 441.73132
+theme = ExtResource("16_04r4e")
+theme_override_colors/default_color = Color(0.94509804, 0.5019608, 0.25882354, 1)
+theme_override_colors/font_outline_color = Color(0.9137255, 0.9137255, 0.9137255, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("21_4d1fn")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[url=https://www.instagram.com/jacktee.art?igsh=MTYxcTY0MzNtdnZrZA==]3D Artist - Jack Teviotdale[/url]"
+
+[node name="Art" type="RichTextLabel" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 339.73132
+offset_right = 716.0
+offset_bottom = 390.73132
+theme = ExtResource("16_04r4e")
+theme_override_colors/default_color = Color(0.94509804, 0.5019608, 0.25882354, 1)
+theme_override_colors/font_outline_color = Color(0.9137255, 0.9137255, 0.9137255, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("21_4d1fn")
+theme_override_font_sizes/normal_font_size = 40
+text = "Artists"
+
+[node name="Audio" type="RichTextLabel" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 507.73132
+offset_right = 716.0
+offset_bottom = 558.7313
+theme = ExtResource("16_04r4e")
+theme_override_colors/default_color = Color(0.94509804, 0.5019608, 0.25882354, 1)
+theme_override_colors/font_outline_color = Color(0.9137255, 0.9137255, 0.9137255, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("21_4d1fn")
+theme_override_font_sizes/normal_font_size = 40
+text = "Audio"
+
 [node name="LoadingScreen" type="CanvasLayer" parent="."]
 layer = 100
 visible = false
@@ -174,3 +376,11 @@ grow_vertical = 2
 color = Color(0.0885599, 0.0885599, 0.0885599, 1)
 
 [connection signal="pressed" from="OptionsMenu/c/Panel/Button" to="OptionsMenu" method="BackPressed"]
+[connection signal="pressed" from="CreditsMenu/c/Panel/Button" to="CreditsMenu" method="BackPressed"]
+[connection signal="meta_clicked" from="CreditsMenu/c/Panel/Cypri" to="." method="_on_cypri_meta_clicked"]
+[connection signal="meta_clicked" from="CreditsMenu/c/Panel/Chloe" to="." method="_on_chloe_meta_clicked"]
+[connection signal="meta_clicked" from="CreditsMenu/c/Panel/Jesse" to="." method="_on_jesse_meta_clicked"]
+[connection signal="meta_clicked" from="CreditsMenu/c/Panel/James" to="." method="_on_james_meta_clicked"]
+[connection signal="meta_clicked" from="CreditsMenu/c/Panel/Hannah" to="." method="_on_hannah_meta_clicked"]
+[connection signal="meta_clicked" from="CreditsMenu/c/Panel/Jesse2" to="." method="_on_jesse_2_meta_clicked"]
+[connection signal="meta_clicked" from="CreditsMenu/c/Panel/Jack" to="." method="_on_jack_meta_clicked"]

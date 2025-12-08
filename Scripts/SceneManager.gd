@@ -18,8 +18,11 @@ enum Scene{
 	LOSE
 }
 
-var optionsRef: Options
+var optionsRef
 var optionsOpen: bool = false
+
+var creditsRef
+var creditsOpen: bool = false
 
 var loadingScreenRef: CanvasLayer
 
@@ -36,6 +39,10 @@ func _ready():
 	optionsRef = $OptionsMenu
 	optionsRef.visible = true
 	remove_child(optionsRef)
+	
+	creditsRef = $CreditsMenu
+	creditsRef.visible = true
+	remove_child(creditsRef)
 
 	loadingScreenRef = $LoadingScreen
 	loadingScreenRef.visible = true
@@ -82,6 +89,15 @@ func CloseOptionsMenu():
 	remove_child(optionsRef)
 	optionsOpen = false
 
+func OpenCreditsMenu():
+	add_child(creditsRef)
+	creditsRef.visible = true
+	creditsOpen = true
+
+func CloseCreditsMenu():
+	remove_child(creditsRef)
+	creditsOpen = false
+
 func _process(_delta):
 	loadingDelay -= _delta
 	if !loading || loadingDelay > 0:
@@ -96,3 +112,29 @@ func _process(_delta):
 
 func HideLoadingScreen():
 	remove_child(loadingScreenRef)
+
+
+func _on_cypri_meta_clicked(meta):
+	OS.shell_open(str(meta))
+
+func _on_hannah_meta_clicked(meta):
+	OS.shell_open(str(meta))
+
+func _on_jack_meta_clicked(meta):
+	OS.shell_open(str(meta))
+
+
+func _on_jesse_meta_clicked(meta):
+	OS.shell_open(str(meta))
+
+
+func _on_jesse_2_meta_clicked(meta):
+	OS.shell_open(str(meta))
+
+
+func _on_chloe_meta_clicked(meta):
+	OS.shell_open(str(meta))
+
+
+func _on_james_meta_clicked(meta):
+	OS.shell_open(str(meta))
