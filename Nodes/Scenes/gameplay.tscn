@@ -1,15 +1,24 @@
-[gd_scene load_steps=38 format=3 uid="uid://c6hrxahg2vy6o"]
+[gd_scene load_steps=47 format=3 uid="uid://c6hrxahg2vy6o"]
 
 [ext_resource type="PackedScene" uid="uid://7cuuqdrdbpn6" path="res://node_3d.tscn" id="1_5aubf"]
 [ext_resource type="Script" uid="uid://d2iv34ayqfa3i" path="res://Scripts/Player.gd" id="1_84d6f"]
 [ext_resource type="Script" uid="uid://dwui3k6hsh45q" path="res://Scripts/Gameplay.gd" id="1_c4uye"]
+[ext_resource type="Texture2D" uid="uid://d32xtaopvaass" path="res://Assets/Art/Sprites/Audience/orange.png" id="3_0tdnq"]
 [ext_resource type="Script" uid="uid://b3qoryrjch6mg" path="res://Scripts/Enemy.gd" id="3_wnkb1"]
 [ext_resource type="Texture2D" uid="uid://bwcibwoa1ym6p" path="res://Assets/Art/Sprites/Sloth/IMG_5455.PNG" id="4_dmect"]
+[ext_resource type="Texture2D" uid="uid://dtt3ccnkbm0cl" path="res://Assets/Art/Sprites/Audience/blue.png" id="4_mld5c"]
 [ext_resource type="Texture2D" uid="uid://ca4n20b4uc5ul" path="res://Assets/Art/Sprites/Player/glove_1.png" id="4_ppefh"]
 [ext_resource type="Texture2D" uid="uid://bfo3nhl5yj255" path="res://Assets/Art/Sprites/Sloth/IMG_5451.PNG" id="5_2kk6b"]
+[ext_resource type="Texture2D" uid="uid://kn7105cdewoy" path="res://Assets/Art/Sprites/Audience/monk4.png" id="5_8xs62"]
+[ext_resource type="Texture2D" uid="uid://cjedk3rk08wj2" path="res://Assets/Art/Sprites/Audience/pink.png" id="5_22ler"]
 [ext_resource type="Texture2D" uid="uid://5f7lrbydbyc4" path="res://Assets/Art/Sprites/Player/glove_2.png" id="5_xucbb"]
+[ext_resource type="Texture2D" uid="uid://bmqchj6dvyl4a" path="res://Assets/Art/Sprites/Audience/purple.png" id="6_8xs62"]
 [ext_resource type="Texture2D" uid="uid://cytdmxy3pu58d" path="res://Assets/Art/Sprites/Player/Teeth.png" id="6_csnm0"]
+[ext_resource type="Script" uid="uid://cmbwooimeo16f" path="res://Scripts/Cheer.gd" id="6_jk06t"]
+[ext_resource type="Texture2D" uid="uid://bt7sb034srvq1" path="res://Assets/Art/Sprites/Audience/monk1.png" id="7_jk06t"]
+[ext_resource type="Texture2D" uid="uid://scsmuqyxptgo" path="res://Assets/Art/Sprites/Audience/mike_wae_a_nanner.png" id="8_dl74m"]
 [ext_resource type="Texture2D" uid="uid://8g0xvrcqeoyt" path="res://Assets/Art/Sprites/Sloth/sloth.png" id="8_ppefh"]
+[ext_resource type="Texture2D" uid="uid://c0hlmr5a02mqr" path="res://Assets/Art/Sprites/Audience/monk2.png" id="8_y0ycs"]
 [ext_resource type="Texture2D" uid="uid://c0sy77xw4xatj" path="res://Assets/Art/Sprites/New folder/elephant.png" id="9_xucbb"]
 [ext_resource type="Texture2D" uid="uid://cs2824o3fow66" path="res://Assets/Art/Sprites/Cheetah/cheetah.png" id="10_0tdnq"]
 [ext_resource type="Texture2D" uid="uid://c1phaql4ftl2k" path="res://Assets/Art/Sprites/Sloth/slotharm2.png" id="11_qay7p"]
@@ -114,6 +123,296 @@ script = ExtResource("1_c4uye")
 
 [node name="Node3D" parent="World" instance=ExtResource("1_5aubf")]
 transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-08, 10.815596, -0.5600095, 21.711939)
+
+[node name="Audience" type="Node3D" parent="World"]
+
+[node name="Orange" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 8.767827, -10.9990225)
+texture_filter = 0
+texture = ExtResource("3_0tdnq")
+
+[node name="Blue" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -6.4114256, 3.4935179, -6.2647247)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("4_mld5c")
+
+[node name="Audience" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -7.300721, 3.6315842, -5.587274)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("5_8xs62")
+script = ExtResource("6_jk06t")
+
+[node name="Audience24" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -10.385825, 5.100946, -5.4552584)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("5_8xs62")
+script = ExtResource("6_jk06t")
+
+[node name="Audience29" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -9.836679, 3.7913542, -3.8383002)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("5_8xs62")
+script = ExtResource("6_jk06t")
+
+[node name="Audience25" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -10.784855, 6.17244, -7.4813304)
+flip_h = true
+billboard = 2
+texture_filter = 0
+texture = ExtResource("5_8xs62")
+script = ExtResource("6_jk06t")
+
+[node name="Audience2" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 6.3146033, 4.236296, -7.772978)
+flip_h = true
+billboard = 2
+texture_filter = 0
+texture = ExtResource("5_8xs62")
+script = ExtResource("6_jk06t")
+
+[node name="Audience3" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 8.758304, 5.233406, -7.488173)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("5_8xs62")
+script = ExtResource("6_jk06t")
+
+[node name="Audience18" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 7.7138805, 3.3549366, -4.5970225)
+flip_h = true
+billboard = 2
+texture_filter = 0
+texture = ExtResource("5_8xs62")
+script = ExtResource("6_jk06t")
+
+[node name="Audience33" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 8.175445, 3.3549366, -3.8072896)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("5_8xs62")
+script = ExtResource("6_jk06t")
+
+[node name="Audience21" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 14.688871, 5.8972526, -4.132442)
+flip_h = true
+billboard = 2
+texture_filter = 0
+texture = ExtResource("5_8xs62")
+script = ExtResource("6_jk06t")
+
+[node name="Audience4" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 6.409566, 5.233406, -8.419946)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
+[node name="Audience17" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 8.443574, 5.838268, -8.364226)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
+[node name="Audience5" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 7.481613, 3.2997837, -6.167447)
+flip_h = true
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
+[node name="Audience20" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 9.644873, 3.2997837, -2.8619373)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
+[node name="Audience35" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 9.245027, 4.2293487, -5.654127)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
+[node name="Audience36" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 9.565481, 5.045812, -4.710988)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
+[node name="Audience23" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 11.893703, 4.9432473, -3.4375358)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
+[node name="Audience7" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -5.1223125, 3.3824077, -7.2960157)
+flip_h = true
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
+[node name="Audience8" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -9.916077, 5.9704247, -7.7426133)
+flip_h = true
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
+[node name="Audience16" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -7.9761143, 5.6461315, -8.339506)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_dl74m")
+script = ExtResource("6_jk06t")
+
+[node name="Audience9" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -9.519027, 4.639773, -5.7081513)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
+[node name="Audience31" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -10.491843, 4.0695944, -3.6441727)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
+[node name="Audience26" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -8.8975315, 3.3423553, -4.1823096)
+flip_h = true
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
+[node name="Audience28" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -11.821014, 5.413078, -4.843699)
+flip_h = true
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
+[node name="Audience10" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -8.299801, 4.4649434, -7.255621)
+flip_h = true
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_y0ycs")
+script = ExtResource("6_jk06t")
+
+[node name="Audience13" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -12.291174, 6.89119, -6.999289)
+flip_h = true
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_y0ycs")
+script = ExtResource("6_jk06t")
+
+[node name="Audience30" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -12.493503, 6.186933, -4.7356415)
+flip_h = true
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_y0ycs")
+script = ExtResource("6_jk06t")
+
+[node name="Audience14" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 7.4728765, 4.261489, -7.3779807)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_y0ycs")
+script = ExtResource("6_jk06t")
+
+[node name="Audience32" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 7.6520643, 5.572461, -8.769173)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_y0ycs")
+script = ExtResource("6_jk06t")
+
+[node name="Audience19" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 10.8272915, 4.5855527, -4.237061)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_y0ycs")
+script = ExtResource("6_jk06t")
+
+[node name="Audience22" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 10.917112, 4.231107, -2.7198088)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_y0ycs")
+script = ExtResource("6_jk06t")
+
+[node name="Audience34" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 8.518282, 3.9503236, -4.5143433)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_y0ycs")
+script = ExtResource("6_jk06t")
+
+[node name="Audience15" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.14, 0, 0, 0, 0.14, 0, 0, 0, 0.14, 8.367827, 3.699491, -5.985807)
+flip_h = true
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_y0ycs")
+script = ExtResource("6_jk06t")
+
+[node name="Audience11" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -8.160749, 3.564341, -5.157405)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_y0ycs")
+script = ExtResource("6_jk06t")
+
+[node name="Audience27" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -10.35662, 4.8135724, -4.6597733)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_y0ycs")
+script = ExtResource("6_jk06t")
+
+[node name="Audience12" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -5.8575916, 4.9353876, -8.697153)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_y0ycs")
+script = ExtResource("6_jk06t")
+
+[node name="Audience6" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.23, 0, 0, 0, 0.23, 0, 0, 0, 0.23, 9.338497, 5.5117364, -6.673139)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
+[node name="Pink" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 5.5177636, 3.2815166, -7.6699243)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("5_22ler")
+
+[node name="Purp" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 6.420424, 3.2815166, -6.923545)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("6_8xs62")
 
 [node name="Player" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.2428935)
