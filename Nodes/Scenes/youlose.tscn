@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmg43dqj06qxs"]
+[gd_scene load_steps=10 format=3 uid="uid://dmg43dqj06qxs"]
 
 [ext_resource type="Script" uid="uid://bt170r4e445qi" path="res://Nodes/Scenes/YouLoseText.gd" id="1_kcema"]
 [ext_resource type="Theme" uid="uid://wajogwsuqirr" path="res://Resources/Buttons.tres" id="2_a47tm"]
 [ext_resource type="Script" uid="uid://d88qniwqmnoc" path="res://Nodes/Scenes/Buttons.gd" id="3_dmy54"]
+[ext_resource type="FontFile" uid="uid://c3r3mjkx1w3lf" path="res://Assets/Fonts/Gambado Sans Forte.ttf" id="4_a47tm"]
+[ext_resource type="Script" uid="uid://bahhttsutm8qa" path="res://Scripts/LoseMonkeometer.gd" id="5_dmy54"]
 
 [sub_resource type="Gradient" id="Gradient_d5r04"]
 colors = PackedColorArray(0.11018626, 0.17129964, 0.20814848, 1, 0, 0, 0, 1)
@@ -14,6 +16,26 @@ height = 90
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmy54"]
+bg_color = Color(0, 0, 0, 0.7529412)
+border_width_bottom = 10
+border_color = Color(0.15127608, 0.15127608, 0.15127608, 1)
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i71ra"]
+bg_color = Color(0.94509804, 0.75686276, 0.25882354, 1)
+border_width_bottom = 20
+border_color = Color(0.94509804, 0.5529412, 0.25882354, 1)
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [node name="CanvasLayer" type="Control"]
 layout_mode = 3
@@ -30,9 +52,9 @@ texture = SubResource("GradientTexture2D_yrbp2")
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 143.0
-offset_top = 358.0
+offset_top = 514.0
 offset_right = 1074.0
-offset_bottom = 551.0
+offset_bottom = 707.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/normal_font_size = 48
@@ -47,23 +69,52 @@ horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 420.0
-offset_top = 648.0
-offset_right = 788.0
-offset_bottom = 778.0
+offset_left = 416.0
+offset_top = 688.0
+offset_right = 784.0
+offset_bottom = 818.0
 theme = ExtResource("2_a47tm")
 text = "TRY AGAIN"
 script = ExtResource("3_dmy54")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 308.0
-offset_top = 206.0
-offset_right = 909.0
-offset_bottom = 327.0
+offset_left = 297.0
+offset_top = 371.0
+offset_right = 898.0
+offset_bottom = 492.0
 theme = ExtResource("2_a47tm")
 theme_override_constants/outline_size = 30
 theme_override_font_sizes/font_size = 120
 text = "YOU LOSE"
+
+[node name="LossCountBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 195.0
+offset_right = 997.0
+offset_bottom = 255.0
+theme_override_colors/font_color = Color(0.94509804, 0.5019608, 0.25882354, 1)
+theme_override_colors/font_outline_color = Color(0.9137255, 0.9137255, 0.9137255, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("4_a47tm")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/background = SubResource("StyleBoxFlat_dmy54")
+theme_override_styles/fill = SubResource("StyleBoxFlat_i71ra")
+max_value = 1.0
+value = 0.8
+script = ExtResource("5_dmy54")
+
+[node name="Moneometer" type="Label" parent="."]
+layout_mode = 0
+offset_left = 197.0
+offset_top = 109.0
+offset_right = 983.0
+offset_bottom = 184.0
+theme = ExtResource("2_a47tm")
+theme_override_font_sizes/font_size = 70
+text = "Monke-O-Meter"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_next_pressed"]

@@ -5,8 +5,12 @@ var randomInt = Globals.randomInt
 var index1 = 0
 var index2 = 0 
 var index3 = 0
+
+var selected = false
+
 func _ready():
-	$LossCountBar.value = Globals.lossCount
+	Globals.justUpgraded = true
+	$LossCountBar.value = (Globals.lossCount as float) / 5
 	_GetAbilities()
 	$Ability1.pressed.connect(_on_ability1_pressed)
 	$Ability2.pressed.connect(_on_ability2_pressed)
@@ -41,27 +45,30 @@ func _GetAbilities() -> void:
 	$Ability3/TextureRect.texture = ability3.icon
 	
 func _on_ability1_pressed():
+	if selected:
+		return
+	selected = true
 	#Get value from canvas or whatever pass in value
 	
 	randomInt.push_front(index2)
 	randomInt.push_front(index3)
-	$LossCountBar.value = Globals.lossCount
 	ApplyAbility($Ability1/AbilityName1.text) 
-	ReturnToGame()
 	
 func _on_ability2_pressed():
+	if selected:
+		return
+	selected = true
 	randomInt.push_front(index1)
 	randomInt.push_front(index3)
 	ApplyAbility($Ability2/AbilityName2.text) 
-	$LossCountBar.value = Globals.lossCount
-	ReturnToGame()
 	
 func _on_ability3_pressed():
+	if selected:
+		return
+	selected = true
 	randomInt.push_front(index1)
 	randomInt.push_front(index2)
-	$LossCountBar.value = Globals.lossCount
 	ApplyAbility($Ability3/AbilityName3.text)
-	ReturnToGame()
 	
 func ApplyAbility(ability_name: String):
 	if ability_name == "Bite":
@@ -84,6 +91,11 @@ func ApplyAbility(ability_name: String):
 		print("tail unlocked")
 	# Might want to put somethere here to show the bar go up instead of insta going to next scene
 	print("Selected ability: ", ability_name)
+
+	var monkeometerTween: Tween = create_tween()
+	monkeometerTween.tween_property($LossCountBar, "value", (Globals.lossCount as float) / 5, 2.5).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+	monkeometerTween.tween_interval(0.5)
+	monkeometerTween.tween_callback(ReturnToGame)
 	
 func ReturnToGame():
 	Root.ins.ChangeScene(Root.Scene.GAME)

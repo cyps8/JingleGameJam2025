@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://c6hrxahg2vy6o"]
+[gd_scene load_steps=51 format=3 uid="uid://c6hrxahg2vy6o"]
 
 [ext_resource type="PackedScene" uid="uid://7cuuqdrdbpn6" path="res://node_3d.tscn" id="1_5aubf"]
 [ext_resource type="Script" uid="uid://d2iv34ayqfa3i" path="res://Scripts/Player.gd" id="1_84d6f"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bwcibwoa1ym6p" path="res://Assets/Art/Sprites/Sloth/IMG_5455.PNG" id="4_dmect"]
 [ext_resource type="Texture2D" uid="uid://dtt3ccnkbm0cl" path="res://Assets/Art/Sprites/Audience/blue.png" id="4_mld5c"]
 [ext_resource type="Texture2D" uid="uid://ca4n20b4uc5ul" path="res://Assets/Art/Sprites/Player/glove_1.png" id="4_ppefh"]
+[ext_resource type="FontFile" uid="uid://c3r3mjkx1w3lf" path="res://Assets/Fonts/Gambado Sans Forte.ttf" id="4_tgqwo"]
 [ext_resource type="Texture2D" uid="uid://bfo3nhl5yj255" path="res://Assets/Art/Sprites/Sloth/IMG_5451.PNG" id="5_2kk6b"]
 [ext_resource type="Texture2D" uid="uid://kn7105cdewoy" path="res://Assets/Art/Sprites/Audience/monk4.png" id="5_8xs62"]
 [ext_resource type="Texture2D" uid="uid://cjedk3rk08wj2" path="res://Assets/Art/Sprites/Audience/pink.png" id="5_22ler"]
@@ -137,6 +138,17 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.3204801, 8.767827, -
 texture_filter = 0
 texture = ExtResource("3_0tdnq")
 
+[node name="Label3D" type="Label3D" parent="World/Audience/Orange" groups=["talk"]]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.16998291, 27.129593)
+visible = false
+billboard = 2
+modulate = Color(0.99607843, 0.6784314, 0, 1)
+outline_modulate = Color(1, 1, 1, 1)
+text = "HELLO I AM TALKING TO YOU"
+font = ExtResource("4_tgqwo")
+font_size = 300
+outline_size = 100
+
 [node name="Blue" type="Sprite3D" parent="World/Audience"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -6.4114256, 3.4935179, -6.2647247)
 billboard = 2
@@ -159,6 +171,13 @@ script = ExtResource("6_jk06t")
 
 [node name="Audience29" type="Sprite3D" parent="World/Audience"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -9.836679, 3.7913542, -3.8383002)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("5_8xs62")
+script = ExtResource("6_jk06t")
+
+[node name="Audience40" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -12.728041, 5.2874355, -2.3780823)
 billboard = 2
 texture_filter = 0
 texture = ExtResource("5_8xs62")
@@ -290,8 +309,22 @@ texture_filter = 0
 texture = ExtResource("7_jk06t")
 script = ExtResource("6_jk06t")
 
+[node name="Audience41" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -14.139256, 6.286879, -2.076113)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
 [node name="Audience31" type="Sprite3D" parent="World/Audience"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -10.491843, 4.0695944, -3.6441727)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_jk06t")
+script = ExtResource("6_jk06t")
+
+[node name="Audience38" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -11.301971, 3.6655173, -1.2510226)
 billboard = 2
 texture_filter = 0
 texture = ExtResource("7_jk06t")
@@ -401,6 +434,20 @@ texture_filter = 0
 texture = ExtResource("8_y0ycs")
 script = ExtResource("6_jk06t")
 
+[node name="Audience39" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -11.634598, 4.8135724, -2.472177)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_y0ycs")
+script = ExtResource("6_jk06t")
+
+[node name="Audience42" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -12.291384, 4.4802833, -1.1945548)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_y0ycs")
+script = ExtResource("6_jk06t")
+
 [node name="Audience12" type="Sprite3D" parent="World/Audience"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -5.8575916, 4.9353876, -8.697153)
 billboard = 2
@@ -434,7 +481,7 @@ transform = Transform3D(-4.1257417e-06, 94.386, 9.938869e-06, -94.386, -4.125743
 material_override = SubResource("StandardMaterial3D_tgqwo")
 
 [node name="Player" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.2428935)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9325843, 3.3429427)
 script = ExtResource("1_84d6f")
 gloves = Array[Texture]([ExtResource("4_ppefh"), ExtResource("5_xucbb")])
 
@@ -512,6 +559,7 @@ texture = SubResource("GradientTexture2D_csnm0")
 [node name="KnockoutBorder" type="TextureRect" parent="Player/HUD/c"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
+z_index = 3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

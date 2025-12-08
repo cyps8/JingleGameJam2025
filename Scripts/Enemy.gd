@@ -36,6 +36,8 @@ var stunned: float = 0
 
 var dead: bool = false
 
+var intro: bool = true
+
 static var ins: Enemy
 
 @onready var healthIcon: Sprite3D = %Health
@@ -92,6 +94,9 @@ func _ready() -> void:
 func _process(_dt: float):
 	$Sprite.position.y = spriteDefPos.y + ((camBob - 0.5) * 0.01)
 
+	if intro:
+		return
+
 	if stunned > 0:
 		stunned -= _dt
 		if stunned <= 0:
@@ -114,6 +119,8 @@ func _process(_dt: float):
 		Punch()
 
 func Punch():
+	if Player.ins.dead  || dead:
+		return
 	var arm: Sprite3D
 	var punchOffset: float = 0
 	if randf() < 0.5:
@@ -157,10 +164,10 @@ func TryDamage():
 	staminaIcon.scale = Vector3(stamScale * defaultStaminaIconScale, stamScale * defaultStaminaIconScale, stamScale * defaultStaminaIconScale)
 
 func TakeDamage(val: float):
-	if Player.ins.dead:
+	if Player.ins.dead  || dead:
 		return
 	healthCur -= val
-	if healthCur < 0:
+	if healthCur <= 0:
 		healthCur = 0
 		Die()
 	var dmgFlash: Tween = create_tween()
@@ -198,8 +205,9 @@ func Die():
 func DeathOver():
 	if enemyType == EnemyType.SLOTH:
 		Globals.currentOpponent = Enemy.EnemyType.ELEPHANT
+		Root.ins.ChangeScene(Root.Scene.GAME)
 	elif enemyType == EnemyType.ELEPHANT:
 		Globals.currentOpponent = Enemy.EnemyType.CHEETAH
+		Root.ins.ChangeScene(Root.Scene.GAME)
 	elif enemyType == EnemyType.CHEETAH:
-		Globals.currentOpponent = Enemy.EnemyType.SLOTH
-	Root.ins.ChangeScene(Root.Scene.GAME)
+		Player.ins.Win()
