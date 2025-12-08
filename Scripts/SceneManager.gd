@@ -134,3 +134,7 @@ func _on_jesse_2_meta_clicked(meta):
 
 func _on_chloe_meta_clicked(meta):
 	OS.shell_open(str(meta))
+
+
+func _on_james_meta_clicked(meta):
+	OS.shell_open(str(meta))

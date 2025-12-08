@@ -277,7 +277,7 @@ theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("21_4d1fn")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "SFX Designer - James Conroy"
+text = "[url=https://www.instagram.com/soundsbyjc?igsh=emZ3dnEzYzBzc3k0]SFX Designer - James Conroy[/url]"
 
 [node name="Hannah" type="RichTextLabel" parent="CreditsMenu/c/Panel"]
 layout_mode = 0
@@ -378,6 +378,7 @@ color = Color(0.0885599, 0.0885599, 0.0885599, 1)
 [connection signal="meta_clicked" from="CreditsMenu/c/Panel/Cypri" to="." method="_on_cypri_meta_clicked"]
 [connection signal="meta_clicked" from="CreditsMenu/c/Panel/Chloe" to="." method="_on_chloe_meta_clicked"]
 [connection signal="meta_clicked" from="CreditsMenu/c/Panel/Jesse" to="." method="_on_jesse_meta_clicked"]
+[connection signal="meta_clicked" from="CreditsMenu/c/Panel/James" to="." method="_on_james_meta_clicked"]
 [connection signal="meta_clicked" from="CreditsMenu/c/Panel/Hannah" to="." method="_on_hannah_meta_clicked"]
 [connection signal="meta_clicked" from="CreditsMenu/c/Panel/Jesse2" to="." method="_on_jesse_2_meta_clicked"]
 [connection signal="meta_clicked" from="CreditsMenu/c/Panel/Jack" to="." method="_on_jack_meta_clicked"]
