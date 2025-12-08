@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bkna205klwqky"]
+[gd_scene load_steps=20 format=3 uid="uid://bkna205klwqky"]
 
 [ext_resource type="Script" uid="uid://ds54j3mnngqou" path="res://Scripts/SceneManager.gd" id="1_uewl6"]
 [ext_resource type="PackedScene" uid="uid://drj0jssxxceyu" path="res://Nodes/Scenes/main_menu.tscn" id="2_62qmo"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bf5lc31pqguc1" path="res://Scripts/Options.gd" id="3_1t681"]
 [ext_resource type="PackedScene" uid="uid://bumwks6a8fxgk" path="res://Nodes/Scenes/intro.tscn" id="4_1yy5m"]
 [ext_resource type="PackedScene" uid="uid://dh5kdx2ryyrin" path="res://Nodes/Scenes/ability_select.tscn" id="4_b4ixw"]
+[ext_resource type="PackedScene" uid="uid://dmg43dqj06qxs" path="res://Nodes/Scenes/youlose.tscn" id="6_1s7rx"]
 [ext_resource type="AudioStream" uid="uid://c8o7qn3sae4d2" path="res://Assets/Audio/SFX/Damage/Enemy/Sloth/SFX_Sloth_Damage_1.wav" id="6_g65lr"]
 [ext_resource type="AudioStream" uid="uid://dqwg3wn54rq4k" path="res://Assets/Audio/SFX/Damage/Enemy/Sloth/SFX_Sloth_Damage_2.wav" id="7_qncjq"]
 [ext_resource type="AudioStream" uid="uid://bf3rkt2yqt68g" path="res://Assets/Audio/SFX/Damage/Enemy/Sloth/SFX_Sloth_Damage_3.wav" id="8_ig2k1"]
@@ -15,9 +16,9 @@
 [ext_resource type="AudioStream" uid="uid://d1punu7abah7t" path="res://Assets/Audio/SFX/Player/SFX_Player_Block_2.wav" id="11_3mi07"]
 [ext_resource type="AudioStream" uid="uid://tmorfrqn6b3b" path="res://Assets/Audio/SFX/SFX_Punch_2.wav" id="12_83jsg"]
 [ext_resource type="AudioStream" uid="uid://trqmdhskd60a" path="res://Assets/Audio/SFX/Player/SFX_ArmSwap.wav" id="13_1yy5m"]
-[ext_resource type="Script" path="res://Nodes/Scenes/Buttons.gd" id="14_3mi07"]
 [ext_resource type="Script" uid="uid://d88qniwqmnoc" path="res://Nodes/Scenes/Buttons.gd" id="14_3mi07"]
 [ext_resource type="Script" uid="uid://coy43r45ubitg" path="res://Scripts/AudioSlider.gd" id="15_2bkfp"]
+[ext_resource type="Theme" uid="uid://wajogwsuqirr" path="res://Resources/Buttons.tres" id="16_04r4e"]
 
 [node name="Root" type="Node"]
 process_mode = 3
@@ -26,6 +27,7 @@ gameScene = ExtResource("2_hheyw")
 menuScene = ExtResource("2_62qmo")
 introScene = ExtResource("4_1yy5m")
 abilitySelectScene = ExtResource("4_b4ixw")
+loseScene = ExtResource("6_1s7rx")
 
 [node name="SFXPlayer" type="Node" parent="."]
 script = ExtResource("2_s5jww")
@@ -52,39 +54,43 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -167.5
-offset_top = -213.5
-offset_right = 167.5
-offset_bottom = 213.5
+offset_left = -197.0
+offset_top = -240.0
+offset_right = 205.0
+offset_bottom = 249.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("16_04r4e")
 
 [node name="Button" type="Button" parent="OptionsMenu/c/Panel"]
 layout_mode = 0
-offset_left = 97.5
-offset_top = 334.5
-offset_right = 257.0
-offset_bottom = 401.0
+offset_left = 92.0
+offset_top = 383.0
+offset_right = 303.0
+offset_bottom = 466.0
+theme = ExtResource("16_04r4e")
 text = "Return
 "
 script = ExtResource("14_3mi07")
 
 [node name="MasterSlider" type="HSlider" parent="OptionsMenu/c/Panel"]
 layout_mode = 0
-offset_left = 41.5
-offset_top = 63.5
-offset_right = 287.0
-offset_bottom = 105.0
+offset_left = 81.0
+offset_top = 157.0
+offset_right = 326.5
+offset_bottom = 198.5
+theme = ExtResource("16_04r4e")
 max_value = 1.0
 step = 0.01
 script = ExtResource("15_2bkfp")
 
 [node name="MusicSlider" type="HSlider" parent="OptionsMenu/c/Panel"]
 layout_mode = 0
-offset_left = 45.5
-offset_top = 141.5
-offset_right = 291.0
-offset_bottom = 183.0
+offset_left = 85.0
+offset_top = 235.0
+offset_right = 330.5
+offset_bottom = 276.5
+theme = ExtResource("16_04r4e")
 max_value = 1.0
 step = 0.01
 script = ExtResource("15_2bkfp")
@@ -92,14 +98,57 @@ busName = "Music"
 
 [node name="SFXSlider" type="HSlider" parent="OptionsMenu/c/Panel"]
 layout_mode = 0
-offset_left = 44.5
-offset_top = 215.5
-offset_right = 290.0
-offset_bottom = 257.0
+offset_left = 84.0
+offset_top = 309.0
+offset_right = 329.5
+offset_bottom = 350.5
+theme = ExtResource("16_04r4e")
 max_value = 1.0
 step = 0.01
 script = ExtResource("15_2bkfp")
 busName = "SFX"
+
+[node name="Label" type="Label" parent="OptionsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 33.0
+offset_right = 319.0
+offset_bottom = 84.0
+theme = ExtResource("16_04r4e")
+text = "OPTIONS"
+
+[node name="Label3" type="Label" parent="OptionsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 127.0
+offset_right = 316.0
+offset_bottom = 178.0
+theme = ExtResource("16_04r4e")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 30
+text = "Master Volume"
+
+[node name="Label4" type="Label" parent="OptionsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 211.0
+offset_right = 315.0
+offset_bottom = 262.0
+theme = ExtResource("16_04r4e")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 30
+text = "Music Volume"
+
+[node name="Label5" type="Label" parent="OptionsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 281.0
+offset_right = 316.0
+offset_bottom = 332.0
+theme = ExtResource("16_04r4e")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 30
+text = "SFX Volume"
 
 [node name="LoadingScreen" type="CanvasLayer" parent="."]
 layer = 100

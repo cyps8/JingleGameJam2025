@@ -64,8 +64,26 @@ func _on_ability3_pressed():
 	ReturnToGame()
 	
 func ApplyAbility(ability_name: String):
+	if ability_name == "Bite":
+		Globals.biteUnlocked = true
+		print("bite unlocked")
+	elif ability_name == "Screech":
+		Globals.screechUnlocked = true
+		print("screech unlocked")
+	elif ability_name == "Beat Chest":
+		Globals.beatUnlocked = true
+		print("beat unlocked")
+	elif ability_name == "Fur":
+		Globals.furUnlocked = true
+		print("fur unlocked")
+	elif ability_name == "Muscles":
+		Globals.muscleUnlocked = true
+		print("muscle unlocked")
+	elif ability_name == "Tail":
+		Globals.tailUnlocked = true
+		print("tail unlocked")
 	# Might want to put somethere here to show the bar go up instead of insta going to next scene
 	print("Selected ability: ", ability_name)
 	
 func ReturnToGame():
-	Root.ins.ChangeScene(Root.Scene.ABILITY_SELECT)
+	Root.ins.ChangeScene(Root.Scene.GAME)
