@@ -14,6 +14,8 @@
 [ext_resource type="AudioStream" uid="uid://wtmrs1b3ywd0" path="res://Assets/Audio/SFX/Player/SFX_Player_Block_1.wav" id="10_83jsg"]
 [ext_resource type="AudioStream" uid="uid://d1punu7abah7t" path="res://Assets/Audio/SFX/Player/SFX_Player_Block_2.wav" id="11_3mi07"]
 [ext_resource type="AudioStream" uid="uid://tmorfrqn6b3b" path="res://Assets/Audio/SFX/SFX_Punch_2.wav" id="12_83jsg"]
+[ext_resource type="AudioStream" uid="uid://trqmdhskd60a" path="res://Assets/Audio/SFX/Player/SFX_ArmSwap.wav" id="13_1yy5m"]
+[ext_resource type="Script" path="res://Nodes/Scenes/Buttons.gd" id="14_3mi07"]
 [ext_resource type="Script" uid="uid://d88qniwqmnoc" path="res://Nodes/Scenes/Buttons.gd" id="14_3mi07"]
 [ext_resource type="Script" uid="uid://coy43r45ubitg" path="res://Scripts/AudioSlider.gd" id="15_2bkfp"]
 
@@ -27,7 +29,7 @@ abilitySelectScene = ExtResource("4_b4ixw")
 
 [node name="SFXPlayer" type="Node" parent="."]
 script = ExtResource("2_s5jww")
-sounds = Array[AudioStream]([ExtResource("6_g65lr"), ExtResource("7_qncjq"), ExtResource("8_ig2k1"), ExtResource("9_0gkdr"), ExtResource("10_83jsg"), ExtResource("11_3mi07"), ExtResource("12_83jsg")])
+sounds = Array[AudioStream]([ExtResource("6_g65lr"), ExtResource("7_qncjq"), ExtResource("8_ig2k1"), ExtResource("9_0gkdr"), ExtResource("10_83jsg"), ExtResource("11_3mi07"), ExtResource("12_83jsg"), ExtResource("13_1yy5m")])
 metadata/_custom_type_script = "uid://dpg0ifkb6hmsd"
 
 [node name="OptionsMenu" type="CanvasLayer" parent="."]
