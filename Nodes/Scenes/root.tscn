@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bkna205klwqky"]
+[gd_scene load_steps=21 format=3 uid="uid://bkna205klwqky"]
 
 [ext_resource type="Script" uid="uid://ds54j3mnngqou" path="res://Scripts/SceneManager.gd" id="1_uewl6"]
 [ext_resource type="PackedScene" uid="uid://drj0jssxxceyu" path="res://Nodes/Scenes/main_menu.tscn" id="2_62qmo"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://d88qniwqmnoc" path="res://Nodes/Scenes/Buttons.gd" id="14_3mi07"]
 [ext_resource type="Script" uid="uid://coy43r45ubitg" path="res://Scripts/AudioSlider.gd" id="15_2bkfp"]
 [ext_resource type="Theme" uid="uid://wajogwsuqirr" path="res://Resources/Buttons.tres" id="16_04r4e"]
+[ext_resource type="Script" uid="uid://sini0j2yfh2w" path="res://Nodes/Scenes/Credits.gd" id="20_jy3bs"]
 
 [node name="Root" type="Node"]
 process_mode = 3
@@ -150,6 +151,164 @@ theme_override_constants/outline_size = 15
 theme_override_font_sizes/font_size = 30
 text = "SFX Volume"
 
+[node name="CreditsMenu" type="CanvasLayer" parent="."]
+layer = 90
+script = ExtResource("20_jy3bs")
+metadata/_custom_type_script = "uid://bf5lc31pqguc1"
+
+[node name="c" type="Control" parent="CreditsMenu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CreditsMenu/c"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -572.0
+offset_top = -381.73132
+offset_right = 572.0
+offset_bottom = 381.73132
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("16_04r4e")
+
+[node name="Button" type="Button" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 444.0
+offset_top = 651.7313
+offset_right = 655.0
+offset_bottom = 734.7313
+theme = ExtResource("16_04r4e")
+text = "Return
+"
+script = ExtResource("14_3mi07")
+
+[node name="Header" type="Label" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 444.0
+offset_top = 27.731323
+offset_right = 676.0
+offset_bottom = 78.73132
+theme = ExtResource("16_04r4e")
+text = "CREDITS"
+
+[node name="Code" type="Label" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 99.73132
+offset_right = 674.0
+offset_bottom = 150.73132
+theme = ExtResource("16_04r4e")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 40
+text = "Programmers"
+
+[node name="Credit1" type="Label" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 155.73132
+offset_right = 849.0
+offset_bottom = 206.73132
+theme = ExtResource("16_04r4e")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 30
+text = "Lead Programmer - Cypri"
+
+[node name="Credit2" type="Label" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 435.73132
+offset_right = 904.0
+offset_bottom = 486.73132
+theme = ExtResource("16_04r4e")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 30
+text = "2D Artist - Chloe Gardiner"
+
+[node name="Credit6" type="Label" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 611.7313
+offset_right = 944.0
+offset_bottom = 662.7313
+theme = ExtResource("16_04r4e")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 30
+text = "Music - Jesse Chan"
+
+[node name="Credit7" type="Label" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 558.7313
+offset_right = 906.0
+offset_bottom = 609.7313
+theme = ExtResource("16_04r4e")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 30
+text = "SFX Designer - James Conroy"
+
+[node name="Credit3" type="Label" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 206.73132
+offset_right = 911.0
+offset_bottom = 257.73132
+theme = ExtResource("16_04r4e")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 30
+text = "Programmer - Hannah Banks"
+
+[node name="Credit5" type="Label" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 375.0
+offset_top = 257.73132
+offset_right = 899.0
+offset_bottom = 308.73132
+theme = ExtResource("16_04r4e")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 30
+text = "Programmer - Jesse Chan"
+
+[node name="Credit4" type="Label" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 390.73132
+offset_right = 1008.0
+offset_bottom = 441.73132
+theme = ExtResource("16_04r4e")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 30
+text = "3D Artist - Jack Teviotdale"
+
+[node name="Art" type="Label" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 339.73132
+offset_right = 716.0
+offset_bottom = 390.73132
+theme = ExtResource("16_04r4e")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 40
+text = "Artists"
+
+[node name="Audio" type="Label" parent="CreditsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 507.73132
+offset_right = 716.0
+offset_bottom = 558.7313
+theme = ExtResource("16_04r4e")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 40
+text = "Audio"
+
 [node name="LoadingScreen" type="CanvasLayer" parent="."]
 layer = 100
 visible = false
@@ -172,3 +331,4 @@ grow_vertical = 2
 color = Color(0.0885599, 0.0885599, 0.0885599, 1)
 
 [connection signal="pressed" from="OptionsMenu/c/Panel/Button" to="OptionsMenu" method="BackPressed"]
+[connection signal="pressed" from="CreditsMenu/c/Panel/Button" to="CreditsMenu" method="BackPressed"]

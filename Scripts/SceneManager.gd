@@ -18,8 +18,11 @@ enum Scene{
 	LOSE
 }
 
-var optionsRef: Options
+var optionsRef
 var optionsOpen: bool = false
+
+var creditsRef
+var creditsOpen: bool = false
 
 var loadingScreenRef: CanvasLayer
 
@@ -36,6 +39,10 @@ func _ready():
 	optionsRef = $OptionsMenu
 	optionsRef.visible = true
 	remove_child(optionsRef)
+	
+	creditsRef = $CreditsMenu
+	creditsRef.visible = true
+	remove_child(creditsRef)
 
 	loadingScreenRef = $LoadingScreen
 	loadingScreenRef.visible = true
@@ -81,6 +88,15 @@ func OpenOptionsMenu():
 func CloseOptionsMenu():
 	remove_child(optionsRef)
 	optionsOpen = false
+
+func OpenCreditsMenu():
+	add_child(creditsRef)
+	creditsRef.visible = true
+	creditsOpen = true
+
+func CloseCreditsMenu():
+	remove_child(creditsRef)
+	creditsOpen = false
 
 func _process(_delta):
 	loadingDelay -= _delta

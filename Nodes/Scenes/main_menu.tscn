@@ -72,5 +72,5 @@ bus = &"Music"
 
 [connection signal="pressed" from="c/StartGame" to="." method="StartPressed"]
 [connection signal="pressed" from="c/Options" to="." method="OptionsPressed"]
-[connection signal="pressed" from="c/Credits" to="." method="OptionsPressed"]
+[connection signal="pressed" from="c/Credits" to="." method="CreditsPressed"]
 [connection signal="pressed" from="c/Quit" to="." method="QuitPressed"]

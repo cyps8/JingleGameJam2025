@@ -17,5 +17,8 @@ func StartPressed():
 func OptionsPressed():
 	Root.ins.OpenOptionsMenu()
 
+func CreditsPressed():
+	Root.ins.OpenCreditsMenu()
+
 func QuitPressed():
 	get_tree().quit()
