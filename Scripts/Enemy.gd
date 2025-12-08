@@ -46,7 +46,7 @@ func _init() -> void:
 	ins = self
 
 func _ready() -> void:
-	enemyType = EnemyType.CHEETAH
+	enemyType = Globals.currentOpponent
 
 	$Sprite.texture = enemyTexture[enemyType]
 	$ArmL.texture = armTexture[enemyType]
@@ -180,4 +180,10 @@ func Stunned():
 	stunned = 3.0
 
 func Die():
-	pass
+	if enemyType == EnemyType.SLOTH:
+		Globals.currentOpponent = Enemy.EnemyType.ELEPHANT
+	elif enemyType == EnemyType.ELEPHANT:
+		Globals.currentOpponent = Enemy.EnemyType.CHEETAH
+	elif enemyType == EnemyType.CHEETAH:
+		Globals.currentOpponent = Enemy.EnemyType.SLOTH
+	Root.ins.ChangeScene(Root.Scene.GAME)

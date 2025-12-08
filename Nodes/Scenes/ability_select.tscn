@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dh5kdx2ryyrin"]
+[gd_scene load_steps=12 format=3 uid="uid://dh5kdx2ryyrin"]
 
 [ext_resource type="Script" uid="uid://c5ghc6qhii1bx" path="res://Nodes/Scenes/AbilitySelect.gd" id="1_cdxm4"]
 [ext_resource type="Script" uid="uid://cu7rke6bemqoj" path="res://Scripts/Ability.gd" id="2_k5os8"]
@@ -8,18 +8,38 @@
 [ext_resource type="Resource" uid="uid://cvjkx67yp8p3i" path="res://Resources/Abilities/Muscles.tres" id="6_8og1i"]
 [ext_resource type="Resource" uid="uid://1s3n3clrnwix" path="res://Resources/Abilities/Screech.tres" id="7_7ncdt"]
 [ext_resource type="Resource" uid="uid://c64jyerof713g" path="res://Resources/Abilities/BeatChest.tres" id="8_upyjv"]
+[ext_resource type="Theme" uid="uid://wajogwsuqirr" path="res://Resources/Buttons.tres" id="9_towo8"]
+
+[sub_resource type="Gradient" id="Gradient_yeh5w"]
+colors = PackedColorArray(0.11018626, 0.17129964, 0.20814848, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_towo8"]
+gradient = SubResource("Gradient_yeh5w")
+width = 120
+height = 90
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
 
 [node name="AbilitySelect" type="CanvasLayer"]
 script = ExtResource("1_cdxm4")
 abilities = Array[ExtResource("2_k5os8")]([ExtResource("3_towo8"), ExtResource("4_ywres"), ExtResource("5_7j3vw"), ExtResource("6_8og1i"), ExtResource("7_7ncdt"), ExtResource("8_upyjv")])
 
-[node name="SelectText" type="RichTextLabel" parent="."]
-offset_top = 30.0
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 120.0
+offset_bottom = 90.0
+scale = Vector2(10, 10)
+texture = SubResource("GradientTexture2D_towo8")
+
+[node name="SelectText" type="Label" parent="."]
+offset_top = 31.0
 offset_right = 1200.0
-offset_bottom = 130.0
-theme_override_font_sizes/normal_font_size = 64
+offset_bottom = 131.0
+theme = ExtResource("9_towo8")
+theme_override_font_sizes/font_size = 70
 text = "Select Your CHIMP Ability"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Ability1" type="Button" parent="."]
 anchors_preset = 9

@@ -46,13 +46,6 @@ var beatCd: float = 0
 var beatCdMax: float = 16
 var enhancedStamina: float = 0
 
-var biteUnlocked: bool = false
-var screechUnlocked: bool = true
-var beatUnlocked: bool = false
-var furUnlocked: bool = false
-var muscleUnlocked: bool = false
-var tailUnlocked: bool = false
-
 @onready var stamBar: ProgressBar = %StamBar
 @onready var healthBar: ProgressBar = %HealthBar
 @onready var dmgBorder: TextureRect = %DMGBorder
@@ -73,22 +66,22 @@ func _init():
 	ins = self
 
 func _ready():
-	if biteUnlocked:
+	if Globals.biteUnlocked:
 		biteAbility.visible = true
 	
-	if screechUnlocked:
+	if Globals.screechUnlocked:
 		screechAbility.visible = true
 
-	if beatUnlocked:
+	if Globals.beatUnlocked:
 		beatAbility.visible = true
 
-	if tailUnlocked:
+	if Globals.tailUnlocked:
 		punchSpeed *= 1.3
 		stamMax *= 1.2
 		stamBar.max_value = stamMax
 		stamCur = stamMax
 
-	if muscleUnlocked:
+	if Globals.muscleUnlocked:
 		punchDamage *= 1.3
 		punchCost *= 0.9
 
@@ -148,17 +141,17 @@ func _process(_dt):
 
 	biteCd -= _dt
 	biteAbility.value = (biteCdMax - biteCd) / biteCdMax
-	if Input.is_action_just_pressed("bite") && !outOfStam && biteCd < 0 && biteUnlocked:
+	if Input.is_action_just_pressed("bite") && !outOfStam && biteCd < 0 && Globals.biteUnlocked:
 		Bite()
 
 	screechCd -= _dt
 	screechAbility.value = (screechCdMax - screechCd) / screechCdMax
-	if Input.is_action_just_pressed("screech") && !outOfStam && screechCd < 0 && screechUnlocked:
+	if Input.is_action_just_pressed("screech") && !outOfStam && screechCd < 0 && Globals.screechUnlocked:
 		Screech()
 
 	beatCd -= _dt
 	beatAbility.value = (beatCdMax - beatCd) / beatCdMax
-	if Input.is_action_just_pressed("beat") && !outOfStam && beatCd < 0 && beatUnlocked && !usingL && !usingR:
+	if Input.is_action_just_pressed("beat") && !outOfStam && beatCd < 0 && Globals.beatUnlocked && !usingL && !usingR:
 		Beat()
 
 	var mousePos: Vector2 = get_viewport().get_mouse_position()
@@ -303,7 +296,7 @@ func ResetArmR():
 	$ArmR.texture = gloves[0]
 
 func TakeDamage(val: float):
-	if furUnlocked:
+	if Globals.furUnlocked:
 		healthCur -= val * 0.75
 	else:
 		healthCur -= val
@@ -330,7 +323,7 @@ func HealDamage(val):
 		healthCur = healthMax
 
 func Block():
-	if furUnlocked:
+	if Globals.furUnlocked:
 		stamCur += 5
 	blockBorder.modulate.a = 1.0
 	var blockFlash: Tween = create_tween()
@@ -341,4 +334,7 @@ func Block():
 	hitRecoilTween.tween_property(self, "hitRecoil", 0.0, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 
 func Die():
-	pass
+	if Globals.lossCount < 4:
+		Root.ins.ChangeScene(Root.Scene.ABILITY_SELECT)
+	else:
+		Root.ins.ChangeScene(Root.Scene.LOSE)

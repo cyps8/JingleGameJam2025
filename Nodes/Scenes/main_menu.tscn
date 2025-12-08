@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://drj0jssxxceyu"]
+[gd_scene load_steps=6 format=3 uid="uid://drj0jssxxceyu"]
 
 [ext_resource type="Script" uid="uid://bjq3igcieuorv" path="res://Scripts/MainMenu.gd" id="1_48opo"]
 [ext_resource type="AudioStream" uid="uid://hf2yqyo0m2k3" path="res://Assets/Audio/Music/Funky music 2.ogg" id="2_ncjvi"]
-[ext_resource type="Script" path="res://Nodes/Scenes/Buttons.gd" id="2_p3l52"]
+[ext_resource type="Script" uid="uid://d88qniwqmnoc" path="res://Nodes/Scenes/Buttons.gd" id="2_p3l52"]
+[ext_resource type="Texture2D" uid="uid://83ia843vj7oq" path="res://Assets/Art/Sprites/UI/splash_page.png" id="2_y3n2m"]
+[ext_resource type="Theme" uid="uid://wajogwsuqirr" path="res://Resources/Buttons.tres" id="3_kexs1"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_48opo")
@@ -15,32 +17,53 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TextureRect" type="TextureRect" parent="c"]
+layout_mode = 0
+offset_right = 1200.0
+offset_bottom = 900.0
+texture = ExtResource("2_y3n2m")
+
 [node name="StartGame" type="Button" parent="c"]
 layout_mode = 0
-offset_left = 131.0
-offset_top = 268.0
-offset_right = 286.0
-offset_bottom = 345.0
+offset_left = 33.0
+offset_top = 752.0
+offset_right = 293.0
+offset_bottom = 872.0
+theme = ExtResource("3_kexs1")
 text = "START"
 script = ExtResource("2_p3l52")
 
 [node name="Options" type="Button" parent="c"]
 layout_mode = 0
-offset_left = 129.0
-offset_top = 368.0
-offset_right = 292.0
-offset_bottom = 446.0
+offset_left = 323.0
+offset_top = 753.0
+offset_right = 583.0
+offset_bottom = 873.0
+theme = ExtResource("3_kexs1")
 text = "OPTIONS"
+script = ExtResource("2_p3l52")
+
+[node name="Credits" type="Button" parent="c"]
+layout_mode = 0
+offset_left = 620.0
+offset_top = 753.0
+offset_right = 880.0
+offset_bottom = 873.0
+theme = ExtResource("3_kexs1")
+text = "CREDITS"
 script = ExtResource("2_p3l52")
 
 [node name="Quit" type="Button" parent="c"]
 layout_mode = 0
-offset_left = 130.0
-offset_top = 464.0
-offset_right = 293.0
-offset_bottom = 542.0
+offset_left = 901.0
+offset_top = 750.0
+offset_right = 1161.0
+offset_bottom = 870.0
+focus_mode = 0
+theme = ExtResource("3_kexs1")
 text = "EXIT"
 script = ExtResource("2_p3l52")
+disableForWeb = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ncjvi")
@@ -49,4 +72,5 @@ bus = &"Music"
 
 [connection signal="pressed" from="c/StartGame" to="." method="StartPressed"]
 [connection signal="pressed" from="c/Options" to="." method="OptionsPressed"]
+[connection signal="pressed" from="c/Credits" to="." method="OptionsPressed"]
 [connection signal="pressed" from="c/Quit" to="." method="QuitPressed"]
