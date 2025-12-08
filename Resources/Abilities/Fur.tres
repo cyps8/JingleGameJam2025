@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_733ii")
 name = "Fur"
-description = "a thick layer of fur that reduces the damage you take and helps you survive longer."
+description = "a thick layer of fur that reduces the damage you take and recovers stamina for blocking."
 icon = ExtResource("1_wnh10")
 metadata/_custom_type_script = "uid://cu7rke6bemqoj"

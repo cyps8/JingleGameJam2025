@@ -2,18 +2,21 @@ class_name Enemy extends Node3D
 
 enum EnemyType { SLOTH = 0, ELEPHANT = 1, CHEETAH = 2 }
 
-@export var enemyTexture: Texture
-@export var armTexture: Texture
-@export var punchTexture: Texture
+var enemyType: EnemyType
 
-var healthMax: float = 150
+@export var enemyTexture: Array[Texture]
+@export var armTexture: Array[Texture]
+@export var punchTexture: Array[Texture]
+
+var healthMax: Array[float] = ([150, 280, 200])
 var healthCur: float = 150
 
-var punchFrequency: float = 2.0
+var punchFrequency: Array[float] = ([2.0, 1.55, 0.9])
 var punchCD: float = 2.0
+var punchSpeed: Array[float] = ([0.8, 0.75, 0.55])
 
-var punchDamage: float = 13
-var punchCost: float = 25
+var punchDamage: Array[float] = ([13, 24, 19])
+var punchCost: Array[float] = ([25, 12.5, 20])
 var left: bool = false
 
 var camBob: float
@@ -23,11 +26,13 @@ var spriteDefPos: Vector3
 
 var staminaMax: float = 100
 var staminaCur: float = 100
-var stamRecovery: float = 40
+var stamRecovery: Array[float] = ([40, 18, 80])
 
 var outOfStam: bool = false
 
 var lastBlock: int = 0
+
+var stunned: float = 0
 
 static var ins: Enemy
 
@@ -41,7 +46,34 @@ func _init() -> void:
 	ins = self
 
 func _ready() -> void:
-	healthCur = healthMax
+	enemyType = EnemyType.CHEETAH
+
+	$Sprite.texture = enemyTexture[enemyType]
+	$ArmL.texture = armTexture[enemyType]
+	$ArmR.texture = armTexture[enemyType]
+
+	if enemyType == EnemyType.ELEPHANT:
+		healthIcon.position.y += 0.3
+		staminaIcon.position.y += 0.3
+		%Dazed.position.y += 0.3
+		$Sprite.position.y += 0.25
+		$ArmL.position += Vector3(-0.1, 0.25, 0.1)
+		$ArmR.position += Vector3(0.1, 0.25, 0.1)
+		var s = $Sprite.scale.x * 1.2
+		$Sprite.scale = Vector3(s, s, s)
+		s = $ArmL.scale.x * 1.2
+		$ArmL.scale = Vector3(s, s, s)
+		$ArmR.scale = Vector3(s, s, s)
+
+	if enemyType == EnemyType.CHEETAH:
+		healthIcon.position.y += 0.1
+		staminaIcon.position.y += 0.1
+		$Sprite.position.y += 0.1
+		$ArmL.position += Vector3(0, 0.2, 0.05)
+		$ArmR.position += Vector3(0, 0.2, 0.05)
+		%Dazed.position.y += 0.1
+
+	healthCur = healthMax[enemyType]
 	staminaCur = staminaMax
 
 	spriteDefPos = $Sprite.position
@@ -57,8 +89,15 @@ func _ready() -> void:
 
 func _process(_dt: float):
 	$Sprite.position.y = spriteDefPos.y + ((camBob - 0.5) * 0.01)
+
+	if stunned > 0:
+		stunned -= _dt
+		if stunned <= 0:
+			%Dazed.visible = false
+		return
+
 	if outOfStam:
-		staminaCur += stamRecovery * _dt
+		staminaCur += stamRecovery[enemyType] * _dt
 		var stamScale: float = staminaCur / staminaMax
 		staminaIcon.scale = Vector3(stamScale * defaultStaminaIconScale, stamScale * defaultStaminaIconScale, stamScale * defaultStaminaIconScale)
 		if staminaCur > staminaMax:
@@ -69,7 +108,7 @@ func _process(_dt: float):
 		punchCD -= _dt
 	
 	if punchCD < 0:
-		punchCD = punchFrequency
+		punchCD = punchFrequency[enemyType]
 		Punch()
 
 func Punch():
@@ -84,21 +123,21 @@ func Punch():
 		left = false
 		punchOffset = -0.1
 
-	arm.texture = punchTexture
+	arm.texture = punchTexture[enemyType]
 	var armDefPos: Vector3 = arm.position
 	arm.position += Vector3(0, 0.2, 0)
 	
 	var punchTween: Tween = create_tween()
-	punchTween.tween_property(arm, "position", arm.position + Vector3(punchOffset,0.1,1.0), 0.8).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	punchTween.tween_property(arm, "position", arm.position + Vector3(punchOffset,0.1,1.0), punchSpeed[enemyType]).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	punchTween.tween_callback(TryDamage)
 	punchTween.tween_property(arm, "position", armDefPos, 0.15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	punchTween.tween_callback(func(): arm.texture = armTexture)
+	punchTween.tween_callback(func(): arm.texture = armTexture[enemyType])
 
 func TryDamage():
 	if left && !Player.ins.blockingL:
-		Player.ins.TakeDamage(punchDamage)
+		Player.ins.TakeDamage(punchDamage[enemyType])
 	elif !left && !Player.ins.blockingR:
-		Player.ins.TakeDamage(punchDamage)
+		Player.ins.TakeDamage(punchDamage[enemyType])
 	else:
 		if lastBlock == 0:
 			lastBlock = 1
@@ -107,7 +146,7 @@ func TryDamage():
 		SFXPlayer.ins.PlaySound(4 + lastBlock, SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
 		Player.ins.Block()
 
-	staminaCur -= punchCost
+	staminaCur -= punchCost[enemyType]
 	if staminaCur <= 0:
 		outOfStam = true
 		staminaIcon.modulate = Color(0.5, 0.5, 1.0)
@@ -130,12 +169,15 @@ func TakeDamage(val: float):
 	dmgFlash.parallel()
 	dmgFlash.tween_property($ArmR, "modulate", Color.WHITE, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
-	var healthScale: float = healthCur / healthMax
+	var healthScale: float = healthCur / healthMax[enemyType]
 	healthIcon.scale = Vector3(healthScale * defaultHealthIconScale, healthScale * defaultHealthIconScale, healthScale * defaultHealthIconScale)
 
 	SFXPlayer.ins.PlaySound(randi_range(0, 2), SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
 	SFXPlayer.ins.PlaySound(6, SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
 
+func Stunned():
+	%Dazed.visible = true
+	stunned = 3.0
 
 func Die():
 	pass

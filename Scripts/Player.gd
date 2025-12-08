@@ -34,21 +34,33 @@ var camBobTween: Tween
 var hitRecoil: float
 
 var biteCd: float = 0
+var biteCdMax: float = 6
 var biteDamage: float = 20
 var biteHeal: float = 15
 var biteCost: float = 30
 
-var biteUnlocked: bool = true
-var screechUnlocked: bool = false
+var screechCd: float = 0
+var screechCdMax: float = 12
+
+var beatCd: float = 0
+var beatCdMax: float = 16
+var enhancedStamina: float = 0
+
+var biteUnlocked: bool = false
+var screechUnlocked: bool = true
 var beatUnlocked: bool = false
 var furUnlocked: bool = false
 var muscleUnlocked: bool = false
+var tailUnlocked: bool = false
 
 @onready var stamBar: ProgressBar = %StamBar
 @onready var healthBar: ProgressBar = %HealthBar
 @onready var dmgBorder: TextureRect = %DMGBorder
 @onready var blockBorder: TextureRect = %BlockBorder
 @onready var knockoutBorder: TextureRect = %KnockoutBorder
+@onready var biteAbility: TextureProgressBar = %BiteCD
+@onready var screechAbility: TextureProgressBar = %ScreechCD
+@onready var beatAbility: TextureProgressBar = %BeatCD
 
 @onready var lowerTeeth: Sprite3D = %LowerTeeth
 @onready var upperTeeth: Sprite3D = %UpperTeeth
@@ -61,6 +73,25 @@ func _init():
 	ins = self
 
 func _ready():
+	if biteUnlocked:
+		biteAbility.visible = true
+	
+	if screechUnlocked:
+		screechAbility.visible = true
+
+	if beatUnlocked:
+		beatAbility.visible = true
+
+	if tailUnlocked:
+		punchSpeed *= 1.3
+		stamMax *= 1.2
+		stamBar.max_value = stamMax
+		stamCur = stamMax
+
+	if muscleUnlocked:
+		punchDamage *= 1.3
+		punchCost *= 0.9
+
 	cam = $Cam
 	camForward = cam.rotation
 	camDefPos = cam.position
@@ -77,6 +108,9 @@ func _ready():
 	camBobTween.tween_property(self, "camBob", -1.0, 0.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 	camBobTween.tween_property(self, "camBob", 0.0, 0.4).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
 
+	var mousePos: Vector2 = get_viewport().get_mouse_position()
+	lastSide = mousePos.x < get_viewport().size.x / 2
+
 func CamStuff(_dt: float, mousePos: Vector2):
 	var lookOffset = Vector2(mousePos.x / get_viewport().size.x, mousePos.y / get_viewport().size.y)
 	lookOffset -= Vector2(.5, .5)
@@ -90,8 +124,20 @@ func KnockoutAnim():
 	var knockoutTween: Tween = create_tween()
 	knockoutTween.tween_property(knockoutBorder, "modulate:a", 1.0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
+var lastSide: bool = false
+
 func _process(_dt):
 	recoverycd -= _dt
+
+	if enhancedStamina > 0:
+		stamCur += recovery * _dt * 3
+		enhancedStamina -= _dt
+		if enhancedStamina < 0:
+			enhancedStamina = 0
+			stamBar.modulate = Color(1.0, 0.85, 0.0)
+		else:
+			stamBar.modulate = Color(1.0, 0.97, 0.7)
+
 	if recoverycd < 0:
 		stamCur += recovery * _dt
 		if stamCur > stamMax:
@@ -100,8 +146,28 @@ func _process(_dt):
 				outOfStam = false
 				stamBar.modulate = Color(1.0, 0.85, 0.0)
 
+	biteCd -= _dt
+	biteAbility.value = (biteCdMax - biteCd) / biteCdMax
+	if Input.is_action_just_pressed("bite") && !outOfStam && biteCd < 0 && biteUnlocked:
+		Bite()
+
+	screechCd -= _dt
+	screechAbility.value = (screechCdMax - screechCd) / screechCdMax
+	if Input.is_action_just_pressed("screech") && !outOfStam && screechCd < 0 && screechUnlocked:
+		Screech()
+
+	beatCd -= _dt
+	beatAbility.value = (beatCdMax - beatCd) / beatCdMax
+	if Input.is_action_just_pressed("beat") && !outOfStam && beatCd < 0 && beatUnlocked && !usingL && !usingR:
+		Beat()
+
 	var mousePos: Vector2 = get_viewport().get_mouse_position()
 	var left: bool = mousePos.x < get_viewport().size.x / 2
+
+	if left != lastSide:
+		SFXPlayer.ins.PlaySound(7, SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.4) + 0.8)
+		lastSide = left
+
 	if left:
 		if !usingL:
 			$ArmL.position = armLDefPos + Vector3(0, 0.1, 0)
@@ -168,17 +234,55 @@ func _process(_dt):
 	CamStuff(_dt, mousePos)
 
 func Bite():
+	stamCur -= biteCost
+	recoverycd = 0.35
+	biteCd = biteCdMax
 	var biteTween: Tween = create_tween()
-	lowerTeeth.position.y = 0.8
+	lowerTeeth.position.y = -0.8
 	upperTeeth.position.y = 0.8
-	biteTween.tween_property(lowerTeeth, "position:y", -0.2, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	biteTween.tween_property(lowerTeeth, "position:y", -0.2, 0.4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	biteTween.parallel()
-	biteTween.tween_property(upperTeeth, "position:y", 0.2, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	biteTween.tween_property(upperTeeth, "position:y", 0.2, 0.4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	biteTween.parallel()
-	biteTween.tween_property(lowerTeeth, "modulate:a", 1.0, 0.5)
+	biteTween.tween_property(lowerTeeth, "modulate:a", 1.0, 0.4)
 	biteTween.parallel()
-	biteTween.tween_property(upperTeeth, "modulate:a", 1.0, 0.5)
+	biteTween.tween_property(upperTeeth, "modulate:a", 1.0, 0.4)
 	biteTween.tween_callback(func(): Enemy.ins.TakeDamage(biteDamage))
+	biteTween.tween_callback(func(): HealDamage(biteHeal))
+	biteTween.tween_interval(0.2)
+	biteTween.tween_property(lowerTeeth, "modulate:a", 0.0, 0.2)
+	biteTween.parallel()
+	biteTween.tween_property(upperTeeth, "modulate:a", 0.0, 0.2)
+
+func Screech():
+	screechCd = screechCdMax
+	Enemy.ins.Stunned()
+
+func Beat():
+	usingL = true
+	usingR = true
+	beatCd = beatCdMax
+	var beatTween: Tween = create_tween()
+	beatTween.tween_property($ArmL, "position:x", $ArmL.position.x + 0.3, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	beatTween.parallel()
+	beatTween.tween_property($ArmR, "position:x", $ArmR.position.x - 0.3, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	beatTween.parallel()
+	beatTween.tween_property($ArmL, "position:y", $ArmL.position.y - 0.2, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	beatTween.parallel()
+	beatTween.tween_property($ArmR, "position:y", $ArmR.position.y - 0.2, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	for i in range(4):
+		beatTween.tween_property($ArmL, "position:y", $ArmL.position.y - 0.2, 0.07).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		beatTween.parallel()
+		beatTween.tween_property($ArmR, "position:y", $ArmR.position.y - 0.5, 0.07).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		beatTween.tween_property($ArmL, "position:y", $ArmL.position.y - 0.5, 0.07).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		beatTween.parallel()
+		beatTween.tween_property($ArmR, "position:y", $ArmR.position.y - 0.2, 0.07).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	beatTween.tween_property($ArmR, "position", armRDefPos, 0.1)
+	beatTween.parallel()
+	beatTween.tween_property($ArmR, "position", armRDefPos, 0.1)
+	beatTween.tween_callback(func(): enhancedStamina = 4.0)
+	beatTween.tween_callback(func(): usingR = false)
+	beatTween.tween_callback(func(): usingL = false)
 
 func ResetArmL():
 	if !blockingL:
@@ -199,7 +303,10 @@ func ResetArmR():
 	$ArmR.texture = gloves[0]
 
 func TakeDamage(val: float):
-	healthCur -= val
+	if furUnlocked:
+		healthCur -= val * 0.75
+	else:
+		healthCur -= val
 	dmgBorder.modulate.a = 1.0
 	var dmgFlash: Tween = create_tween()
 	dmgFlash.tween_property(dmgBorder, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
@@ -219,7 +326,12 @@ func HealDamage(val):
 	healthCur += val
 	healthBar.value = healthCur
 
+	if healthCur > healthMax:
+		healthCur = healthMax
+
 func Block():
+	if furUnlocked:
+		stamCur += 5
 	blockBorder.modulate.a = 1.0
 	var blockFlash: Tween = create_tween()
 	blockFlash.tween_property(blockBorder, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
