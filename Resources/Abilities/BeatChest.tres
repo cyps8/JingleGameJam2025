@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://c64jyerof713g"]
 
-[ext_resource type="Texture2D" uid="uid://che1v77ujxggu" path="res://Assets/Art/Other/icon.svg" id="1_yk2jr"]
+[ext_resource type="Texture2D" uid="uid://68gxrieqkas7" path="res://Assets/Art/Sprites/Abilities/BeatChest.png" id="1_yk2jr"]
 [ext_resource type="Script" uid="uid://cu7rke6bemqoj" path="res://Scripts/Ability.gd" id="2_lpx4w"]
 
 [resource]
 script = ExtResource("2_lpx4w")
 name = "Beat Chest"
-description = "beat your chest to give you enhanced stamina for a short duration."
+description = "[ABILITY] beat your chest to give you enhanced stamina for a short duration."
 icon = ExtResource("1_yk2jr")
 metadata/_custom_type_script = "uid://cu7rke6bemqoj"

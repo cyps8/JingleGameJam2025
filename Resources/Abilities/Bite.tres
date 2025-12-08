@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://bf5yiiu35417v"]
 
-[ext_resource type="Texture2D" uid="uid://che1v77ujxggu" path="res://Assets/Art/Other/icon.svg" id="1_avb4e"]
+[ext_resource type="Texture2D" uid="uid://m2y02u545o2d" path="res://Assets/Art/Sprites/Abilities/Bite.png" id="1_avb4e"]
 [ext_resource type="Script" uid="uid://cu7rke6bemqoj" path="res://Scripts/Ability.gd" id="1_e1dg8"]
 
 [resource]
 script = ExtResource("1_e1dg8")
 name = "Bite"
-description = "bite your opponent with your sharp teeth and stealing health."
+description = "[ABILITY] bite your opponent with your sharp teeth and stealing health."
 icon = ExtResource("1_avb4e")
 metadata/_custom_type_script = "uid://cu7rke6bemqoj"
