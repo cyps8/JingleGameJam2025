@@ -1,18 +1,27 @@
-[gd_scene load_steps=25 format=3 uid="uid://c6hrxahg2vy6o"]
+[gd_scene load_steps=38 format=3 uid="uid://c6hrxahg2vy6o"]
 
 [ext_resource type="PackedScene" uid="uid://7cuuqdrdbpn6" path="res://node_3d.tscn" id="1_5aubf"]
 [ext_resource type="Script" uid="uid://d2iv34ayqfa3i" path="res://Scripts/Player.gd" id="1_84d6f"]
 [ext_resource type="Script" uid="uid://dwui3k6hsh45q" path="res://Scripts/Gameplay.gd" id="1_c4uye"]
-[ext_resource type="Texture2D" uid="uid://imy4rgupu6uo" path="res://Assets/Art/Sprites/Player/glove1.png" id="3_5aubf"]
 [ext_resource type="Script" uid="uid://b3qoryrjch6mg" path="res://Scripts/Enemy.gd" id="3_wnkb1"]
 [ext_resource type="Texture2D" uid="uid://bwcibwoa1ym6p" path="res://Assets/Art/Sprites/Sloth/IMG_5455.PNG" id="4_dmect"]
-[ext_resource type="Texture2D" uid="uid://cogxtjb1a3dc1" path="res://Assets/Art/Sprites/Player/glove2.png" id="4_sv8sg"]
+[ext_resource type="Texture2D" uid="uid://ca4n20b4uc5ul" path="res://Assets/Art/Sprites/Player/glove_1.png" id="4_ppefh"]
 [ext_resource type="Texture2D" uid="uid://bfo3nhl5yj255" path="res://Assets/Art/Sprites/Sloth/IMG_5451.PNG" id="5_2kk6b"]
+[ext_resource type="Texture2D" uid="uid://5f7lrbydbyc4" path="res://Assets/Art/Sprites/Player/glove_2.png" id="5_xucbb"]
 [ext_resource type="Texture2D" uid="uid://cytdmxy3pu58d" path="res://Assets/Art/Sprites/Player/Teeth.png" id="6_csnm0"]
-[ext_resource type="Texture2D" uid="uid://dvf6mdhljja31" path="res://Assets/Art/Sprites/Sloth/IMG_5450.PNG" id="6_uk5xd"]
-[ext_resource type="Texture2D" uid="uid://tkawe1iu413a" path="res://Assets/Art/Sprites/UI/heart.png" id="7_eno18"]
-[ext_resource type="Texture2D" uid="uid://3pdhtkbnclge" path="res://Assets/Art/Sprites/UI/stam.png" id="8_oo8pr"]
+[ext_resource type="Texture2D" uid="uid://8g0xvrcqeoyt" path="res://Assets/Art/Sprites/Sloth/sloth.png" id="8_ppefh"]
+[ext_resource type="Texture2D" uid="uid://c0sy77xw4xatj" path="res://Assets/Art/Sprites/New folder/elephant.png" id="9_xucbb"]
+[ext_resource type="Texture2D" uid="uid://cs2824o3fow66" path="res://Assets/Art/Sprites/Cheetah/cheetah.png" id="10_0tdnq"]
+[ext_resource type="Texture2D" uid="uid://c1phaql4ftl2k" path="res://Assets/Art/Sprites/Sloth/slotharm2.png" id="11_qay7p"]
+[ext_resource type="Texture2D" uid="uid://ci4qsnpsl1d5m" path="res://Assets/Art/Sprites/New folder/elepahantarm2.png" id="12_7o6j1"]
 [ext_resource type="AudioStream" uid="uid://dk5tnp3ftb8tv" path="res://Assets/Audio/SFX/Ambience/SFX_Ambience_Arena.ogg" id="12_csnm0"]
+[ext_resource type="Texture2D" uid="uid://brpapg1if7hjh" path="res://Assets/Art/Sprites/Cheetah/cheetaharm2.png" id="13_mld5c"]
+[ext_resource type="Texture2D" uid="uid://byu4upao6io7k" path="res://Assets/Art/Sprites/Sloth/slotharm.png" id="14_22ler"]
+[ext_resource type="Texture2D" uid="uid://2ec4gnh0p8k0" path="res://Assets/Art/Sprites/New folder/elephantarm.png" id="15_8xs62"]
+[ext_resource type="Texture2D" uid="uid://bwi2tn802wv4h" path="res://Assets/Art/Sprites/Cheetah/cheetaharm_.png" id="16_jk06t"]
+[ext_resource type="Texture2D" uid="uid://ba2y4ljwumpon" path="res://Assets/Art/Sprites/UI/health_icon.png" id="17_ppefh"]
+[ext_resource type="Texture2D" uid="uid://bvas31pox7vrk" path="res://Assets/Art/Sprites/UI/energyy_icon.png" id="18_ppefh"]
+[ext_resource type="Texture2D" uid="uid://c8gy4mvk1mpwf" path="res://Assets/Art/Sprites/UI/dazed.png" id="19_xucbb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84d6f"]
 bg_color = Color(0.09620472, 0.09620475, 0.09620469, 1)
@@ -29,7 +38,7 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmect"]
-bg_color = Color(0.75686276, 0.19607843, 0, 1)
+bg_color = Color(0.74346554, 0, 0.115897425, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -67,6 +76,28 @@ height = 180
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="Gradient" id="Gradient_0tdnq"]
+offsets = PackedFloat32Array(0.50332594, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.2686335, 1.8049032e-07, 7.219613e-08, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qay7p"]
+gradient = SubResource("Gradient_0tdnq")
+width = 128
+height = 128
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_ppefh"]
+offsets = PackedFloat32Array(0.50332594, 1)
+colors = PackedColorArray(0.5970353, 0.32978043, 0.30158353, 1, 0.49803922, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xucbb"]
+gradient = SubResource("Gradient_ppefh")
+width = 128
+height = 128
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_5aubf"]
 radius = 5.664
 height = 16.818
@@ -87,22 +118,22 @@ transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-
 [node name="Player" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.2428935)
 script = ExtResource("1_84d6f")
-gloves = Array[Texture]([ExtResource("3_5aubf"), ExtResource("4_sv8sg")])
+gloves = Array[Texture]([ExtResource("4_ppefh"), ExtResource("5_xucbb")])
 
 [node name="Cam" type="Camera3D" parent="Player"]
 current = true
 fov = 85.0
 
 [node name="ArmR" type="Sprite3D" parent="Player"]
-transform = Transform3D(0.045492567, -0.012297771, -0.016709022, 0.017962778, 0.043496903, 0.016892549, 0.010381001, -0.021372516, 0.043993752, 0.82144547, -0.71799016, -0.92223907)
+transform = Transform3D(0.045492563, -0.012297769, -0.016709022, 0.017962778, 0.043496903, 0.016892547, 0.010381001, -0.021372514, 0.043993756, 0.82144547, -0.7016678, -0.92223907)
 billboard = 1
-texture = ExtResource("3_5aubf")
+texture = ExtResource("4_ppefh")
 
 [node name="ArmL" type="Sprite3D" parent="Player"]
 transform = Transform3D(0.045492567, -0.012297771, -0.016709022, 0.017962778, 0.043496903, 0.016892549, 0.010381001, -0.021372516, 0.043993752, -0.821, -0.718, -0.922)
 flip_h = true
 billboard = 1
-texture = ExtResource("3_5aubf")
+texture = ExtResource("4_ppefh")
 
 [node name="HUD" type="CanvasLayer" parent="Player"]
 
@@ -119,7 +150,7 @@ unique_name_in_owner = true
 layout_mode = 0
 offset_left = 367.0
 offset_top = 828.0
-offset_right = 849.0
+offset_right = 834.0
 offset_bottom = 855.0
 theme_override_styles/background = SubResource("StyleBoxFlat_84d6f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wnkb1")
@@ -131,7 +162,7 @@ unique_name_in_owner = true
 layout_mode = 0
 offset_left = 407.0
 offset_top = 857.0
-offset_right = 807.0
+offset_right = 795.0
 offset_bottom = 872.0
 theme_override_styles/background = SubResource("StyleBoxFlat_84d6f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_dmect")
@@ -171,15 +202,141 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_eno18")
 
+[node name="Center" type="CenterContainer" parent="Player/HUD/c"]
+layout_mode = 0
+offset_left = 386.0
+offset_top = 753.0
+offset_right = 1261.0
+offset_bottom = 881.0
+scale = Vector2(0.5, 0.5)
+
+[node name="HorBox" type="HBoxContainer" parent="Player/HUD/c/Center"]
+layout_mode = 2
+
+[node name="BiteCD" type="TextureProgressBar" parent="Player/HUD/c/Center/HorBox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+max_value = 1.0
+step = 0.01
+value = 0.5
+fill_mode = 4
+texture_under = SubResource("GradientTexture2D_qay7p")
+texture_progress = SubResource("GradientTexture2D_xucbb")
+
+[node name="Label" type="Label" parent="Player/HUD/c/Center/HorBox/BiteCD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 32
+text = "BITE
+(space)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScreechCD" type="TextureProgressBar" parent="Player/HUD/c/Center/HorBox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+max_value = 1.0
+step = 0.01
+value = 0.5
+fill_mode = 4
+texture_under = SubResource("GradientTexture2D_qay7p")
+texture_progress = SubResource("GradientTexture2D_xucbb")
+
+[node name="Label" type="Label" parent="Player/HUD/c/Center/HorBox/ScreechCD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 32
+text = "Screech
+(E)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BeatCD" type="TextureProgressBar" parent="Player/HUD/c/Center/HorBox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+max_value = 1.0
+step = 0.01
+value = 0.5
+fill_mode = 4
+texture_under = SubResource("GradientTexture2D_qay7p")
+texture_progress = SubResource("GradientTexture2D_xucbb")
+
+[node name="Label" type="Label" parent="Player/HUD/c/Center/HorBox/BeatCD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 32
+text = "Beat
+(F)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Player/HUD/c"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -46.0
+offset_right = 2036.0
+offset_bottom = 2002.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.011, 0.011)
+texture = ExtResource("17_ppefh")
+
+[node name="TextureRect" type="TextureRect" parent="Player/HUD/c"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -15.999939
+offset_top = -76.99994
+offset_right = 2032.0
+offset_bottom = 1971.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.018, 0.018)
+texture = ExtResource("18_ppefh")
+
 [node name="Teeth" type="Node3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.825525)
 
 [node name="UpperTeeth" type="Sprite3D" parent="Player/Teeth"]
+unique_name_in_owner = true
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.1, 0)
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("6_csnm0")
 
 [node name="LowerTeeth" type="Sprite3D" parent="Player/Teeth"]
+unique_name_in_owner = true
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.1, 0)
 flip_v = true
 modulate = Color(1, 1, 1, 0)
@@ -188,21 +345,25 @@ texture = ExtResource("6_csnm0")
 [node name="Enemy" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2580582, -0.8971336)
 script = ExtResource("3_wnkb1")
-enemyTexture = ExtResource("4_dmect")
-armTexture = ExtResource("5_2kk6b")
-punchTexture = ExtResource("6_uk5xd")
+enemyTexture = Array[Texture]([ExtResource("8_ppefh"), ExtResource("9_xucbb"), ExtResource("10_0tdnq")])
+armTexture = Array[Texture]([ExtResource("11_qay7p"), ExtResource("12_7o6j1"), ExtResource("13_mld5c")])
+punchTexture = Array[Texture]([ExtResource("14_22ler"), ExtResource("15_8xs62"), ExtResource("16_jk06t")])
 
 [node name="Health" type="Sprite3D" parent="Enemy"]
 unique_name_in_owner = true
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.19273318, 1.0298122, 0)
-modulate = Color(0.87614596, 0, 0.2658959, 1)
-texture = ExtResource("7_eno18")
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.23759611, 1.0298122, 0)
+texture = ExtResource("17_ppefh")
+
+[node name="Dazed" type="Sprite3D" parent="Enemy"]
+unique_name_in_owner = true
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.018691435, 0.70822394, 0.18335068)
+visible = false
+texture = ExtResource("19_xucbb")
 
 [node name="Stamina" type="Sprite3D" parent="Enemy"]
 unique_name_in_owner = true
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.16677137, 1.0298122, 0)
-modulate = Color(0.9843137, 0.76862746, 0, 1)
-texture = ExtResource("8_oo8pr")
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, -0.2728539, 1.0298122, 0)
+texture = ExtResource("18_ppefh")
 
 [node name="Sprite" type="Sprite3D" parent="Enemy"]
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, -0.18522167, -0.015573919)
