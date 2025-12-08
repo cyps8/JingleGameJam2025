@@ -62,6 +62,8 @@ var enhancedStamina: float = 0
 
 static var ins: Player
 
+var dead: bool = false
+
 func _init():
 	ins = self
 
@@ -120,6 +122,12 @@ func KnockoutAnim():
 var lastSide: bool = false
 
 func _process(_dt):
+
+	if Input.is_action_just_pressed("SecretDeath"):
+		TakeDamage(9999)
+	if Input.is_action_just_pressed("SecretKill"):
+		Enemy.ins.TakeDamage(9999)
+
 	recoverycd -= _dt
 
 	if enhancedStamina > 0:
@@ -273,7 +281,7 @@ func Beat():
 	beatTween.tween_property($ArmR, "position", armRDefPos, 0.1)
 	beatTween.parallel()
 	beatTween.tween_property($ArmR, "position", armRDefPos, 0.1)
-	beatTween.tween_callback(func(): enhancedStamina = 4.0)
+	beatTween.tween_callback(func(): enhancedStamina = 3.0)
 	beatTween.tween_callback(func(): usingR = false)
 	beatTween.tween_callback(func(): usingL = false)
 
@@ -296,6 +304,8 @@ func ResetArmR():
 	$ArmR.texture = gloves[0]
 
 func TakeDamage(val: float):
+	if Enemy.ins.dead:
+		return
 	if Globals.furUnlocked:
 		healthCur -= val * 0.75
 	else:
@@ -313,7 +323,7 @@ func TakeDamage(val: float):
 	healthBar.value = healthCur
 
 	SFXPlayer.ins.PlaySound(3, SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.4) + 0.8)
-	SFXPlayer.ins.PlaySound(6, SFXPlayer.SoundType.SFX, 0.8, (randf() * 0.2) + 0.9)
+	SFXPlayer.ins.PlaySound(6, SFXPlayer.SoundType.SFX, 0.6, (randf() * 0.2) + 0.9)
 
 func HealDamage(val):
 	healthCur += val
@@ -334,6 +344,7 @@ func Block():
 	hitRecoilTween.tween_property(self, "hitRecoil", 0.0, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 
 func Die():
+	dead = true
 	if Globals.lossCount < 4:
 		Root.ins.ChangeScene(Root.Scene.ABILITY_SELECT)
 	else:

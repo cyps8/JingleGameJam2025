@@ -8,14 +8,14 @@ var enemyType: EnemyType
 @export var armTexture: Array[Texture]
 @export var punchTexture: Array[Texture]
 
-var healthMax: Array[float] = ([150, 280, 200])
+var healthMax: Array[float] = ([150, 280, 220])
 var healthCur: float = 150
 
-var punchFrequency: Array[float] = ([2.0, 1.55, 0.9])
-var punchCD: float = 2.0
-var punchSpeed: Array[float] = ([0.8, 0.75, 0.55])
+var punchFrequency: Array[float] = ([2.0, 1.5, 0.9])
+var punchCD: float = 1.5
+var punchSpeed: Array[float] = ([0.8, 0.7, 0.55])
 
-var punchDamage: Array[float] = ([13, 24, 19])
+var punchDamage: Array[float] = ([13, 25, 20])
 var punchCost: Array[float] = ([25, 12.5, 20])
 var left: bool = false
 
@@ -26,13 +26,15 @@ var spriteDefPos: Vector3
 
 var staminaMax: float = 100
 var staminaCur: float = 100
-var stamRecovery: Array[float] = ([40, 18, 80])
+var stamRecovery: Array[float] = ([40, 16, 80])
 
 var outOfStam: bool = false
 
 var lastBlock: int = 0
 
 var stunned: float = 0
+
+var dead: bool = false
 
 static var ins: Enemy
 
@@ -155,6 +157,8 @@ func TryDamage():
 	staminaIcon.scale = Vector3(stamScale * defaultStaminaIconScale, stamScale * defaultStaminaIconScale, stamScale * defaultStaminaIconScale)
 
 func TakeDamage(val: float):
+	if Player.ins.dead:
+		return
 	healthCur -= val
 	if healthCur < 0:
 		healthCur = 0
@@ -173,13 +177,25 @@ func TakeDamage(val: float):
 	healthIcon.scale = Vector3(healthScale * defaultHealthIconScale, healthScale * defaultHealthIconScale, healthScale * defaultHealthIconScale)
 
 	SFXPlayer.ins.PlaySound(randi_range(0, 2), SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
-	SFXPlayer.ins.PlaySound(6, SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
+	SFXPlayer.ins.PlaySound(6, SFXPlayer.SoundType.SFX, 0.6, (randf() * 0.2) + 0.9)
 
 func Stunned():
 	%Dazed.visible = true
 	stunned = 3.0
 
 func Die():
+	dead = true
+	SFXPlayer.ins.PlaySound(8, SFXPlayer.SoundType.SFX)
+	var dyingTween: Tween = create_tween()
+	dyingTween.tween_property(self, "rotation:x", -90.0, 1.5).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN)
+	dyingTween.parallel()
+	dyingTween.tween_property(self, "position:z", -1.0, 1.5).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+	dyingTween.parallel()
+	dyingTween.tween_property(self, "position:y", -1.0, 1.5).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN)
+	dyingTween.tween_interval(0.5)
+	dyingTween.tween_callback(func(): DeathOver())
+
+func DeathOver():
 	if enemyType == EnemyType.SLOTH:
 		Globals.currentOpponent = Enemy.EnemyType.ELEPHANT
 	elif enemyType == EnemyType.ELEPHANT:
