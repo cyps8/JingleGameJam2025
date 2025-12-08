@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bumwks6a8fxgk"]
+[gd_scene load_steps=4 format=3 uid="uid://bumwks6a8fxgk"]
 
 [ext_resource type="Script" uid="uid://dmo022vcrtnl3" path="res://Nodes/Scenes/IntroText.gd" id="1_yeh5w"]
+
+[sub_resource type="Gradient" id="Gradient_yeh5w"]
+colors = PackedColorArray(0.11018626, 0.17129964, 0.20814848, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yrbp2"]
+gradient = SubResource("Gradient_yeh5w")
+width = 120
+height = 90
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
 
 [node name="CanvasLayer" type="Control"]
 layout_mode = 3
@@ -8,10 +19,19 @@ anchors_preset = 0
 script = ExtResource("1_yeh5w")
 typing_speed = 0.005
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(10, 10)
+texture = SubResource("GradientTexture2D_yrbp2")
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_right = 1200.0
-offset_bottom = 900.0
+offset_left = 118.0
+offset_top = 92.0
+offset_right = 1040.0
+offset_bottom = 799.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/normal_font_size = 48
@@ -26,8 +46,8 @@ autowrap_mode = 2
 [node name="Button" type="Button" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 918.0
-offset_top = 606.0
-offset_right = 1106.7097
-offset_bottom = 736.0
+offset_left = 883.0
+offset_top = 699.0
+offset_right = 1071.7097
+offset_bottom = 829.0
 text = "Next"

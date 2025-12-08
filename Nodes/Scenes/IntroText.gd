@@ -57,7 +57,7 @@ func typing():
 				await get_tree().create_timer(sentence_pause).timeout
 				start_typing_sentence()
 			else:
-				await get_tree().create_timer(1.0).timeout
+				await get_tree().create_timer(0.3).timeout
 				finish_intro()
 	)
 
