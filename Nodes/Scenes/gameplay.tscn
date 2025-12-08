@@ -122,12 +122,13 @@ script = ExtResource("1_c4uye")
 [node name="World" type="Node3D" parent="."]
 
 [node name="Node3D" parent="World" instance=ExtResource("1_5aubf")]
-transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-08, 10.815596, -0.5600095, 21.711939)
+transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-08, 10.907019, -0.5600095, 21.711939)
 
 [node name="Audience" type="Node3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09142256, 0, 0)
 
 [node name="Orange" type="Sprite3D" parent="World/Audience"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 8.767827, -10.9990225)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.3204801, 8.767827, -10.9990225)
 texture_filter = 0
 texture = ExtResource("3_0tdnq")
 
@@ -263,7 +264,7 @@ texture = ExtResource("7_jk06t")
 script = ExtResource("6_jk06t")
 
 [node name="Audience8" type="Sprite3D" parent="World/Audience"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -9.916077, 5.9704247, -7.7426133)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -9.659826, 5.9704247, -7.8901415)
 flip_h = true
 billboard = 2
 texture_filter = 0
@@ -338,6 +339,13 @@ texture_filter = 0
 texture = ExtResource("8_y0ycs")
 script = ExtResource("6_jk06t")
 
+[node name="Audience37" type="Sprite3D" parent="World/Audience"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 5.5400743, 5.49391, -9.731121)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_y0ycs")
+script = ExtResource("6_jk06t")
+
 [node name="Audience32" type="Sprite3D" parent="World/Audience"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 7.6520643, 5.572461, -8.769173)
 billboard = 2
@@ -403,7 +411,7 @@ texture = ExtResource("7_jk06t")
 script = ExtResource("6_jk06t")
 
 [node name="Pink" type="Sprite3D" parent="World/Audience"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 5.5177636, 3.2815166, -7.6699243)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 5.407341, 3.2815166, -7.6699243)
 billboard = 2
 texture_filter = 0
 texture = ExtResource("5_22ler")
