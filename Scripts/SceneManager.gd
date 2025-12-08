@@ -112,3 +112,25 @@ func _process(_delta):
 
 func HideLoadingScreen():
 	remove_child(loadingScreenRef)
+
+
+func _on_cypri_meta_clicked(meta):
+	OS.shell_open(str(meta))
+
+func _on_hannah_meta_clicked(meta):
+	OS.shell_open(str(meta))
+
+func _on_jack_meta_clicked(meta):
+	OS.shell_open(str(meta))
+
+
+func _on_jesse_meta_clicked(meta):
+	OS.shell_open(str(meta))
+
+
+func _on_jesse_2_meta_clicked(meta):
+	OS.shell_open(str(meta))
+
+
+func _on_chloe_meta_clicked(meta):
+	OS.shell_open(str(meta))
