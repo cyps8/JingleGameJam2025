@@ -30,4 +30,4 @@ func _buttonPressed() -> void:
 	var buttonPressedTween: Tween = create_tween()
 	buttonPressedTween.tween_property(self,"scale",PressedScale,0.06).set_trans(Tween.TRANS_SINE) 
 	buttonPressedTween.tween_property(self,"scale",hoverScale,0.12).set_trans(Tween.TRANS_SINE)
-	SFXPlayer.ins.PlaySound(6, SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.4) + 0.8)
+	SFXPlayer.ins.PlaySound(6, SFXPlayer.SoundType.SFX, 0.6, (randf() * 0.4) + 0.8)
