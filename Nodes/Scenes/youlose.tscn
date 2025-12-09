@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmg43dqj06qxs"]
+[gd_scene load_steps=11 format=3 uid="uid://dmg43dqj06qxs"]
 
 [ext_resource type="Script" uid="uid://bt170r4e445qi" path="res://Nodes/Scenes/YouLoseText.gd" id="1_kcema"]
 [ext_resource type="Theme" uid="uid://wajogwsuqirr" path="res://Resources/Buttons.tres" id="2_a47tm"]
 [ext_resource type="Script" uid="uid://d88qniwqmnoc" path="res://Nodes/Scenes/Buttons.gd" id="3_dmy54"]
 [ext_resource type="FontFile" uid="uid://c3r3mjkx1w3lf" path="res://Assets/Fonts/Gambado Sans Forte.ttf" id="4_a47tm"]
 [ext_resource type="Script" uid="uid://bahhttsutm8qa" path="res://Scripts/LoseMonkeometer.gd" id="5_dmy54"]
+[ext_resource type="AudioStream" uid="uid://dfn05wll18jk3" path="res://Assets/Audio/Music/GameOver Bad Ending.ogg" id="6_i71ra"]
 
 [sub_resource type="Gradient" id="Gradient_d5r04"]
 colors = PackedColorArray(0.11018626, 0.17129964, 0.20814848, 1, 0, 0, 0, 1)
@@ -116,5 +117,11 @@ theme_override_font_sizes/font_size = 70
 text = "Monke-O-Meter"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_i71ra")
+volume_db = -7.46
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="Button" to="." method="_on_next_pressed"]

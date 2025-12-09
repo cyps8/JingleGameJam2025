@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bkna205klwqky"]
+[gd_scene load_steps=32 format=3 uid="uid://bkna205klwqky"]
 
 [ext_resource type="Script" uid="uid://ds54j3mnngqou" path="res://Scripts/SceneManager.gd" id="1_uewl6"]
 [ext_resource type="PackedScene" uid="uid://drj0jssxxceyu" path="res://Nodes/Scenes/main_menu.tscn" id="2_62qmo"]
@@ -20,8 +20,17 @@
 [ext_resource type="Script" uid="uid://coy43r45ubitg" path="res://Scripts/AudioSlider.gd" id="15_2bkfp"]
 [ext_resource type="Theme" uid="uid://wajogwsuqirr" path="res://Resources/Buttons.tres" id="16_04r4e"]
 [ext_resource type="AudioStream" uid="uid://b0adus1a8ud44" path="res://Assets/Audio/SFX/SFX_Fighting_KO.wav" id="16_jy3bs"]
+[ext_resource type="AudioStream" uid="uid://1xx6gwokrmcv" path="res://Assets/Audio/SFX/Player/SFX_Ability_Chest.wav" id="17_5ced6"]
+[ext_resource type="AudioStream" uid="uid://chftbxda7i2ua" path="res://Assets/Audio/SFX/Player/SFX_Ability_Chomp.wav" id="18_ykorw"]
+[ext_resource type="AudioStream" uid="uid://bgxqwjo013nny" path="res://Assets/Audio/SFX/Player/SFX_Ability_Scream.wav" id="19_o00sb"]
 [ext_resource type="Script" path="res://Nodes/Scenes/Credits.gd" id="20_jy3bs"]
+[ext_resource type="AudioStream" uid="uid://cm0qr07dhp8kj" path="res://Assets/Audio/SFX/Player/SFX_Player_NoStamina.wav" id="20_ykorw"]
 [ext_resource type="FontFile" uid="uid://c3r3mjkx1w3lf" path="res://Assets/Fonts/Gambado Sans Forte.ttf" id="21_4d1fn"]
+[ext_resource type="AudioStream" uid="uid://b83vbp24i7une" path="res://Assets/Audio/SFX/Damage/Enemy/Elephant/SFX_Elephant_Damage_1.wav" id="21_uothk"]
+[ext_resource type="AudioStream" uid="uid://d4mkjrwvm3d62" path="res://Assets/Audio/SFX/Damage/Enemy/Elephant/SFX_Elephant_Damage_3.wav" id="22_pturm"]
+[ext_resource type="AudioStream" uid="uid://rbubl0rinokv" path="res://Assets/Audio/SFX/Damage/Enemy/Cheetah/SFX_Cheetah_Damage_1.wav" id="23_0oh4s"]
+[ext_resource type="AudioStream" uid="uid://v5sawbn1pb2e" path="res://Assets/Audio/SFX/Damage/Enemy/Cheetah/SFX_Cheetah_Damage_2.wav" id="24_uyefi"]
+[ext_resource type="AudioStream" uid="uid://efx3t3ymfnwl" path="res://Assets/Audio/SFX/Damage/Enemy/Cheetah/SFX_Cheetah_Damage_3.wav" id="25_toyp8"]
 
 [node name="Root" type="Node"]
 process_mode = 3
@@ -34,7 +43,7 @@ loseScene = ExtResource("6_1s7rx")
 
 [node name="SFXPlayer" type="Node" parent="."]
 script = ExtResource("2_s5jww")
-sounds = Array[AudioStream]([ExtResource("6_g65lr"), ExtResource("7_qncjq"), ExtResource("8_ig2k1"), ExtResource("9_0gkdr"), ExtResource("10_83jsg"), ExtResource("11_3mi07"), ExtResource("12_83jsg"), ExtResource("13_1yy5m"), ExtResource("16_jy3bs")])
+sounds = Array[AudioStream]([ExtResource("6_g65lr"), ExtResource("7_qncjq"), ExtResource("8_ig2k1"), ExtResource("9_0gkdr"), ExtResource("10_83jsg"), ExtResource("11_3mi07"), ExtResource("12_83jsg"), ExtResource("13_1yy5m"), ExtResource("16_jy3bs"), ExtResource("17_5ced6"), ExtResource("18_ykorw"), ExtResource("19_o00sb"), ExtResource("20_ykorw"), ExtResource("21_uothk"), ExtResource("22_pturm"), ExtResource("23_0oh4s"), ExtResource("24_uyefi"), ExtResource("25_toyp8")])
 metadata/_custom_type_script = "uid://dpg0ifkb6hmsd"
 
 [node name="OptionsMenu" type="CanvasLayer" parent="."]
@@ -372,7 +381,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0885599, 0.0885599, 0.0885599, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="LoadingScreen/c/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -137.0
+offset_top = -25.5
+offset_right = 137.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("16_04r4e")
+text = "LOADING..."
 
 [connection signal="pressed" from="OptionsMenu/c/Panel/Button" to="OptionsMenu" method="BackPressed"]
 [connection signal="pressed" from="CreditsMenu/c/Panel/Button" to="CreditsMenu" method="BackPressed"]

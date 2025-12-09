@@ -708,6 +708,22 @@ flip_v = true
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("6_csnm0")
 
+[node name="Tutorial" type="Label3D" parent="Player"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68307424, -1.1474655)
+visible = false
+billboard = 2
+alpha_cut = 1
+modulate = Color(0.99607843, 0.6784314, 0, 1)
+outline_modulate = Color(1, 1, 1, 1)
+text = "Punch with Left Click
+Block with Right Click
+Move mouse to both sides
+<----->"
+font = ExtResource("4_tgqwo")
+font_size = 20
+outline_size = 10
+
 [node name="Enemy" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2580582, -0.8971336)
 script = ExtResource("3_wnkb1")

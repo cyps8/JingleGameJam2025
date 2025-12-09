@@ -196,7 +196,7 @@ func Intro():
 	elif Globals.currentOpponent == Enemy.EnemyType.SLOTH:
 		stuffToSay = ["You failed to appease \n both myself and the banana republic", "thus you stand here today to fight \n my 3 strongest and mightiest warriors", "If you fail to do so, you shall become \n ONE OF US and join me as one of my Chimpions.."]
 	elif Globals.currentOpponent == Enemy.EnemyType.ELEPHANT:
-		stuffToSay = ["What?! How could you? \n He was one of my finest Chimpions!", "He called in sick to be here \n and you just knocked him out!", "Nevermind, I’ll send someone out here \n who aught to knock your socks off…", "literally, \n he has been known to do that"]
+		stuffToSay = ["What?! How could you? \n He was one of my finest Chimpions!", "He called in sick to be here \n and you just knocked him out!", "Nevermind, I’ll send someone out here \n who ought to knock your socks off…", "literally, \n he has been known to do that"]
 	elif Globals.currentOpponent == Enemy.EnemyType.CHEETAH:
 		stuffToSay = ["OOGH AGH! You’ve done it again! \n Again? Grrr… ", "I didn’t expect you to be so strong", "That’s it", "Time to send out a real Chimpion, \n one of my strongest Warriors.."]
 	introTween.tween_callback(func(): EmperorTalk())
@@ -211,6 +211,11 @@ func Win():
 	winTween.tween_callback(func(): EmperorTalk())
 
 func FinishIntro():
+	if Globals.currentOpponent == Enemy.EnemyType.SLOTH:
+		%Tutorial.visible = true
+		var tutorialTween: Tween = create_tween()
+		tutorialTween.tween_interval(10.0)
+		tutorialTween.tween_callback(func(): %Tutorial.visible = false)
 	var introTween: Tween = create_tween()
 	introTween.tween_property(self, "position", Vector3(0, 1.5, 1.243), 1.6)
 	introTween.tween_callback(func(): EndIntro())
@@ -329,6 +334,7 @@ func _process(_dt):
 	if stamCur < 0:
 		stamCur = 0
 		outOfStam = true
+		SFXPlayer.ins.PlaySound(12, SFXPlayer.SoundType.SFX, 10.0)
 		stamBar.modulate = Color(0.5, 0.5, 1.0)
 
 	stamBar.value = stamCur
@@ -351,6 +357,7 @@ func Bite():
 	biteTween.tween_property(lowerTeeth, "modulate:a", 1.0, 0.4)
 	biteTween.parallel()
 	biteTween.tween_property(upperTeeth, "modulate:a", 1.0, 0.4)
+	biteTween.tween_callback(func(): SFXPlayer.ins.PlaySound(10, SFXPlayer.SoundType.SFX))
 	biteTween.tween_callback(func(): Enemy.ins.TakeDamage(biteDamage))
 	biteTween.tween_callback(func(): HealDamage(biteHeal))
 	biteTween.tween_interval(0.2)
@@ -360,6 +367,7 @@ func Bite():
 
 func Screech():
 	screechCd = screechCdMax
+	SFXPlayer.ins.PlaySound(11, SFXPlayer.SoundType.SFX)
 	Enemy.ins.Stunned()
 
 func Beat():
@@ -376,6 +384,7 @@ func Beat():
 	beatTween.tween_property($ArmL, "position:y", $ArmL.position.y - 0.2, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	beatTween.parallel()
 	beatTween.tween_property($ArmR, "position:y", $ArmR.position.y - 0.2, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	beatTween.tween_callback(func(): SFXPlayer.ins.PlaySound(9, SFXPlayer.SoundType.SFX))
 	for i in range(4):
 		beatTween.tween_property($ArmL, "position:y", $ArmL.position.y - 0.2, 0.07).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		beatTween.parallel()

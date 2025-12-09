@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dfn05wll18jk3"
+path="res://.godot/imported/GameOver Bad Ending.ogg-c35227a105f63a812420bda3e03c896f.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Audio/Music/GameOver Bad Ending.ogg"
+dest_files=["res://.godot/imported/GameOver Bad Ending.ogg-c35227a105f63a812420bda3e03c896f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

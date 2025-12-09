@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bumwks6a8fxgk"]
+[gd_scene load_steps=7 format=3 uid="uid://bumwks6a8fxgk"]
 
 [ext_resource type="Script" uid="uid://dmo022vcrtnl3" path="res://Nodes/Scenes/IntroText.gd" id="1_yeh5w"]
 [ext_resource type="Theme" uid="uid://wajogwsuqirr" path="res://Resources/Buttons.tres" id="2_d5r04"]
 [ext_resource type="Script" uid="uid://d88qniwqmnoc" path="res://Nodes/Scenes/Buttons.gd" id="2_yrbp2"]
+[ext_resource type="AudioStream" uid="uid://crpfbpi8px15t" path="res://Assets/Audio/Music/Good ending.ogg" id="4_5ma08"]
 
 [sub_resource type="Gradient" id="Gradient_d5r04"]
 colors = PackedColorArray(0.11018626, 0.17129964, 0.20814848, 1, 0, 0, 0, 1)
@@ -55,3 +56,9 @@ offset_bottom = 829.0
 theme = ExtResource("2_d5r04")
 text = "Next"
 script = ExtResource("2_yrbp2")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_5ma08")
+volume_db = -7.46
+autoplay = true
+bus = &"Music"

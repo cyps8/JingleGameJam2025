@@ -183,7 +183,12 @@ func TakeDamage(val: float):
 	var healthScale: float = healthCur / healthMax[enemyType]
 	healthIcon.scale = Vector3(healthScale * defaultHealthIconScale, healthScale * defaultHealthIconScale, healthScale * defaultHealthIconScale)
 
-	SFXPlayer.ins.PlaySound(randi_range(0, 2), SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
+	if enemyType == EnemyType.SLOTH:
+		SFXPlayer.ins.PlaySound(randi_range(0, 2), SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
+	elif enemyType == EnemyType.ELEPHANT:
+		SFXPlayer.ins.PlaySound(randi_range(13, 14), SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
+	elif enemyType == EnemyType.CHEETAH:
+		SFXPlayer.ins.PlaySound(randi_range(15, 17), SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
 	SFXPlayer.ins.PlaySound(6, SFXPlayer.SoundType.SFX, 0.6, (randf() * 0.2) + 0.9)
 
 func Stunned():
