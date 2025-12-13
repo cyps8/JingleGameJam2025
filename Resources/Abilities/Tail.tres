@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_fb00i")
 name = "Tail"
-description = "[PASSIVE] a tail improves your balance and agility which helps you punch faster and increases max stamina."
+description = "a tail improves your balance and agility which helps you punch faster and increases max stamina."
 icon = ExtResource("1_urmqo")
+abilityType = "[PASSIVE]"
 metadata/_custom_type_script = "uid://cu7rke6bemqoj"

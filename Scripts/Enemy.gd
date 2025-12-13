@@ -79,6 +79,16 @@ func _ready() -> void:
 		$ArmR.position += Vector3(0, 0.2, 0.05)
 		%Dazed.position.y += 0.1
 
+	if Globals.christmasMode:
+		$Sprite/Hat.visible = true
+		healthIcon.position.y += 0.2
+		staminaIcon.position.y += 0.2
+		if enemyType == EnemyType.ELEPHANT || enemyType == EnemyType.ELEPHANTHARD:
+			healthIcon.position.y += 0.3
+			staminaIcon.position.y += 0.3
+	else:
+		$Sprite/Hat.visible = false
+
 	healthCur = healthMax[enemyType]
 	staminaCur = staminaMax
 

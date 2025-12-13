@@ -4,3 +4,4 @@ class_name Ability
 @export var name: String
 @export var description: String
 @export var icon: Texture
+@export var abilityType: String

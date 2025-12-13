@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_u3ew0")
 name = "Muscles"
-description = "[PASSIVE] strong muscles help you deal more damage to your opponents with improved efficiency."
+description = "strong muscles help you deal more damage to your opponents with improved efficiency."
 icon = ExtResource("1_gm6kr")
+abilityType = "[PASSIVE]"
 metadata/_custom_type_script = "uid://cu7rke6bemqoj"

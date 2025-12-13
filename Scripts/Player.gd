@@ -1,5 +1,16 @@
 class_name Player extends Node3D
 
+enum Buffer {
+	PUNCH = 0,
+	BLOCK = 1,
+	BEAT = 2
+}
+
+var bufferL: Buffer = Buffer.PUNCH
+var bufferR: Buffer = Buffer.PUNCH
+var bufferLTime: float = 0
+var bufferRTime: float = 0
+
 var usingL = false
 var usingR = false
 
@@ -73,6 +84,8 @@ var stuffToSay: Array[String]
 var emperorYapping: bool = false
 
 var won: bool = false
+
+var left: bool
 
 func _init():
 	ins = self
@@ -208,6 +221,9 @@ func Win():
 	winTween.tween_callback(func(): LookAtEmperor())
 	winTween.tween_interval(0.5)
 	stuffToSay = ["Mmm, hmph, well I guess what they say is true \n I suppose Cheetahs never DO prosper", "Fine, take your freedom", "but don’t think for a second \n that this means you’re off the hook", "We’ll meet again… \n Now get out of my sight \n before I change my mind", "OOG AGH!"]
+	if !Globals.hardUnlocked && Globals.lossCount == 0:
+		Globals.hardUnlocked = true
+		stuffToSay.append("Oh, also you unlocked HARD MODE \n Good luck, heh")
 	winTween.tween_callback(func(): EmperorTalk())
 
 func FinishIntro():
@@ -224,8 +240,10 @@ func EndIntro():
 	intro = false
 	Enemy.ins.intro = false
 
-func _process(_dt):
+func SetLeft(val: bool):
+	left = val
 
+func _process(_dt):
 	if (intro || won) && emperorYapping && Input.is_action_just_pressed("punch"):
 		EmperorTalk()
 
@@ -235,6 +253,29 @@ func _process(_dt):
 		Enemy.ins.TakeDamage(9999)
 
 	recoverycd -= _dt
+
+	bufferLTime -= _dt
+	bufferRTime -= _dt
+
+	if left && usingL:
+		if Input.is_action_just_pressed("punch"):
+			bufferL = Buffer.PUNCH
+			bufferLTime = 0.2
+		elif Input.is_action_just_pressed("block"):
+			bufferL = Buffer.BLOCK
+			bufferLTime = 0.2
+	elif !left && usingR:
+		if Input.is_action_just_pressed("punch"):
+			bufferR = Buffer.PUNCH
+			bufferRTime = 0.2
+		elif Input.is_action_just_pressed("block"):
+			bufferR = Buffer.BLOCK
+			bufferRTime = 0.2
+	if (usingL || usingR) && Input.is_action_just_pressed("beat"):
+		bufferL = Buffer.BEAT
+		bufferR = Buffer.BEAT
+		bufferLTime = 0.2
+		bufferRTime = 0.2
 
 	if enhancedStamina > 0:
 		stamCur += recovery * _dt * 3
@@ -265,11 +306,11 @@ func _process(_dt):
 
 	beatCd -= _dt
 	beatAbility.value = (beatCdMax - beatCd) / beatCdMax
-	if Input.is_action_just_pressed("beat") && !outOfStam && beatCd < 0 && Globals.beatUnlocked && !usingL && !usingR && !intro && !won:
+	if (Input.is_action_just_pressed("beat") || (bufferL == Buffer.BEAT && bufferR == Buffer.BEAT && bufferLTime > 0)) && !outOfStam && beatCd < 0 && Globals.beatUnlocked && !usingL && !usingR && !intro && !won:
 		Beat()
 
 	var mousePos: Vector2 = get_viewport().get_mouse_position()
-	var left: bool = mousePos.x < get_viewport().size.x / 2
+	#var left: bool = mousePos.x < get_viewport().size.x / 2
 
 	if left != lastSide:
 		SFXPlayer.ins.PlaySound(7, SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.4) + 0.8)
@@ -285,9 +326,9 @@ func _process(_dt):
 			$ArmR.position = armRDefPos + Vector3(0, 0.1, 0)
 		if !usingL:
 			$ArmL.position = armLDefPos
-		
+
 	if left && !usingL:
-		if Input.is_action_just_pressed("punch") && !outOfStam && !dead && !intro && !won:
+		if (Input.is_action_just_pressed("punch") || (bufferL == Buffer.PUNCH && bufferLTime > 0)) && !outOfStam && !dead && !intro && !won:
 			var punchTween: Tween = create_tween()
 			punchTween.tween_property($ArmL, "position:z", $ArmL.position.z - 1, 1/punchSpeed).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 			punchTween.parallel()
@@ -299,7 +340,7 @@ func _process(_dt):
 			recoverycd = 0.35
 			usingL = true
 			$ArmL.texture = gloves[1]
-		elif Input.is_action_just_pressed("block") && !outOfStam && !dead && !intro && !won:
+		elif (Input.is_action_just_pressed("block") || (bufferL == Buffer.BLOCK && bufferLTime > 0)) && !outOfStam && !dead && !intro && !won:
 			blockingL = true
 			$ArmL.position += Vector3(0.3, 0.5, 0)
 			var blockTween: Tween = create_tween()
@@ -309,7 +350,7 @@ func _process(_dt):
 			recoverycd = 0.35
 			usingL = true
 	elif !left && !usingR:
-		if Input.is_action_just_pressed("punch") && !outOfStam && !dead && !intro && !won:
+		if (Input.is_action_just_pressed("punch") || (bufferR == Buffer.PUNCH && bufferRTime > 0)) && !outOfStam && !dead && !intro && !won:
 			var punchTween: Tween = create_tween()
 			punchTween.tween_property($ArmR, "position:z", $ArmR.position.z - 1, 1/punchSpeed).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 			punchTween.parallel()
@@ -321,7 +362,7 @@ func _process(_dt):
 			recoverycd = 0.35
 			usingR = true
 			$ArmR.texture = gloves[1]
-		elif Input.is_action_just_pressed("block") && !outOfStam && !dead && !intro && !won:
+		elif (Input.is_action_just_pressed("block")) || (bufferR == Buffer.BLOCK && bufferRTime > 0) && !outOfStam && !dead && !intro && !won:
 			blockingR = true
 			$ArmR.position += Vector3(-0.3, 0.5, 0)
 			var blockTween: Tween = create_tween()

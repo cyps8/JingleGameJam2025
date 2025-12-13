@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_e1dg8")
 name = "Bite"
-description = "[ABILITY] bite your opponent with your sharp teeth and stealing health."
+description = "bite your opponent with your sharp teeth and stealing health."
 icon = ExtResource("1_avb4e")
+abilityType = "[ABILITY]"
 metadata/_custom_type_script = "uid://cu7rke6bemqoj"

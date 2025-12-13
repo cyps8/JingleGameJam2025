@@ -33,7 +33,7 @@ func _ready():
 func start_typing_sentence():
 	char_index = 0
 	if sentence_index > 0:
-		$RichTextLabel.text += "\n"
+		$RichTextLabel.text += "\n\n"
 	typing()
 
 

@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_r65rb")
 name = "Screech"
-description = "[ABILITY] let out a loud screech which will stun your opponent for a short duration."
+description = "let out a loud screech which will stun your opponent for a short duration."
 icon = ExtResource("1_xogev")
+abilityType = "[ABILITY]"
 metadata/_custom_type_script = "uid://cu7rke6bemqoj"

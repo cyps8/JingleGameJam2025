@@ -39,6 +39,10 @@ func _GetAbilities() -> void:
 	$Ability1/Description1.text = ability1.description
 	$Ability2/Description2.text = ability2.description
 	$Ability3/Description3.text = ability3.description
+
+	$Ability1/AbilityType1.text = ability1.abilityType
+	$Ability2/AbilityType2.text = ability2.abilityType
+	$Ability3/AbilityType3.text = ability3.abilityType
 	
 	$Ability1/TextureRect.texture = ability1.icon
 	$Ability2/TextureRect.texture = ability2.icon

@@ -16,3 +16,5 @@ var justUpgraded: bool = false
 
 var hardMode: bool = false
 var hardUnlocked: bool = false
+
+var christmasMode: bool = false

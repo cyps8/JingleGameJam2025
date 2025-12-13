@@ -23,7 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://1xx6gwokrmcv" path="res://Assets/Audio/SFX/Player/SFX_Ability_Chest.wav" id="17_5ced6"]
 [ext_resource type="AudioStream" uid="uid://chftbxda7i2ua" path="res://Assets/Audio/SFX/Player/SFX_Ability_Chomp.wav" id="18_ykorw"]
 [ext_resource type="AudioStream" uid="uid://bgxqwjo013nny" path="res://Assets/Audio/SFX/Player/SFX_Ability_Scream.wav" id="19_o00sb"]
-[ext_resource type="Script" path="res://Nodes/Scenes/Credits.gd" id="20_jy3bs"]
+[ext_resource type="Script" uid="uid://sini0j2yfh2w" path="res://Nodes/Scenes/Credits.gd" id="20_jy3bs"]
 [ext_resource type="AudioStream" uid="uid://cm0qr07dhp8kj" path="res://Assets/Audio/SFX/Player/SFX_Player_NoStamina.wav" id="20_ykorw"]
 [ext_resource type="FontFile" uid="uid://c3r3mjkx1w3lf" path="res://Assets/Fonts/Gambado Sans Forte.ttf" id="21_4d1fn"]
 [ext_resource type="AudioStream" uid="uid://b83vbp24i7une" path="res://Assets/Audio/SFX/Damage/Enemy/Elephant/SFX_Elephant_Damage_1.wav" id="21_uothk"]
@@ -35,6 +35,7 @@
 [node name="Root" type="Node"]
 process_mode = 3
 script = ExtResource("1_uewl6")
+skipMenu = true
 gameScene = ExtResource("2_hheyw")
 menuScene = ExtResource("2_62qmo")
 introScene = ExtResource("4_1yy5m")
@@ -67,19 +68,19 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -197.0
-offset_top = -240.0
+offset_top = -300.0
 offset_right = 205.0
-offset_bottom = 249.0
+offset_bottom = 305.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("16_04r4e")
 
 [node name="Button" type="Button" parent="OptionsMenu/c/Panel"]
 layout_mode = 0
-offset_left = 92.0
-offset_top = 383.0
-offset_right = 303.0
-offset_bottom = 466.0
+offset_left = 99.0
+offset_top = 485.0
+offset_right = 310.0
+offset_bottom = 568.0
 theme = ExtResource("16_04r4e")
 text = "Return
 "
@@ -162,8 +163,20 @@ theme_override_constants/outline_size = 15
 theme_override_font_sizes/font_size = 30
 text = "SFX Volume"
 
+[node name="ChristmasMode" type="CheckButton" parent="OptionsMenu/c/Panel"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 382.0
+offset_right = 352.0
+offset_bottom = 458.0
+focus_mode = 0
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 30
+text = "Christmas Mode"
+
 [node name="CreditsMenu" type="CanvasLayer" parent="."]
 layer = 90
+visible = false
 script = ExtResource("20_jy3bs")
 metadata/_custom_type_script = "uid://bf5lc31pqguc1"
 
@@ -400,6 +413,7 @@ theme = ExtResource("16_04r4e")
 text = "LOADING..."
 
 [connection signal="pressed" from="OptionsMenu/c/Panel/Button" to="OptionsMenu" method="BackPressed"]
+[connection signal="toggled" from="OptionsMenu/c/Panel/ChristmasMode" to="OptionsMenu" method="ChristmasToggled"]
 [connection signal="pressed" from="CreditsMenu/c/Panel/Button" to="CreditsMenu" method="BackPressed"]
 [connection signal="meta_clicked" from="CreditsMenu/c/Panel/Cypri" to="." method="_on_cypri_meta_clicked"]
 [connection signal="meta_clicked" from="CreditsMenu/c/Panel/Chloe" to="." method="_on_chloe_meta_clicked"]

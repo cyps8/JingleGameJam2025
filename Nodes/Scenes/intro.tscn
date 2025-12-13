@@ -37,12 +37,16 @@ offset_right = 1052.0
 offset_bottom = 799.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/normal_font_size = 48
+theme_override_font_sizes/normal_font_size = 40
 theme_override_font_sizes/bold_font_size = 48
 theme_override_font_sizes/bold_italics_font_size = 48
 theme_override_font_sizes/italics_font_size = 48
 theme_override_font_sizes/mono_font_size = 48
-text = "You awake in a dark and musty room, captive in shackles and chains. Light pours in through a metal cage to the outside where you can hear the cheering and hollering of a large audience. You suddenly remember that after you failed to please the Banana Republic last year, you were sentenced to trial by combat..."
+text = "You awake in a dark and musty room, captive in shackles and chains. 
+          
+Light pours in through a metal cage to the outside where you can hear the cheering and hollering of a large audience.
+          
+You suddenly remember that after you failed to please the Banana Republic last year, you were sentenced to trial by combat..."
 scroll_active = false
 autowrap_mode = 2
 

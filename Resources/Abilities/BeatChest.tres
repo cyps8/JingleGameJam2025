@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_lpx4w")
 name = "Beat Chest"
-description = "[ABILITY] beat your chest to give you enhanced stamina for a short duration."
+description = "beat your chest to give you enhanced stamina for a short duration."
 icon = ExtResource("1_yk2jr")
+abilityType = "[ABILITY]"
 metadata/_custom_type_script = "uid://cu7rke6bemqoj"

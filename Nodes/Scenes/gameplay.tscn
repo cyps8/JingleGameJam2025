@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://c6hrxahg2vy6o"]
+[gd_scene load_steps=55 format=3 uid="uid://c6hrxahg2vy6o"]
 
 [ext_resource type="PackedScene" uid="uid://7cuuqdrdbpn6" path="res://node_3d.tscn" id="1_5aubf"]
 [ext_resource type="Script" uid="uid://d2iv34ayqfa3i" path="res://Scripts/Player.gd" id="1_84d6f"]
@@ -38,6 +38,27 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgqwo"]
 albedo_texture = ExtResource("13_y66qq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y24bu"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+texture_filter = 0
+disable_receive_shadows = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_fwyn7"]
+material = SubResource("StandardMaterial3D_y24bu")
+radius = 0.05
+height = 0.1
+radial_segments = 4
+rings = 2
+
+[sub_resource type="Curve" id="Curve_y24bu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.86046517, 0.9887641), 0.049553435, 0.049553435, 0, 0, Vector2(1, 0), -19.970098, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84d6f"]
 bg_color = Color(0.09620472, 0.09620475, 0.09620469, 1)
@@ -481,6 +502,23 @@ texture = ExtResource("6_8xs62")
 transform = Transform3D(-4.1257417e-06, 94.386, 9.938869e-06, -94.386, -4.125743e-06, 1.1251687e-05, 1.1251688e-05, -9.938868e-06, 94.386, -0.07134473, 5.6432147, -9.173917)
 material_override = SubResource("StandardMaterial3D_tgqwo")
 
+[node name="Snow" type="CPUParticles3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.79974, -3.2079701)
+cast_shadow = 0
+amount = 1000
+lifetime = 4.0
+preprocess = 5.0
+mesh = SubResource("SphereMesh_fwyn7")
+emission_shape = 3
+emission_box_extents = Vector3(10, 1, 10)
+direction = Vector3(0, -1, 0)
+spread = 2.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 4.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_y24bu")
+
 [node name="Player" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9325843, 3.3429427)
 script = ExtResource("1_84d6f")
@@ -693,6 +731,24 @@ grow_vertical = 0
 scale = Vector2(0.018, 0.018)
 texture = ExtResource("18_ppefh")
 
+[node name="Left" type="Control" parent="Player/HUD/c"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -600.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Right" type="Control" parent="Player/HUD/c"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Teeth" type="Node3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.825525)
 
@@ -759,7 +815,7 @@ cast_shadow = 3
 mesh = SubResource("CapsuleMesh_5aubf")
 
 [node name="Hat" type="Sprite3D" parent="Enemy/Sprite"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 9.063258, 0.6238141)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 9.063, 1.2)
 modulate = Color(1.0039216, 0.9999855, 0.9999855, 1)
 texture = ExtResource("33_y24bu")
 
@@ -788,5 +844,8 @@ skeleton = NodePath("../../Sprite")
 stream = ExtResource("12_csnm0")
 autoplay = true
 bus = &"SFX"
+
+[connection signal="mouse_entered" from="Player/HUD/c/Left" to="Player" method="SetLeft" binds= [true]]
+[connection signal="mouse_entered" from="Player/HUD/c/Right" to="Player" method="SetLeft" binds= [false]]
 
 [editable path="World/Tarp"]

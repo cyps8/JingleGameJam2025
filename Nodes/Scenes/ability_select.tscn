@@ -98,6 +98,25 @@ text = "Ability Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="AbilityType1" type="Label" parent="Ability1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.407
+anchor_top = 0.147
+anchor_right = 0.577
+anchor_bottom = 0.179
+offset_left = -101.75
+offset_top = 156.5
+offset_right = 105.75
+offset_bottom = 240.5
+mouse_filter = 1
+theme = ExtResource("9_towo8")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+text = "Ability Type"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Description1" type="RichTextLabel" parent="Ability1"]
 layout_mode = 0
 offset_top = 300.0
@@ -136,6 +155,19 @@ theme = ExtResource("9_towo8")
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 32
 text = "Ability Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AbilityType2" type="Label" parent="Ability2"]
+layout_mode = 0
+offset_top = 230.0
+offset_right = 250.00002
+offset_bottom = 330.0
+mouse_filter = 1
+theme = ExtResource("9_towo8")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+text = "Ability Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -178,6 +210,20 @@ theme = ExtResource("9_towo8")
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 32
 text = "Ability Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AbilityType3" type="Label" parent="Ability3"]
+layout_mode = 0
+offset_left = 6.154
+offset_top = 230.0
+offset_right = 256.154
+offset_bottom = 330.0
+mouse_filter = 1
+theme = ExtResource("9_towo8")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+text = "Ability Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 

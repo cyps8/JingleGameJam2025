@@ -1,7 +1,8 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://wajogwsuqirr"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://wajogwsuqirr"]
 
 [ext_resource type="FontFile" uid="uid://c3r3mjkx1w3lf" path="res://Assets/Fonts/Gambado Sans Forte.ttf" id="1_n2ky4"]
 [ext_resource type="Texture2D" uid="uid://mfuhpyfsl8kw" path="res://Assets/Art/Sprites/UI/banana.png" id="2_oaate"]
+[ext_resource type="Texture2D" uid="uid://cdrjmpevqff0n" path="res://Assets/Art/Sprites/UI/emptybanana.png" id="3_kyh5u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2ky4"]
 bg_color = Color(0.10747976, 0.10747973, 0.10747973, 1)
@@ -111,6 +112,15 @@ Button/styles/disabled = SubResource("StyleBoxFlat_n2ky4")
 Button/styles/hover = SubResource("StyleBoxFlat_kyh5u")
 Button/styles/normal = SubResource("StyleBoxFlat_oaate")
 Button/styles/pressed = SubResource("StyleBoxFlat_8my1v")
+CheckButton/colors/button_checked_color = Color(1, 1, 1, 1)
+CheckButton/colors/button_unchecked_color = Color(1, 1, 1, 1)
+CheckButton/colors/font_focus_color = Color(0.9882353, 0.50980395, 0.15686275, 1)
+CheckButton/colors/font_hover_pressed_color = Color(0.9882353, 0.50980395, 0.15686275, 1)
+CheckButton/colors/font_pressed_color = Color(0.94509804, 0.5019608, 0.25882354, 1)
+CheckButton/icons/checked = ExtResource("2_oaate")
+CheckButton/icons/unchecked = ExtResource("3_kyh5u")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxFlat_8my1v")
+CheckButton/styles/pressed = SubResource("StyleBoxFlat_8my1v")
 HSlider/icons/grabber = ExtResource("2_oaate")
 HSlider/icons/grabber_highlight = ExtResource("2_oaate")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_lqslk")
