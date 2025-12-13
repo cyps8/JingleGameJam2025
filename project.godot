@@ -24,7 +24,6 @@ Globals="*res://Globals.gd"
 window/size/viewport_width=1200
 window/size/viewport_height=900
 window/stretch/mode="viewport"
-window/stretch/aspect="keep_height"
 
 [file_customization]
 

@@ -1,6 +1,6 @@
 class_name Enemy extends Node3D
 
-enum EnemyType { SLOTH = 0, ELEPHANT = 1, CHEETAH = 2 }
+enum EnemyType { SLOTH = 0, ELEPHANT = 1, CHEETAH = 2, SLOTHHARD = 3, ELEPHANTHARD = 4, CHEETAHHARD = 5 }
 
 var enemyType: EnemyType
 
@@ -8,15 +8,15 @@ var enemyType: EnemyType
 @export var armTexture: Array[Texture]
 @export var punchTexture: Array[Texture]
 
-var healthMax: Array[float] = ([150, 280, 220])
+var healthMax: Array[float] = [150, 280, 220, 180, 330, 250]
 var healthCur: float = 150
 
-var punchFrequency: Array[float] = ([2.0, 1.5, 0.9])
+var punchFrequency: Array[float] = [2.0, 1.5, 0.9, 1.4, 1.1, 0.8]
 var punchCD: float = 1.5
-var punchSpeed: Array[float] = ([0.8, 0.7, 0.55])
+var punchSpeed: Array[float] = [0.8, 0.7, 0.55, 0.7, 0.6, 0.4]
 
-var punchDamage: Array[float] = ([13, 25, 20])
-var punchCost: Array[float] = ([25, 12.5, 20])
+var punchDamage: Array[float] = [13, 25, 20, 20, 35, 25]
+var punchCost: Array[float] = [25, 12.5, 20, 25, 10, 25]
 var left: bool = false
 
 var camBob: float
@@ -26,7 +26,7 @@ var spriteDefPos: Vector3
 
 var staminaMax: float = 100
 var staminaCur: float = 100
-var stamRecovery: Array[float] = ([40, 16, 80])
+var stamRecovery: Array[float] = [40, 16, 80, 60, 25, 120]
 
 var outOfStam: bool = false
 
@@ -51,12 +51,14 @@ func _init() -> void:
 
 func _ready() -> void:
 	enemyType = Globals.currentOpponent
+	if Globals.hardMode:
+		enemyType += 3
 
 	$Sprite.texture = enemyTexture[enemyType]
 	$ArmL.texture = armTexture[enemyType]
 	$ArmR.texture = armTexture[enemyType]
 
-	if enemyType == EnemyType.ELEPHANT:
+	if enemyType == EnemyType.ELEPHANT || enemyType == EnemyType.ELEPHANTHARD:
 		healthIcon.position.y += 0.3
 		staminaIcon.position.y += 0.3
 		%Dazed.position.y += 0.3
@@ -69,7 +71,7 @@ func _ready() -> void:
 		$ArmL.scale = Vector3(s, s, s)
 		$ArmR.scale = Vector3(s, s, s)
 
-	if enemyType == EnemyType.CHEETAH:
+	if enemyType == EnemyType.CHEETAH || enemyType == EnemyType.CHEETAHHARD:
 		healthIcon.position.y += 0.1
 		staminaIcon.position.y += 0.1
 		$Sprite.position.y += 0.1
@@ -99,6 +101,8 @@ func _process(_dt: float):
 
 	if stunned > 0:
 		stunned -= _dt
+		if Globals.hardMode:
+			stunned -= _dt * 0.5
 		if stunned <= 0:
 			%Dazed.visible = false
 		return
@@ -183,11 +187,11 @@ func TakeDamage(val: float):
 	var healthScale: float = healthCur / healthMax[enemyType]
 	healthIcon.scale = Vector3(healthScale * defaultHealthIconScale, healthScale * defaultHealthIconScale, healthScale * defaultHealthIconScale)
 
-	if enemyType == EnemyType.SLOTH:
+	if enemyType == EnemyType.SLOTH || enemyType == EnemyType.SLOTHHARD:
 		SFXPlayer.ins.PlaySound(randi_range(0, 2), SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
-	elif enemyType == EnemyType.ELEPHANT:
+	elif enemyType == EnemyType.ELEPHANT || enemyType == EnemyType.ELEPHANTHARD:
 		SFXPlayer.ins.PlaySound(randi_range(13, 14), SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
-	elif enemyType == EnemyType.CHEETAH:
+	elif enemyType == EnemyType.CHEETAH || enemyType == EnemyType.CHEETAHHARD:
 		SFXPlayer.ins.PlaySound(randi_range(15, 17), SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
 	SFXPlayer.ins.PlaySound(6, SFXPlayer.SoundType.SFX, 0.6, (randf() * 0.2) + 0.9)
 
@@ -208,11 +212,11 @@ func Die():
 	dyingTween.tween_callback(func(): DeathOver())
 
 func DeathOver():
-	if enemyType == EnemyType.SLOTH:
+	if enemyType == EnemyType.SLOTH || enemyType == EnemyType.SLOTHHARD:
 		Globals.currentOpponent = Enemy.EnemyType.ELEPHANT
 		Root.ins.ChangeScene(Root.Scene.GAME)
-	elif enemyType == EnemyType.ELEPHANT:
+	elif enemyType == EnemyType.ELEPHANT || enemyType == EnemyType.ELEPHANTHARD:
 		Globals.currentOpponent = Enemy.EnemyType.CHEETAH
 		Root.ins.ChangeScene(Root.Scene.GAME)
-	elif enemyType == EnemyType.CHEETAH:
+	elif enemyType == EnemyType.CHEETAH || enemyType == EnemyType.CHEETAHHARD:
 		Player.ins.Win()

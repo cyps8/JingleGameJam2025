@@ -13,3 +13,6 @@ var muscleUnlocked: bool = false
 var tailUnlocked: bool = false
 
 var justUpgraded: bool = false
+
+var hardMode: bool = false
+var hardUnlocked: bool = false

@@ -9,10 +9,12 @@ var sentence_index := 0
 var char_index := 0
 
 @onready var next_button := $Button
+@onready var hard_button := $Button2
 
 func _ready():
 	$RichTextLabel.text = ""
 	next_button.visible = false
+	hard_button.visible = false
 	
 	# this is probably overcomplicating it 
 	var regex = RegEx.new()
@@ -25,6 +27,7 @@ func _ready():
 	
 	start_typing_sentence()
 	next_button.pressed.connect(_on_next_pressed)
+	hard_button.pressed.connect(Hard_Mode_Pressed)
 
 
 func start_typing_sentence():
@@ -64,6 +67,12 @@ func typing():
 
 func finish_intro():
 	next_button.visible = true
+	if Globals.hardUnlocked:
+		hard_button.visible = true
 	
 func _on_next_pressed():
 	Root.ins.ChangeScene(Root.Scene.GAME)
+
+func Hard_Mode_Pressed():
+	Globals.hardMode = true
+	_on_next_pressed()

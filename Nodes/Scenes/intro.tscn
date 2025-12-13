@@ -33,7 +33,7 @@ texture = SubResource("GradientTexture2D_yrbp2")
 layout_mode = 0
 offset_left = 118.0
 offset_top = 92.0
-offset_right = 1040.0
+offset_right = 1052.0
 offset_bottom = 799.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
@@ -47,14 +47,23 @@ scroll_active = false
 autowrap_mode = 2
 
 [node name="Button" type="Button" parent="."]
-visible = false
 layout_mode = 0
-offset_left = 883.0
-offset_top = 699.0
-offset_right = 1071.7097
-offset_bottom = 829.0
+offset_left = 887.0
+offset_top = 711.0
+offset_right = 1075.7097
+offset_bottom = 841.0
 theme = ExtResource("2_d5r04")
 text = "Next"
+script = ExtResource("2_yrbp2")
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 541.0
+offset_top = 711.0
+offset_right = 871.0
+offset_bottom = 841.0
+theme = ExtResource("2_d5r04")
+text = "Hard Mode"
 script = ExtResource("2_yrbp2")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

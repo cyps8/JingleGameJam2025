@@ -727,9 +727,9 @@ outline_size = 10
 [node name="Enemy" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2580582, -0.8971336)
 script = ExtResource("3_wnkb1")
-enemyTexture = Array[Texture]([ExtResource("8_ppefh"), ExtResource("9_xucbb"), ExtResource("10_0tdnq")])
-armTexture = Array[Texture]([ExtResource("11_qay7p"), ExtResource("12_7o6j1"), ExtResource("13_mld5c")])
-punchTexture = Array[Texture]([ExtResource("14_22ler"), ExtResource("15_8xs62"), ExtResource("16_jk06t")])
+enemyTexture = Array[Texture]([ExtResource("8_ppefh"), ExtResource("9_xucbb"), ExtResource("10_0tdnq"), ExtResource("8_ppefh"), ExtResource("9_xucbb"), ExtResource("10_0tdnq")])
+armTexture = Array[Texture]([ExtResource("11_qay7p"), ExtResource("12_7o6j1"), ExtResource("13_mld5c"), ExtResource("11_qay7p"), ExtResource("12_7o6j1"), ExtResource("13_mld5c")])
+punchTexture = Array[Texture]([ExtResource("14_22ler"), ExtResource("15_8xs62"), ExtResource("16_jk06t"), ExtResource("14_22ler"), ExtResource("15_8xs62"), ExtResource("16_jk06t")])
 
 [node name="Health" type="Sprite3D" parent="Enemy"]
 unique_name_in_owner = true
