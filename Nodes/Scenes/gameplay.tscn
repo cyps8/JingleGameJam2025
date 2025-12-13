@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://c6hrxahg2vy6o"]
+[gd_scene load_steps=52 format=3 uid="uid://c6hrxahg2vy6o"]
 
 [ext_resource type="PackedScene" uid="uid://7cuuqdrdbpn6" path="res://node_3d.tscn" id="1_5aubf"]
 [ext_resource type="Script" uid="uid://d2iv34ayqfa3i" path="res://Scripts/Player.gd" id="1_84d6f"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://ba2y4ljwumpon" path="res://Assets/Art/Sprites/UI/health_icon.png" id="17_ppefh"]
 [ext_resource type="Texture2D" uid="uid://bvas31pox7vrk" path="res://Assets/Art/Sprites/UI/energyy_icon.png" id="18_ppefh"]
 [ext_resource type="Texture2D" uid="uid://c8gy4mvk1mpwf" path="res://Assets/Art/Sprites/UI/dazed.png" id="19_xucbb"]
+[ext_resource type="Texture2D" uid="uid://dowl6tft42qa0" path="res://Assets/Art/Sprites/SantaHat.png" id="33_y24bu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgqwo"]
 albedo_texture = ExtResource("13_y66qq")
@@ -756,6 +757,11 @@ texture = ExtResource("4_dmect")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.841537, 0)
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_5aubf")
+
+[node name="Hat" type="Sprite3D" parent="Enemy/Sprite"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 9.063258, 0.6238141)
+modulate = Color(1.0039216, 0.9999855, 0.9999855, 1)
+texture = ExtResource("33_y24bu")
 
 [node name="ArmR" type="Sprite3D" parent="Enemy"]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0.6089966, -0.06779206, 0.14576149)
