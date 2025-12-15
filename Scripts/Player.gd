@@ -31,7 +31,7 @@ var healthMax: float = 100
 var healthCur: float = 100
 
 var punchCost: float = 30
-var blockCost: float = 13
+var blockCost: float = 11
 
 var recovery: float = 33
 var recoverycd: float = 0
@@ -48,7 +48,7 @@ var biteCd: float = 0
 var biteCdMax: float = 6
 var biteDamage: float = 20
 var biteHeal: float = 15
-var biteCost: float = 30
+var biteCost: float = 20
 
 var screechCd: float = 0
 var screechCdMax: float = 12
@@ -165,7 +165,7 @@ func LookAwayEmperor():
 		Root.ins.ChangeScene(Root.Scene.MAINMENU)
 
 func CamStuff(_dt: float, mousePos: Vector2):
-	var lookOffset = Vector2(mousePos.x / get_viewport().size.x, mousePos.y / get_viewport().size.y)
+	var lookOffset = Vector2(mousePos.x / get_viewport().get_visible_rect().size.x, mousePos.y / get_viewport().get_visible_rect().size.y)
 	lookOffset -= Vector2(.5, .5)
 	cam.rotation.y = camForward.y - (lookOffset.x * 0.3)
 	cam.rotation.x = camForward.x - (lookOffset.y * 0.3)
@@ -301,7 +301,7 @@ func _process(_dt):
 
 	screechCd -= _dt
 	screechAbility.value = (screechCdMax - screechCd) / screechCdMax
-	if Input.is_action_just_pressed("screech") && !outOfStam && screechCd < 0 && Globals.screechUnlocked && !intro && !won:
+	if Input.is_action_just_pressed("screech") && screechCd < 0 && Globals.screechUnlocked && !intro && !won:
 		Screech()
 
 	beatCd -= _dt
@@ -312,11 +312,16 @@ func _process(_dt):
 	var mousePos: Vector2 = get_viewport().get_mouse_position()
 	#var left: bool = mousePos.x < get_viewport().size.x / 2
 
-	if left != lastSide:
+	if (left != lastSide) && !dead && !outOfStam:
 		SFXPlayer.ins.PlaySound(7, SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.4) + 0.8)
 		lastSide = left
 
-	if left:
+	if outOfStam:
+		if !usingL:
+			$ArmL.position = armLDefPos + Vector3(0.2, -0.2, 0.1)
+		if !usingR:
+			$ArmR.position = armRDefPos + Vector3(-0.2, -0.2, 0.1)
+	elif left:
 		if !usingL:
 			$ArmL.position = armLDefPos + Vector3(0, 0.1, 0)
 		if !usingR:
@@ -489,7 +494,7 @@ func HealDamage(val):
 
 func Block():
 	if Globals.furUnlocked:
-		stamCur += 5
+		stamCur += 4
 	blockBorder.modulate.a = 1.0
 	var blockFlash: Tween = create_tween()
 	blockFlash.tween_property(blockBorder, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)

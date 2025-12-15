@@ -11,13 +11,14 @@ var enemyType: EnemyType
 var healthMax: Array[float] = [150, 280, 220, 180, 330, 250]
 var healthCur: float = 150
 
-var punchFrequency: Array[float] = [2.0, 1.5, 0.9, 1.4, 1.1, 0.8]
+var punchFrequency: Array[float] = [2.0, 1.5, 0.9, 1.3, 1.1, 0.85]
 var punchCD: float = 1.5
-var punchSpeed: Array[float] = [0.8, 0.7, 0.55, 0.7, 0.6, 0.4]
+var punchSpeed: Array[float] = [0.8, 0.7, 0.55, 0.75, 0.6, 0.55]
 
 var punchDamage: Array[float] = [13, 25, 20, 20, 35, 25]
-var punchCost: Array[float] = [25, 12.5, 20, 25, 10, 25]
+var punchCost: Array[float] = [25, 12.5, 20, 25, 10, 20]
 var left: bool = false
+var both: bool = false
 
 var camBob: float
 var camBobTween: Tween
@@ -26,7 +27,7 @@ var spriteDefPos: Vector3
 
 var staminaMax: float = 100
 var staminaCur: float = 100
-var stamRecovery: Array[float] = [40, 16, 80, 60, 25, 120]
+var stamRecovery: Array[float] = [40, 16, 80, 60, 25, 85]
 
 var outOfStam: bool = false
 
@@ -136,15 +137,34 @@ func Punch():
 	if Player.ins.dead  || dead:
 		return
 	var arm: Sprite3D
+	var otherArm: Sprite3D
 	var punchOffset: float = 0
-	if randf() < 0.5:
-		arm = $ArmL
-		left = true
-		punchOffset = 0.1
+	var otherPunchOffset: float = 0
+	if !Globals.hardMode:
+		if randf() < 0.5:
+			arm = $ArmL
+			left = true
+			punchOffset = 0.1
+		else:
+			arm = $ArmR
+			left = false
+			punchOffset = -0.1
 	else:
-		arm = $ArmR
-		left = false
-		punchOffset = -0.1
+		var ran: float = randf()
+		if ran < 0.4:
+			arm = $ArmL
+			left = true
+			punchOffset = 0.1
+		elif ran < 0.8:
+			arm = $ArmR
+			left = false
+			punchOffset = -0.1
+		else:
+			both = true
+			arm = $ArmL
+			otherArm = $ArmR
+			punchOffset = 0.1
+			otherPunchOffset = -0.1
 
 	arm.texture = punchTexture[enemyType]
 	var armDefPos: Vector3 = arm.position
@@ -156,18 +176,42 @@ func Punch():
 	punchTween.tween_property(arm, "position", armDefPos, 0.15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	punchTween.tween_callback(func(): arm.texture = armTexture[enemyType])
 
+	if both:
+		otherArm.texture = punchTexture[enemyType]
+		var otherArmDefPos: Vector3 = otherArm.position
+		otherArm.position += Vector3(0, 0.2, 0)
+
+		var otherPunchTween: Tween = create_tween()
+		otherPunchTween.tween_property(otherArm, "position", otherArm.position + Vector3(otherPunchOffset,0.1,1.0), punchSpeed[enemyType]).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+		otherPunchTween.tween_property(otherArm, "position", otherArmDefPos, 0.15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		otherPunchTween.tween_callback(func(): otherArm.texture = armTexture[enemyType])
+
+func PlayerBlock():
+	if lastBlock == 0:
+		lastBlock = 1
+	else: 
+		lastBlock = 0
+	SFXPlayer.ins.PlaySound(4 + lastBlock, SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
+	Player.ins.Block()
+
 func TryDamage():
-	if left && !Player.ins.blockingL:
-		Player.ins.TakeDamage(punchDamage[enemyType])
-	elif !left && !Player.ins.blockingR:
-		Player.ins.TakeDamage(punchDamage[enemyType])
+	if !both:
+		if left && !Player.ins.blockingL:
+			Player.ins.TakeDamage(punchDamage[enemyType])
+		elif !left && !Player.ins.blockingR:
+			Player.ins.TakeDamage(punchDamage[enemyType])
+		else:
+			PlayerBlock()
 	else:
-		if lastBlock == 0:
-			lastBlock = 1
-		else: 
-			lastBlock = 0
-		SFXPlayer.ins.PlaySound(4 + lastBlock, SFXPlayer.SoundType.SFX, 1.0, (randf() * 0.2) + 0.9)
-		Player.ins.Block()
+		if Player.ins.blockingL && Player.ins.blockingR:
+			PlayerBlock()
+		elif (Player.ins.blockingL && !Player.ins.blockingR) || (!Player.ins.blockingL && Player.ins.blockingR):
+			Player.ins.TakeDamage(punchDamage[enemyType])
+			PlayerBlock()
+		else:
+			Player.ins.TakeDamage(punchDamage[enemyType] * 2.0)
+
+	both = false
 
 	staminaCur -= punchCost[enemyType]
 	if staminaCur <= 0:

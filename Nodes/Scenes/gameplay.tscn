@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://c6hrxahg2vy6o"]
+[gd_scene load_steps=64 format=3 uid="uid://c6hrxahg2vy6o"]
 
 [ext_resource type="PackedScene" uid="uid://7cuuqdrdbpn6" path="res://node_3d.tscn" id="1_5aubf"]
 [ext_resource type="Script" uid="uid://d2iv34ayqfa3i" path="res://Scripts/Player.gd" id="1_84d6f"]
@@ -34,7 +34,16 @@
 [ext_resource type="Texture2D" uid="uid://ba2y4ljwumpon" path="res://Assets/Art/Sprites/UI/health_icon.png" id="17_ppefh"]
 [ext_resource type="Texture2D" uid="uid://bvas31pox7vrk" path="res://Assets/Art/Sprites/UI/energyy_icon.png" id="18_ppefh"]
 [ext_resource type="Texture2D" uid="uid://c8gy4mvk1mpwf" path="res://Assets/Art/Sprites/UI/dazed.png" id="19_xucbb"]
+[ext_resource type="Texture2D" uid="uid://dwwr3fyot6pf3" path="res://Assets/Art/Sprites/Sloth/slothh.png" id="25_vb45g"]
+[ext_resource type="Texture2D" uid="uid://nv554iplhgxm" path="res://Assets/Art/Sprites/New folder/elephanth.png" id="26_o2dlx"]
+[ext_resource type="Texture2D" uid="uid://cwygtyh1pcyok" path="res://Assets/Art/Sprites/Cheetah/cheetahh.png" id="27_v77yr"]
+[ext_resource type="Texture2D" uid="uid://bfh2kmmqxo8lk" path="res://Assets/Art/Sprites/Sloth/slotharm2h.png" id="31_y35iv"]
+[ext_resource type="Texture2D" uid="uid://swq1seuuj1w1" path="res://Assets/Art/Sprites/New folder/elepahantarm2h.png" id="32_t5v03"]
+[ext_resource type="Texture2D" uid="uid://b6gn4nakj1id5" path="res://Assets/Art/Sprites/Cheetah/cheetaharm2h.png" id="33_1wjfg"]
 [ext_resource type="Texture2D" uid="uid://dowl6tft42qa0" path="res://Assets/Art/Sprites/SantaHat.png" id="33_y24bu"]
+[ext_resource type="Texture2D" uid="uid://d2hpesjabg8ve" path="res://Assets/Art/Sprites/Sloth/slotharmh.png" id="37_pe3n0"]
+[ext_resource type="Texture2D" uid="uid://dwdmaavbp6c4k" path="res://Assets/Art/Sprites/New folder/elephantarmh.png" id="38_pm33y"]
+[ext_resource type="Texture2D" uid="uid://cncfcpxpliy45" path="res://Assets/Art/Sprites/Cheetah/cheetaharm_h.png" id="39_h5d4g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgqwo"]
 albedo_texture = ExtResource("13_y66qq")
@@ -784,9 +793,9 @@ outline_size = 10
 [node name="Enemy" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2580582, -0.8971336)
 script = ExtResource("3_wnkb1")
-enemyTexture = Array[Texture]([ExtResource("8_ppefh"), ExtResource("9_xucbb"), ExtResource("10_0tdnq"), ExtResource("8_ppefh"), ExtResource("9_xucbb"), ExtResource("10_0tdnq")])
-armTexture = Array[Texture]([ExtResource("11_qay7p"), ExtResource("12_7o6j1"), ExtResource("13_mld5c"), ExtResource("11_qay7p"), ExtResource("12_7o6j1"), ExtResource("13_mld5c")])
-punchTexture = Array[Texture]([ExtResource("14_22ler"), ExtResource("15_8xs62"), ExtResource("16_jk06t"), ExtResource("14_22ler"), ExtResource("15_8xs62"), ExtResource("16_jk06t")])
+enemyTexture = Array[Texture]([ExtResource("8_ppefh"), ExtResource("9_xucbb"), ExtResource("10_0tdnq"), ExtResource("25_vb45g"), ExtResource("26_o2dlx"), ExtResource("27_v77yr")])
+armTexture = Array[Texture]([ExtResource("11_qay7p"), ExtResource("12_7o6j1"), ExtResource("13_mld5c"), ExtResource("31_y35iv"), ExtResource("32_t5v03"), ExtResource("33_1wjfg")])
+punchTexture = Array[Texture]([ExtResource("14_22ler"), ExtResource("15_8xs62"), ExtResource("16_jk06t"), ExtResource("37_pe3n0"), ExtResource("38_pm33y"), ExtResource("39_h5d4g")])
 
 [node name="Health" type="Sprite3D" parent="Enemy"]
 unique_name_in_owner = true

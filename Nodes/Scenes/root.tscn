@@ -23,7 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://1xx6gwokrmcv" path="res://Assets/Audio/SFX/Player/SFX_Ability_Chest.wav" id="17_5ced6"]
 [ext_resource type="AudioStream" uid="uid://chftbxda7i2ua" path="res://Assets/Audio/SFX/Player/SFX_Ability_Chomp.wav" id="18_ykorw"]
 [ext_resource type="AudioStream" uid="uid://bgxqwjo013nny" path="res://Assets/Audio/SFX/Player/SFX_Ability_Scream.wav" id="19_o00sb"]
-[ext_resource type="Script" uid="uid://sini0j2yfh2w" path="res://Nodes/Scenes/Credits.gd" id="20_jy3bs"]
+[ext_resource type="Script" path="res://Nodes/Scenes/Credits.gd" id="20_jy3bs"]
 [ext_resource type="AudioStream" uid="uid://cm0qr07dhp8kj" path="res://Assets/Audio/SFX/Player/SFX_Player_NoStamina.wav" id="20_ykorw"]
 [ext_resource type="FontFile" uid="uid://c3r3mjkx1w3lf" path="res://Assets/Fonts/Gambado Sans Forte.ttf" id="21_4d1fn"]
 [ext_resource type="AudioStream" uid="uid://b83vbp24i7une" path="res://Assets/Audio/SFX/Damage/Enemy/Elephant/SFX_Elephant_Damage_1.wav" id="21_uothk"]
@@ -35,7 +35,6 @@
 [node name="Root" type="Node"]
 process_mode = 3
 script = ExtResource("1_uewl6")
-skipMenu = true
 gameScene = ExtResource("2_hheyw")
 menuScene = ExtResource("2_62qmo")
 introScene = ExtResource("4_1yy5m")
