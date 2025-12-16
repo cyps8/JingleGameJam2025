@@ -31,7 +31,7 @@ var healthMax: float = 100
 var healthCur: float = 100
 
 var punchCost: float = 30
-var blockCost: float = 11
+var blockCost: float = 12
 
 var recovery: float = 33
 var recoverycd: float = 0
@@ -351,7 +351,10 @@ func _process(_dt):
 			var blockTween: Tween = create_tween()
 			blockTween.tween_interval(1/punchSpeed)
 			blockTween.tween_callback(Callable(self, "ResetArmL"))
-			stamCur -= blockCost
+			if blockingR:
+				stamCur -= blockCost * 0.5
+			else:
+				stamCur -= blockCost
 			recoverycd = 0.35
 			usingL = true
 	elif !left && !usingR:
@@ -367,13 +370,16 @@ func _process(_dt):
 			recoverycd = 0.35
 			usingR = true
 			$ArmR.texture = gloves[1]
-		elif (Input.is_action_just_pressed("block")) || (bufferR == Buffer.BLOCK && bufferRTime > 0) && !outOfStam && !dead && !intro && !won:
+		elif (Input.is_action_just_pressed("block") || (bufferR == Buffer.BLOCK && bufferRTime > 0)) && !outOfStam && !dead && !intro && !won:
 			blockingR = true
 			$ArmR.position += Vector3(-0.3, 0.5, 0)
 			var blockTween: Tween = create_tween()
 			blockTween.tween_interval(1/punchSpeed)
 			blockTween.tween_callback(Callable(self, "ResetArmR"))
-			stamCur -= blockCost
+			if blockingL:
+				stamCur -= blockCost * 0.5
+			else:
+				stamCur -= blockCost
 			recoverycd = 0.35
 			usingR = true
 
